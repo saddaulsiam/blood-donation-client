@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
@@ -10,46 +10,68 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 type TInputProps = {
   name: string;
   type?: string;
-  placeholder?: string;
+  label?: string;
   required?: boolean;
   className?: string;
+  defaultValue?: Date | string | null;
 };
 
-const DatePicker = ({
+const BDDatePicker = ({
   name,
-  type = "date",
   required,
-  placeholder,
+  label,
   className,
+  defaultValue,
 }: TInputProps) => {
   const { control } = useFormContext();
-  const [date, setDate] = useState<Date>();
+
+  const [date, setDate] = useState<Date | undefined>(() => {
+    if (defaultValue) {
+      return typeof defaultValue === "string"
+        ? new Date(defaultValue)
+        : defaultValue;
+    }
+    return undefined;
+  });
+
+  useEffect(() => {
+    if (defaultValue) {
+      setDate(
+        typeof defaultValue === "string"
+          ? new Date(defaultValue)
+          : defaultValue,
+      );
+    }
+  }, [defaultValue]);
+
   return (
     <Controller
       control={control}
       name={name}
-      defaultValue=""
+      defaultValue={defaultValue ? new Date(defaultValue).toISOString() : ""}
       render={({ field }) => (
         <Popover {...field}>
           <PopoverTrigger asChild className={className}>
             <Button
               variant={"outline"}
               className={cn(
-                "m-0 h-14 w-full justify-start text-left font-normal",
+                "w-full justify-start text-left font-normal",
                 !date && "text-muted-foreground",
               )}
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
-              {date ? format(date, "PPP") : <span>{placeholder}</span>}
+              {date ? format(date, "PPP") : <span>{label}</span>}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0">
             <Calendar
               mode="single"
-              selected={date}
+              selected={date || undefined}
               onSelect={(selectedDate) => {
-                setDate(selectedDate); // Update local state
-                field.onChange(selectedDate?.toISOString()); // Sync with react-hook-form
+                if (selectedDate) {
+                  setDate(selectedDate);
+                  field.onChange(selectedDate?.toISOString());
+                }
               }}
             />
           </PopoverContent>
@@ -59,4 +81,4 @@ const DatePicker = ({
   );
 };
 
-export default DatePicker;
+export default BDDatePicker;

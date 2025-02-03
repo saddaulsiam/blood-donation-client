@@ -1,6 +1,6 @@
 "use client";
 
-import DatePicker from "@/components/forms/BDDatePicker";
+import BDDatePicker from "@/components/forms/BDDatePicker";
 import BDForm from "@/components/forms/BDForm";
 import BDInput from "@/components/forms/BDInput";
 import BDSelect from "@/components/forms/BDSelect";
@@ -27,6 +27,7 @@ const Register = () => {
 
   const handleRegister = async (values: FieldValues) => {
     values.age = parseInt(values.age);
+    values.lastDonationDate = values.lastDonationDate.split("T")[0];
 
     try {
       const res = await register(values).unwrap();
@@ -46,7 +47,8 @@ const Register = () => {
         }
       }
     } catch (err: any) {
-      toast.error(err?.message);
+      toast.error(err?.data?.message);
+      console.log(err);
     }
   };
   return (
@@ -85,22 +87,22 @@ const Register = () => {
           />
 
           <BDSelect
-            bloodGroups={bloodGroups}
+            values={bloodGroups}
             className="h-14 w-full"
             label="Blood Groups"
             name="bloodType"
             required
           />
           <BDSelect
-            bloodGroups={cities}
+            values={cities}
             className="h-14 w-full"
             label="Your City"
-            name="location"
+            name="reason"
             required
           />
-          <DatePicker
+          <BDDatePicker
             name="lastDonationDate"
-            placeholder="Last Donation Date (Optional)"
+            label="Last Donation Date (Optional)"
             className="mb-5 h-14 max-w-2xl"
           />
           <BDInput

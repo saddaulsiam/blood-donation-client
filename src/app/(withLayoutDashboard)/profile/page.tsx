@@ -1,11 +1,26 @@
 "use client";
 
+import BDForm from "@/components/forms/BDForm";
+import BDInput from "@/components/forms/BDInput";
+import BDSelect from "@/components/forms/BDSelect";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useGetMeQuery } from "@/redux/features/auth/authApi";
+import { availability, bloodGroups, cities } from "@/utils/data";
 
 const Profile = () => {
   const { data: user } = useGetMeQuery("");
-  console.log(user)
   return (
     <div className="max-w-6xl rounded-lg bg-slate-100 p-16">
       <div className="flex justify-between">
@@ -30,7 +45,8 @@ const Profile = () => {
           </div>
         </div>
         <div className="cursor-pointer text-xl font-medium text-gray-600">
-          Edit Profile
+          {/* Edit Profile */}
+          <EditProfileModel />
         </div>
       </div>
 
@@ -57,7 +73,7 @@ const Profile = () => {
           <h4 className="text-sm font-medium text-gray-500">Last Donation</h4>
           <p className="text-md font-semibold text-slate-700">
             {user?.profile.lastDonationDate
-              ? user?.profile.lastDonationDate
+              ? user?.profile.lastDonationDate.split("T")[0]
               : "N/A"}
           </p>
         </div>
@@ -73,3 +89,73 @@ const Profile = () => {
 };
 
 export default Profile;
+
+const EditProfileModel = () => {
+  const handleSubmit = () => {};
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline">Edit Profile</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit profile</DialogTitle>
+          <DialogDescription>
+            Make changes to your profile here. Click save when you&apos;re done.
+          </DialogDescription>
+        </DialogHeader>
+
+        <BDForm onSubmit={handleSubmit}>
+          <div className="space-y-3">
+            <BDInput
+              name="name"
+              type="text"
+              placeholder="Name"
+              className=""
+              required
+            />
+            <BDInput
+              name="email"
+              type="text"
+              placeholder="Email"
+              className=""
+              required
+            />
+            <BDInput
+              name="age"
+              placeholder="Age"
+              type="number"
+              className=""
+              required
+            />
+            <BDSelect
+              values={bloodGroups}
+              name="bloodGroups"
+              label="Blood Groups"
+              className=""
+              required
+            />
+            <BDSelect
+              values={cities}
+              name="reason"
+              label="City"
+              className=""
+              required
+            />
+            <BDSelect
+              values={availability}
+              name="availability"
+              label="Do you Available "
+              className=""
+              required
+            />
+          </div>
+        </BDForm>
+
+        <DialogFooter>
+          <Button type="submit">Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};

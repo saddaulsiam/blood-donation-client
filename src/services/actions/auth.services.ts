@@ -2,13 +2,13 @@ import { authKey } from "@/contants/authkey";
 import { decodedToken } from "@/utils/jwt";
 
 import {
-   getFromLocalStorage,
-   removeFromLocalStorage
+  getFromLocalStorage,
+  removeFromLocalStorage,
 } from "@/utils/local-storage";
 
 export const getUserInfo = () => {
   const authToken = getFromLocalStorage(authKey);
-  //   console.log(authToken);
+
   if (authToken) {
     const decodedData: any = decodedToken(authToken);
     return {

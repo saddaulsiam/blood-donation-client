@@ -14,16 +14,10 @@ interface ITextField {
   label: string;
   required?: boolean;
   className?: string;
-  bloodGroups: string[];
+  values: string[];
 }
 
-const BDSelect = ({
-  name,
-  label,
-  required,
-  className,
-  bloodGroups,
-}: ITextField) => {
+const BDSelect = ({ name, label, required, className, values }: ITextField) => {
   const { control } = useFormContext();
 
   return (
@@ -43,7 +37,7 @@ const BDSelect = ({
             <SelectGroup>
               <SelectLabel>{label}</SelectLabel>
 
-              {bloodGroups?.map((group) => (
+              {values?.map((group) => (
                 <SelectItem key={group} value={group}>
                   {group}
                 </SelectItem>

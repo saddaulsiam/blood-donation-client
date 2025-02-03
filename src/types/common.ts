@@ -56,7 +56,8 @@ export type TUser = {
     | "AB_NEGATIVE"
     | "O_POSITIVE"
     | "O_NEGATIVE";
-  location: string;
+  reason: string;
+  address: string;
   availability: boolean;
   createdAt: string;
   updatedAt: string;

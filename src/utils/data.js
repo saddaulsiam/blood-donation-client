@@ -65,4 +65,6 @@ export const cities = [
   "Rangamati",
 ];
 
-export const bloodBagNumbers = [1, 2, 3, 4, 5];
+export const availability = ["Yes", "No"];
+
+export const bloodBagNumbers = ["1", "2", "3", "4", "5"];

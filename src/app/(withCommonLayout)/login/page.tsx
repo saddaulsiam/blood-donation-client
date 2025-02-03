@@ -3,11 +3,15 @@
 import BDForm from "@/components/forms/BDForm";
 import BDInput from "@/components/forms/BDInput";
 import { Button } from "@/components/ui/button";
-import { authKey } from "@/contants/authkey";
+import { authKey, redirectUrl } from "@/contants/authkey";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { setToLocalStorage } from "@/utils/local-storage";
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+  setToLocalStorage,
+} from "@/utils/local-storage";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
@@ -30,8 +34,12 @@ const Login = () => {
           }),
         );
         setToLocalStorage({ key: authKey, token: res.data.accessToken });
+        // Check if there is a stored redirect URL
+        const Url = getFromLocalStorage(redirectUrl) || "/dashboard";
 
-        router.push("/dashboard");
+        // Clear the stored redirect URL
+        removeFromLocalStorage(redirectUrl);
+        router.push(Url);
       }
     } catch (err: any) {
       console.error(err);
