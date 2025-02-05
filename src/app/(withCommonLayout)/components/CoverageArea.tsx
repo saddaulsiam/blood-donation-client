@@ -1,38 +1,30 @@
-import React from "react";
+"use client";
+
+import CountUp from "react-countup";
 
 const CoverageArea = () => {
+  const stats = [
+    { label: "Cities", value: 50, text: "We are Coverage in" },
+    { label: "Donors", value: 500, text: "Our Total" },
+    { label: "Donation", value: 5000, text: "Complete Total" },
+    { label: "Donation", value: 50, text: "Inprogress" },
+  ];
   return (
-    <section className="container">
-      <div className="text-center">
-        <h4 className="text-2xl font-bold text-[#101010]">Coverage Area</h4>
-        <p className="pt-5 leading-7 text-slate-600">
-          Lorem ipsum dolor sit amet consectetur <br /> adipisicing elit.
-          Ratione, optio!
-        </p>
-      </div>
-      <div className="mt-16 grid grid-cols-4 gap-5">
-        <div className="space-y-2 rounded-md bg-slate-100 p-5 pl-10">
-          <p className="text-xl font-semibold text-slate-600">
-            We are Coverage in
-          </p>
-          <p className="text-5xl font-semibold text-slate-900">50</p>
-          <p className="text-lg font-semibold text-slate-600">City</p>
-        </div>
-        <div className="space-y-2 rounded-md bg-slate-100 p-5 pl-10">
-          <p className="text-xl font-semibold text-slate-600">Our Total</p>
-          <p className="text-5xl font-semibold text-slate-900">50</p>
-          <p className="text-lg font-semibold text-slate-600">Donor</p>
-        </div>
-        <div className="space-y-2 rounded-md bg-slate-100 p-5 pl-10">
-          <p className="text-xl font-semibold text-slate-600">Complete Total</p>
-          <p className="text-5xl font-semibold text-slate-900">500</p>
-          <p className="text-lg font-semibold text-slate-600">Donation</p>
-        </div>
-        <div className="space-y-2 rounded-md bg-slate-100 p-5 pl-10">
-          <p className="text-xl font-semibold text-slate-600">Inprogress</p>
-          <p className="text-5xl font-semibold text-slate-900">500</p>
-          <p className="text-lg font-semibold text-slate-600">Donation</p>
-        </div>
+    <section className="container mt-20 text-center">
+      <h4 className="pb-10 text-2xl font-bold text-[#101010]">
+        <span className="text-primary">#</span> Coverage Area
+      </h4>
+
+      <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
+        {stats.map((stat, index) => (
+          <div key={index} className="rounded-lg bg-gray-50 p-4 shadow">
+            <p className="text-sm text-gray-600">{stat.text}</p>
+            <h3 className="text-2xl font-bold text-black">
+              <CountUp start={0} end={stat.value} duration={3} />{" "}
+              <span className="text-red-500">{stat.label}</span>
+            </h3>
+          </div>
+        ))}
       </div>
     </section>
   );

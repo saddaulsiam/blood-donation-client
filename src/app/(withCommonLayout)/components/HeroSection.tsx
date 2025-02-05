@@ -6,9 +6,9 @@ import animationData from "../../../../public/heroAnimation.json";
 
 const HeroSection = () => {
   return (
-    <header className="container grid grid-cols-1 sm:grid-cols-2 md:h-[37.2rem]">
+    <header className="container mt-10 grid sm:mt-0 sm:grid-cols-2 md:h-[38rem]">
       {/* details */}
-      <div className="order-2 flex flex-col justify-center space-y-6 sm:order-1">
+      <div className="flex flex-col justify-center space-y-5">
         <h4 className="text-2xl font-bold tracking-tight text-gray-800">
           Be a Hero 🦸
         </h4>
@@ -18,8 +18,7 @@ const HeroSection = () => {
         <p className="text-lg leading-8 text-gray-600">
           Your blood donation is more than just a gift; it&apos;s a lifeline
           that transforms hope into survival for those in critical need. Each
-          donation has the potential to save up to three lives, making you a
-          hero in the truest sense.
+          donation has the potential to save up to three lives.
         </p>
         <p className="pb-3 pt-10 font-medium text-slate-600">
           🔴 Find a Donor | ❤️ Become a Donor | 🩸 Save a Life
@@ -39,7 +38,7 @@ const HeroSection = () => {
       </div>
 
       {/* image */}
-      <div className="order-1 flex flex-1 justify-end sm:order-2">
+      <div className="flex flex-1 justify-end">
         <Lottie animationData={animationData} className="" loop={true} />
       </div>
     </header>

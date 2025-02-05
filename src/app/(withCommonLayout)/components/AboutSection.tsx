@@ -4,17 +4,17 @@ import about from "../../../../public/about.svg";
 
 const AboutSection = () => {
   return (
-    <section className="container mt-10 flex">
-      <div className="w-[40%]">
+    <section className="container my-20 grid border sm:grid-cols-2">
+      <div className="order-2 sm:order-1">
         <Image
           src={about}
           alt=""
           height={400}
           width={416}
-          className="rounded-3xl"
+          // className="rounded-3xl"
         />
       </div>
-      <div className="flex w-[60%] flex-col justify-center">
+      <div className="order-1 flex flex-col justify-center sm:order-2">
         <p className="text-2xl font-bold text-[#101010]">About Us</p>
         <h2 className="mt-10 text-3xl font-medium text-slate-700">
           Main HeadLine

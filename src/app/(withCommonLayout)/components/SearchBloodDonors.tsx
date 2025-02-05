@@ -26,7 +26,7 @@ const SearchBloodDonors = () => {
         <div className="grid gap-5 px-5 sm:grid-cols-4">
           <BDSelect
             values={bloodGroups}
-            className="h-20 w-full"
+            className="h-16 w-full"
             label="Select Blood Group"
             name="bloodGroups"
             required
@@ -34,7 +34,7 @@ const SearchBloodDonors = () => {
 
           <BDSelect
             values={cities}
-            className="h-20 w-full"
+            className="h-16 w-full"
             label="Select Your City"
             name="reason"
             required
@@ -43,11 +43,11 @@ const SearchBloodDonors = () => {
           <BDDatePicker
             name="date"
             label="Select date"
-            className="h-20 w-full"
+            className="h-16 w-full"
             required
           />
 
-          <Button className="h-20 px-[7.5rem]">Search</Button>
+          <Button className="h-16 px-[7.5rem]">Search</Button>
         </div>
       </BDForm>
     </section>

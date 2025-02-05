@@ -8,8 +8,8 @@ export default function Home() {
     <main>
       <HeroSection />
       <SearchBloodDonor />
-      {/* <AboutSection /> */}
-      {/* <CoverageArea /> */}
+      <CoverageArea />
+      <AboutSection />
     </main>
   );
 }
