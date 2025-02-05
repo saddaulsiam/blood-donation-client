@@ -11,7 +11,7 @@ const CoverageArea = () => {
   ];
   return (
     <section className="container mt-20 text-center">
-      <h4 className="pb-10 text-2xl font-bold text-[#101010]">
+      <h4 className="pb-8 text-2xl font-semibold text-gray-800">
         <span className="text-primary">#</span> Coverage Area
       </h4>
 

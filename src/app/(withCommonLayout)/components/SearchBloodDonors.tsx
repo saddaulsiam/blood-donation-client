@@ -4,7 +4,7 @@ import BDDatePicker from "@/components/forms/BDDatePicker";
 import BDForm from "@/components/forms/BDForm";
 import BDSelect from "@/components/forms/BDSelect";
 import { Button } from "@/components/ui/button";
-import { bloodBagNumbers, bloodGroups, cities } from "@/utils/data";
+import { bloodGroups, cities } from "@/utils/data";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 
@@ -17,40 +17,77 @@ const SearchBloodDonors = () => {
     );
   };
   return (
-    <section className="container mt-10 rounded border pb-10 sm:mt-0">
-      <h4 className="pb-10 pt-5 text-center text-2xl font-semibold text-[#101010]">
-        Search Blood Donor&rsquo;s
-      </h4>
+    <>
+      <section className="container mt-10 rounded border bg-gray-50 pb-10 sm:mt-0">
+        <h4 className="pb-10 pt-5 text-center text-2xl font-semibold text-gray-800">
+          Search <span className="text-primary">Blood Donors</span>
+        </h4>
 
-      <BDForm onSubmit={onSubmit}>
-        <div className="grid gap-5 px-5 sm:grid-cols-4">
-          <BDSelect
-            values={bloodGroups}
-            className="h-16 w-full"
-            label="Select Blood Group"
-            name="bloodGroups"
-            required
-          />
+        <BDForm onSubmit={onSubmit}>
+          <div className="grid gap-5 px-5 sm:grid-cols-4">
+            <BDSelect
+              values={bloodGroups}
+              className="h-14 w-full"
+              label="Select Blood Group"
+              name="bloodGroups"
+              required
+            />
 
-          <BDSelect
-            values={cities}
-            className="h-16 w-full"
-            label="Select Your City"
-            name="reason"
-            required
-          />
+            <BDSelect
+              values={cities}
+              className="h-14 w-full"
+              label="Select Your City"
+              name="reason"
+              required
+            />
 
-          <BDDatePicker
-            name="date"
-            label="Select date"
-            className="h-16 w-full"
-            required
-          />
+            <BDDatePicker
+              name="date"
+              label="Select date"
+              className="h-14 w-full"
+              required
+            />
 
-          <Button className="h-16 px-[7.5rem]">Search</Button>
-        </div>
-      </BDForm>
-    </section>
+            <Button className="h-14 px-[7.5rem]">Search</Button>
+          </div>
+        </BDForm>
+      </section>
+
+      {/*  <section className="container mt-10 rounded-lg border bg-white p-6 shadow-lg">
+        <h4 className="pb-6 text-center text-3xl font-bold text-gray-800">
+          Search <span className="text-red-500">Blood Donors</span>
+        </h4>
+
+        <BDForm onSubmit={onSubmit}>
+          <div className="grid gap-5 sm:grid-cols-4">
+            <BDSelect
+              values={bloodGroups}
+              className="w-full"
+              label="Select Blood Group"
+              name="bloodGroups"
+              required
+            />
+            <BDSelect
+              values={cities}
+              className="w-full"
+              label="Select Your City"
+              name="reason"
+              required
+            />
+
+            <BDDatePicker
+              name="date"
+              label="Select Date"
+              className="w-full"
+              required
+            />
+            <Button className="w-full bg-red-500 text-lg font-semibold hover:bg-red-600">
+              🔍 Search Donors
+            </Button>
+          </div>
+        </BDForm>
+      </section> */}
+    </>
   );
 };
 
