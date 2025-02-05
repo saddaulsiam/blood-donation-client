@@ -13,7 +13,7 @@ const SearchBloodDonors = () => {
 
   const onSubmit = async (values: FieldValues) => {
     router.push(
-      `/donors?bloodGroup=${values.bloodGroups}&date=${values.date}&reason=${values.reason}`,
+      `/donors?bloodGroup=${values.bloodGroups}&date=${values.date.split("T")[0]}&reason=${values.reason}`,
     );
   };
   return (

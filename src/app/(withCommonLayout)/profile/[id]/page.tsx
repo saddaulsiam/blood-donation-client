@@ -31,9 +31,8 @@ const Profile = () => {
     };
     try {
       bloodRequest(data).then((response) => {
-        if (response.data.data.success) {
-          console.log(response.data);
-          toast.success("Success");
+        if (response.data.success) {
+          toast.success("Request Successful");
           router.push("/dashboard");
         }
       });

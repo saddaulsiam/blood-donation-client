@@ -5,7 +5,7 @@ const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     donors: builder.query({
       query: ({ bloodGroup, date, reason }) => ({
-        url: `/donors?`, //bloodGroup=${bloodGroup}&reason=${reason}&date=${date}
+        url: `/donors?bloodGroup=${bloodGroup}&reason=${reason}`, //&date=${date}
         method: "GET",
       }),
     }),

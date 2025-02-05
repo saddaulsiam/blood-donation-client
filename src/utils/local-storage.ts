@@ -13,7 +13,7 @@ export const setToLocalStorage = ({
 
 export const getFromLocalStorage = (key: string) => {
   if (!key || typeof window === "undefined") {
-    return "";
+    return false;
   }
   return localStorage.getItem(key);
 };
