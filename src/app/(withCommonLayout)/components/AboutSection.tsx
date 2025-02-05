@@ -4,7 +4,7 @@ import about from "../../../../public/about.svg";
 
 const AboutSection = () => {
   return (
-    <section className="flex">
+    <section className="container mt-10 flex">
       <div className="w-[40%]">
         <Image
           src={about}

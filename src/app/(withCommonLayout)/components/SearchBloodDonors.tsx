@@ -17,50 +17,37 @@ const SearchBloodDonors = () => {
     );
   };
   return (
-    <section>
-      <div className="text-center">
-        <h4 className="text-2xl font-bold text-[#101010]">
-          Search Blood Donor
-        </h4>
-        <p className="pt-3 leading-6 text-slate-600">
-          Lorem ipsum dolor sit amet consectetur <br /> adipisicing elit.
-          Ratione, optio!
-        </p>
-      </div>
+    <section className="container mt-10 rounded border pb-10 sm:mt-0">
+      <h4 className="pb-10 pt-5 text-center text-2xl font-semibold text-[#101010]">
+        Search Blood Donor&rsquo;s
+      </h4>
 
       <BDForm onSubmit={onSubmit}>
-        <div className="grid grid-cols-5 gap-x-5 pt-16">
+        <div className="grid gap-5 px-5 sm:grid-cols-4">
           <BDSelect
             values={bloodGroups}
-            className="h-16 w-full"
+            className="h-20 w-full"
             label="Select Blood Group"
             name="bloodGroups"
+            required
+          />
+
+          <BDSelect
+            values={cities}
+            className="h-20 w-full"
+            label="Select Your City"
+            name="reason"
             required
           />
 
           <BDDatePicker
             name="date"
             label="Select date"
-            className="h-16 w-full"
+            className="h-20 w-full"
             required
           />
 
-          <BDSelect
-            values={cities}
-            className="h-16 w-full"
-            label="Select Your City"
-            name="reason"
-            required
-          />
-          <BDSelect
-            values={bloodBagNumbers}
-            className="h-16 w-full"
-            label="Select Your Area"
-            name="area"
-            required
-          />
-
-          <Button className="h-16 px-[7.5rem]">Search</Button>
+          <Button className="h-20 px-[7.5rem]">Search</Button>
         </div>
       </BDForm>
     </section>

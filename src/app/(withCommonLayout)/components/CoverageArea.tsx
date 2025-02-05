@@ -2,7 +2,7 @@ import React from "react";
 
 const CoverageArea = () => {
   return (
-    <section>
+    <section className="container">
       <div className="text-center">
         <h4 className="text-2xl font-bold text-[#101010]">Coverage Area</h4>
         <p className="pt-5 leading-7 text-slate-600">
