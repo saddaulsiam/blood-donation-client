@@ -48,45 +48,12 @@ const SearchBloodDonors = () => {
               required
             />
 
-            <Button className="h-14 px-[7.5rem]">Search</Button>
-          </div>
-        </BDForm>
-      </section>
-
-      {/*  <section className="container mt-10 rounded-lg border bg-white p-6 shadow-lg">
-        <h4 className="pb-6 text-center text-3xl font-bold text-gray-800">
-          Search <span className="text-red-500">Blood Donors</span>
-        </h4>
-
-        <BDForm onSubmit={onSubmit}>
-          <div className="grid gap-5 sm:grid-cols-4">
-            <BDSelect
-              values={bloodGroups}
-              className="w-full"
-              label="Select Blood Group"
-              name="bloodGroups"
-              required
-            />
-            <BDSelect
-              values={cities}
-              className="w-full"
-              label="Select Your City"
-              name="reason"
-              required
-            />
-
-            <BDDatePicker
-              name="date"
-              label="Select Date"
-              className="w-full"
-              required
-            />
-            <Button className="w-full bg-red-500 text-lg font-semibold hover:bg-red-600">
-              🔍 Search Donors
+            <Button className="h-14 rounded-md px-[7.5rem] text-base font-medium">
+              Search
             </Button>
           </div>
         </BDForm>
-      </section> */}
+      </section>
     </>
   );
 };

@@ -1,36 +1,42 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import about from "../../../../public/about.svg";
+import Lottie from "lottie-react";
+import animationData from "../../../../public/about.json";
 
 const AboutSection = () => {
   return (
-    <section className="container my-20 grid border sm:grid-cols-2">
-      <div className="order-2 sm:order-1">
-        <Image
-          src={about}
-          alt=""
-          height={400}
-          width={416}
-          // className="rounded-3xl"
-        />
+    <section className="container my-20 grid grid-cols-1 items-center gap-28 px-4 pb-20 pt-20 lg:grid-cols-5 lg:px-0">
+      {/* Image Section */}
+      <div className="relative col-span-1 flex justify-center lg:col-span-2 lg:justify-start">
+        <Lottie animationData={animationData} loop />
       </div>
-      <div className="order-1 flex flex-col justify-center sm:order-2">
-        <p className="text-2xl font-bold text-[#101010]">About Us</p>
-        <h2 className="mt-10 text-3xl font-medium text-slate-700">
-          Main HeadLine
+
+      {/* Text Content */}
+      <div className="col-span-1 flex flex-col justify-center space-y-6 lg:col-span-3">
+        <h4 className="text-2xl font-semibold text-gray-800">
+          <span className="text-primary">#</span> About Us
+        </h4>
+        <h2 className="text-3xl font-bold leading-tight text-gray-800">
+          Save a Life, Donate Blood Today
         </h2>
-        <h3 className="mt-3 text-xl font-medium text-slate-700">
-          2nd HeadLine
-        </h3>
-        <p className="my-5 leading-7 text-slate-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, dolor
-          ad amet id quae, accusantium provident fugit aut voluptatibus
-          voluptate vitae fuga similique beatae quasi? Facere id aliquid dicta
-          quo?
+
+        <p className="text-lg text-gray-700">
+          Our mission is to bridge the gap between blood donors and those in
+          urgent need. We are committed to making the process of blood donation
+          seamless, accessible, and life-changing.
         </p>
-        <div className="pt-5">
-          <Button>Button</Button>
+
+        {/* Key Features */}
+        <div className="space-y-3 text-lg text-gray-600">
+          <p>🔹 Find and connect with nearby donors easily.</p>
+          <p>🔹 Support emergency cases with instant donor matching.</p>
+          <p>🔹 Join a community of lifesavers and make an impact.</p>
         </div>
+
+        <Button className="mt-6 w-max rounded-md bg-primary px-8 py-3 text-base font-medium text-white shadow-lg transition-all duration-300 hover:bg-red-500 hover:shadow-xl">
+          Become a Donor
+        </Button>
       </div>
     </section>
   );
