@@ -7,14 +7,14 @@ import "./globals.css";
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  display: "swap",
+  // display: "swap",
   variable: "--font-montserrat", // Define CSS variable
 });
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  display: "swap",
+  // display: "swap",
   variable: "--font-inter", // Define CSS variable
 });
 
