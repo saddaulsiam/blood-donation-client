@@ -8,7 +8,6 @@ import BDSelect from "@/components/forms/BDSelect";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useSingleDonorQuery } from "@/redux/features/donors/donorsApi";
 import { Gender } from "@/types";
 import { bloodGroups } from "@/utils/data";
@@ -33,16 +32,26 @@ const UpdateProfileForm = () => {
   };
 
   return (
-    <div className="container relative mb-8 rounded-md border bg-white p-6 shadow-sm md:p-8">
+    <div className="container relative mb-8 rounded-lg border bg-gradient-to-br from-white to-gray-50 p-6 shadow-lg md:p-8">
+      {/* Avatar and Profile Info Section */}
       <div className="mb-8 flex flex-col items-center gap-6 text-center md:flex-row md:text-left">
-        <Avatar className="h-20 w-20 border-[3px] border-primary">
-          <AvatarImage
-            src={photo || donarInfo?.profile?.photo || "/default-avatar.png"}
-          />
-          <AvatarFallback className="bg-primary/10 text-primary">
-            {donarInfo?.name?.charAt(0)}
-          </AvatarFallback>
-        </Avatar>
+        <div className="relative">
+          <Avatar className="h-24 w-24 border-[3px] border-primary shadow-md">
+            <AvatarImage
+              src={photo || donarInfo?.profile?.photo || "/default-avatar.png"}
+              className="object-cover"
+            />
+            <AvatarFallback className="bg-primary/10 text-primary">
+              {donarInfo?.name?.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
+          <label
+            htmlFor="photo"
+            className="absolute -bottom-2 right-0 cursor-pointer rounded-full bg-primary p-1.5 text-white shadow-sm transition-all hover:bg-primary/90"
+          >
+            <FiEdit2 className="h-4 w-4" />
+          </label>
+        </div>
         <div>
           <h1 className="text-2xl font-bold capitalize text-gray-800">
             {donarInfo?.name}
@@ -52,9 +61,9 @@ const UpdateProfileForm = () => {
           </p>
           <Badge
             variant={donarInfo?.availability ? "default" : "destructive"}
-            className="mt-4"
+            className="mt-4 gap-2"
           >
-            <FiDroplet className="mr-2" />
+            <FiDroplet className="h-4 w-4" />
             {donarInfo?.availability
               ? "Available to donate"
               : "Currently unavailable"}
@@ -62,19 +71,22 @@ const UpdateProfileForm = () => {
         </div>
       </div>
 
+      {/* Form Section */}
       <BDForm onSubmit={handleSubmit}>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <BDInput
             name="name"
             defaultValue={donarInfo?.name}
             label="Your Full Name"
             placeholder="John Doe"
+            className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDInput
             name="bio"
             defaultValue={donarInfo?.profile.bio}
             label="Bio"
             placeholder="Your cool bio"
+            className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDSelect
             name="BloodGroup"
@@ -82,12 +94,14 @@ const UpdateProfileForm = () => {
             label="Blood Group"
             placeholder="Select your group"
             values={bloodGroups}
+            className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDInput
             name="Age"
             defaultValue={donarInfo?.profile.age}
             label="Your Age"
             placeholder="23"
+            className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDSelect
             name="gender"
@@ -95,6 +109,7 @@ const UpdateProfileForm = () => {
             values={Gender}
             defaultValue={donarInfo?.gender}
             placeholder="Select gender"
+            className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDDatePicker
             name="lastDonation"
@@ -107,6 +122,7 @@ const UpdateProfileForm = () => {
                     .split("T")[0]
                 : ""
             }
+            className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDSelect
             name="availability"
@@ -122,6 +138,7 @@ const UpdateProfileForm = () => {
                 ? "Available to donate"
                 : "Currently unavailable"
             }
+            className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDFile
             type="file"
@@ -129,16 +146,20 @@ const UpdateProfileForm = () => {
             label="Profile Photo"
             placeholder="Select Photo"
             onChange={handleFileChange}
-            className="rounded-md border p-2"
+            className="rounded-lg border border-gray-200 bg-white p-2 focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
         </div>
-      </BDForm>
 
-      <div className="mt-8 flex justify-end">
-        <Button type="submit" className="flex items-center gap-2">
-          <FiEdit2 /> Update Profile
-        </Button>
-      </div>
+        {/* Submit Button */}
+        <div className="mt-8 flex justify-end">
+          <Button
+            type="submit"
+            className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary to-primary/90 px-6 py-3 text-white transition-all hover:from-primary/90 hover:to-primary"
+          >
+            <FiEdit2 className="h-5 w-5" /> Update Profile
+          </Button>
+        </div>
+      </BDForm>
     </div>
   );
 };

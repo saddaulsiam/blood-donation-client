@@ -43,7 +43,7 @@ const Profile = () => {
       <DonarProfileDetails donarInfo={donarInfo} />
 
       {/* Request Form */}
-      <div className="rounded-md border bg-white p-6 shadow-sm md:p-8">
+      <div className="rounded-md border bg-gradient-to-br from-white to-gray-50 p-6 shadow-sm md:p-8">
         <BloodDonationRequestForm handleSubmit={handleSubmit} />
       </div>
     </section>

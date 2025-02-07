@@ -13,7 +13,7 @@ const DonarProfileDetails = ({
   edit?: boolean;
 }) => {
   return (
-    <div className="relative mb-8 rounded-md border bg-white p-6 shadow-sm md:p-8">
+    <div className="relative mb-8 rounded-md border bg-gradient-to-br from-white to-gray-50 p-6 shadow-sm md:p-8">
       {/* Edit Button */}
       {edit && (
         <Link href={`/profile/update/${donarInfo?.id}`}>
