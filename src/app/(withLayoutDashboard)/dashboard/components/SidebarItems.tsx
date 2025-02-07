@@ -1,13 +1,15 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { logoutUser } from "@/services/actions/logoutUser";
 import { defaultMenus } from "@/utils/drawerItems";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { LuLogOut } from "react-icons/lu";
 
 const SidebarItems = ({ isSidebarOpen }: any) => {
   const pathname = usePathname();
-
+  const router = useRouter();
   return (
     <aside
       className={`fixed z-30 flex h-full w-64 flex-col justify-between bg-white p-6 shadow-lg transition-all duration-300 ease-in-out lg:relative lg:z-0 ${
@@ -40,16 +42,9 @@ const SidebarItems = ({ isSidebarOpen }: any) => {
       </div>
       {/* Profile Section at the Bottom */}
       <div className="border-t border-gray-200 pt-6">
-        <div className="flex items-center">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src="https://github.com/shadcn.png" alt="Profile" />
-            <AvatarFallback>P</AvatarFallback>
-          </Avatar>
-          <div className="ml-3">
-            <p className="text-sm font-medium text-gray-900">John Doe</p>
-            <p className="text-xs text-gray-500">Admin</p>
-          </div>
-        </div>
+        <Button className="w-full" onClick={() => logoutUser(router)}>
+          Logout <LuLogOut />
+        </Button>
       </div>
     </aside>
   );

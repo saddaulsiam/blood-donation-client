@@ -22,21 +22,13 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* App Bar */}
         <header className="flex h-20 items-center justify-between bg-white px-4 shadow-sm lg:px-6">
-          <div className="flex items-center space-x-4">
+          <div>
             <button
               onClick={toggleSidebar}
               className="p-2 text-gray-600 transition-colors duration-200 hover:text-red-600 lg:hidden"
             >
               <FiMenu className="h-6 w-6" />
             </button>
-            <div className="relative w-48 lg:w-96">
-              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-              <Input
-                className="h-10 w-full rounded-lg border border-gray-300 pl-10 pr-4 focus:border-red-300 focus:ring-2 focus:ring-red-200"
-                type="text"
-                placeholder="Search..."
-              />
-            </div>
           </div>
           <Avatar className="h-10 w-10 cursor-pointer transition-shadow duration-200 hover:shadow-md">
             <AvatarImage src="https://github.com/shadcn.png" alt="Profile" />

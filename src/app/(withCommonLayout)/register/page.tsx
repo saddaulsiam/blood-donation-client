@@ -38,7 +38,7 @@ const Register = () => {
           toast.success(result?.message);
           dispatch(setUser({ user: result.data.user }));
           setToLocalStorage({ key: authKey, token: result.data.accessToken });
-          router.push("/dashboard");
+          router.push("/profile");
         }
       }
     } catch (err: any) {

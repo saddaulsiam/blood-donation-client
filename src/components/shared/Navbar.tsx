@@ -38,7 +38,7 @@ const Navbar = () => {
       <ul className="hidden items-center space-x-8 text-lg font-medium text-gray-700 md:flex">
         <li>
           <Link
-            href="/dashboard"
+            href="/my-donate-request"
             className="transition duration-300 hover:text-primary"
           >
             Dashboard

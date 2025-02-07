@@ -36,7 +36,7 @@ const Login = () => {
         );
         setToLocalStorage({ key: authKey, token: res.data.accessToken });
         // Check if there is a stored redirect URL
-        const Url = getFromLocalStorage(redirectUrl) || "/dashboard";
+        const Url = getFromLocalStorage(redirectUrl) || "/";
 
         // Clear the stored redirect URL
         removeFromLocalStorage(redirectUrl);
