@@ -41,7 +41,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="container my-20">
+    <section className="container mb-40 pt-20">
       <h4 className="pb-14 text-center text-2xl font-semibold text-gray-800">
         <span className="text-primary"># </span>
         Frequently Asked Questions

@@ -15,11 +15,12 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
+import { FiDroplet } from "react-icons/fi";
 import { toast } from "sonner";
 
 const Login = () => {
   const router = useRouter();
-  const [loginUser] = useLoginMutation();
+  const [loginUser, { isLoading }] = useLoginMutation();
   const dispatch = useAppDispatch();
 
   const handleLogin = async (values: FieldValues) => {
@@ -47,48 +48,82 @@ const Login = () => {
   };
 
   return (
-    <section className="flex h-[750px] flex-col items-center justify-center rounded-2xl bg-slate-100">
-      <h4 className="text-2xl font-bold text-slate-800">
-        Login with Blood Donation Company Name
-      </h4>
-      <p className="pt-2 text-base font-normal leading-7 text-slate-600">
-        Lorem ipsum dolor sit amet consectetur,
-      </p>
-      <h4 className="pb-5 pt-10 text-3xl font-bold text-slate-800">Login</h4>
-      <BDForm onSubmit={handleLogin}>
-        <BDInput
-          name="email"
-          className="mb-5 h-16 max-w-2xl rounded-lg"
-          type="email"
-          placeholder="Email"
-        />
-        <BDInput
-          name="password"
-          className="h-16 max-w-2xl rounded-lg"
-          type="password"
-          placeholder="Password"
-        />
-        <p className="my-3 text-center text-sm font-normal text-gray-700">
-          Don&apos;t have a account{" "}
-          <Link href="/register">
-            <span className="cursor-pointer text-blue-600">Register</span>
-          </Link>
-        </p>
-        <Button type="submit" className="h-16 min-w-[42rem]">
-          Login
-        </Button>
-      </BDForm>
+    <div className="flex min-h-[calc(100vh-80px)] items-center bg-gradient-to-br from-red-50 to-red-100">
+      <div className="mx-auto flex w-[64rem] flex-col overflow-hidden rounded-3xl bg-white shadow-lg lg:flex-row">
+        {/* Form Section */}
+        <div className="p-12 lg:w-1/2">
+          <div className="mx-auto">
+            <div className="mb-8 text-center">
+              <h1 className="mb-2 text-3xl font-bold text-gray-900">Sign In</h1>
+              <p className="text-gray-600">
+                Don&apos;t have an account?{" "}
+                <Link
+                  href="/register"
+                  className="font-semibold text-red-600 hover:text-red-700"
+                >
+                  Sign up
+                </Link>
+              </p>
+            </div>
 
-      {/* <p className="mb-5 mt-10 text-xl font-bold text-slate-900 underline underline-offset-2">
-        Login with Social Platforms
-      </p>
-      <ul className="flex space-x-5">
-        <li className="size-12 rounded-full bg-slate-800"></li>
-        <li className="size-12 rounded-full bg-slate-800"></li>
-        <li className="size-12 rounded-full bg-slate-800"></li>
-        <li className="size-12 rounded-full bg-slate-800"></li>
-      </ul> */}
-    </section>
+            <BDForm onSubmit={handleLogin}>
+              <div className="space-y-5">
+                <BDInput
+                  name="email"
+                  label="Email Address"
+                  type="email"
+                  placeholder="john@example.com"
+                  required
+                />
+
+                <BDInput
+                  name="password"
+                  label="Password"
+                  type="password"
+                  placeholder="••••••••"
+                  required
+                />
+
+                <Button
+                  type="submit"
+                  className="h-12 w-full bg-red-600 transition-colors duration-200 hover:bg-red-700"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <div className="flex items-center justify-center">
+                      <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+                    </div>
+                  ) : (
+                    "Sign In"
+                  )}
+                </Button>
+              </div>
+            </BDForm>
+
+            <p className="mt-6 text-center text-sm text-gray-600">
+              Forgot your password?{" "}
+              <Link
+                href="#"
+                className="font-medium text-red-600 hover:text-red-700"
+              >
+                Reset it here
+              </Link>
+            </p>
+          </div>
+        </div>
+
+        {/* Illustration Section */}
+        <div className="flex items-center justify-center bg-gradient-to-br from-red-600 to-red-700 p-12 lg:w-1/2">
+          <div className="text-center text-white">
+            <FiDroplet className="mx-auto mb-6 h-24 w-24 animate-pulse" />
+            <h2 className="mb-4 text-4xl font-bold">Welcome Back!</h2>
+            <p className="text-xl opacity-90">
+              Log in to continue saving lives
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

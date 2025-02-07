@@ -13,12 +13,14 @@ type TFormConfig = {
 type TFormProps = {
   children: React.ReactNode;
   onSubmit: SubmitHandler<FieldValues>;
+  className?: string;
 } & TFormConfig;
 
 const BDForm = ({
   children,
   onSubmit,
   resolver,
+  className,
   defaultValues,
 }: TFormProps) => {
   const formConfig: TFormConfig = {};
@@ -41,7 +43,9 @@ const BDForm = ({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(submit)}>{children}</form>
+      <form onSubmit={handleSubmit(submit)} className={className}>
+        {children}
+      </form>
     </FormProvider>
   );
 };
