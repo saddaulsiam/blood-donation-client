@@ -28,7 +28,7 @@ const SearchBloodDonors = () => {
             <BDSelect
               values={bloodGroups}
               className="h-14 w-full"
-              label="Select Blood Group"
+              placeholder="Select Blood Group"
               name="bloodGroups"
               required
             />
@@ -36,14 +36,14 @@ const SearchBloodDonors = () => {
             <BDSelect
               values={cities}
               className="h-14 w-full"
-              label="Select Your City"
+              placeholder="Select Your City"
               name="reason"
               required
             />
 
             <BDDatePicker
               name="date"
-              label="Select date"
+              placeholder="Select date"
               className="h-14 w-full"
               required
             />

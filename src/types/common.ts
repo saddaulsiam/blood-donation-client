@@ -47,7 +47,7 @@ export type TUser = {
   email: string;
   password: string;
   gender: "Male" | "Female";
-  bloodType:
+  bloodGroup:
     | "A_POSITIVE"
     | "A_NEGATIVE"
     | "B_POSITIVE"

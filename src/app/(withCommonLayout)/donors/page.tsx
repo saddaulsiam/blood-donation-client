@@ -1,29 +1,11 @@
-"use client";
-
-import { useDonorsQuery } from "@/redux/features/donors/donorsApi";
-import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import BloodDonorList from "../components/BloodDonorList";
-
-const DonorsContent = () => {
-  const searchParams = useSearchParams();
-
-  const bloodGroup = searchParams.get("bloodGroup");
-  const date = searchParams.get("date");
-  const reason = searchParams.get("reason");
-
-  const { data } = useDonorsQuery({ bloodGroup, date, reason });
-
-  return (
-    <section>
-      <BloodDonorList donors={data?.data} />
-    </section>
-  );
-};
+import DonorsContent from "../components/DonorsContent";
+import SearchBloodDonors from "../components/SearchBloodDonors";
 
 const Donors = () => (
   <Suspense fallback={<div>Loading...</div>}>
-    <div className="container">
+    <div className="container mt-10">
+      <SearchBloodDonors />
       <DonorsContent />
     </div>
   </Suspense>

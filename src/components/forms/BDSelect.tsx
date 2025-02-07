@@ -8,16 +8,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { Label } from "../ui/label";
 
 interface ITextField {
   name: string;
-  label: string;
+  label?: string;
+  placeholder: string;
   required?: boolean;
   className?: string;
   values: string[];
 }
 
-const BDSelect = ({ name, label, required, className, values }: ITextField) => {
+const BDSelect = ({
+  name,
+  label,
+  required,
+  className,
+  placeholder,
+  values,
+}: ITextField) => {
   const { control } = useFormContext();
 
   return (
@@ -25,26 +34,34 @@ const BDSelect = ({ name, label, required, className, values }: ITextField) => {
       name={name}
       control={control}
       render={({ field }) => (
-        <Select
-          {...field}
-          onValueChange={(value) => field.onChange(value)}
-          required={required}
-        >
-          <SelectTrigger className={className}>
-            <SelectValue placeholder={label} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>{label}</SelectLabel>
+        <div>
+          {label && (
+            <Label htmlFor={name} className="text-sm text-gray-700">
+              {label}
+            </Label>
+          )}
 
-              {values?.map((group) => (
-                <SelectItem key={group} value={group}>
-                  {group}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+          <Select
+            {...field}
+            onValueChange={(value) => field.onChange(value)}
+            required={required}
+          >
+            <SelectTrigger className={`${className}`}>
+              <SelectValue placeholder={placeholder} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>{label}</SelectLabel>
+
+                {values?.map((group) => (
+                  <SelectItem key={group} value={group}>
+                    {group}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
       )}
     />
   );
