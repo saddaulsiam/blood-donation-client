@@ -1,45 +1,64 @@
-import { Input } from "@/components/ui/input";
-import SidebarItems from "./dashboard/components/SidebarItems";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+"use client";
 
-const DashboardLayout = ({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) => {
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { FiMenu, FiSearch } from "react-icons/fi";
+import SidebarItems from "./dashboard/components/SidebarItems";
+
+const Dashboard = ({ children }: { children: React.ReactNode }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <main className="flex h-screen w-screen">
-      <div className="h-full w-2/12 rounded-r-3xl bg-slate-200">
-        <aside>
-          <span className="ml-10 flex h-28 items-center text-3xl font-extrabold text-gray-800">
-            Blood Donation
-          </span>
-          <SidebarItems />
-        </aside>
-      </div>
-      <div className="h-full w-10/12">
-        {/* app bar */}
-        <div className="flex h-28 items-center justify-between px-10">
-          {/* User name */}
-          <div>
-            <Input
-              className="h-12 min-w-96 border-none bg-slate-100 focus-visible:ring-1 focus-visible:ring-gray-300 focus-visible:ring-offset-0"
-              type="email"
-              placeholder="Search..."
-            />
+    <main className="flex h-screen w-screen overflow-hidden bg-gray-50">
+      {/* Sidebar for Desktop */}
+      <SidebarItems isSidebarOpen={isSidebarOpen} />
+
+      {/* Main Content */}
+      <div className="flex flex-1 flex-col overflow-hidden">
+        {/* App Bar */}
+        <header className="flex h-20 items-center justify-between bg-white px-4 shadow-sm lg:px-6">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={toggleSidebar}
+              className="p-2 text-gray-600 transition-colors duration-200 hover:text-red-600 lg:hidden"
+            >
+              <FiMenu className="h-6 w-6" />
+            </button>
+            <div className="relative w-48 lg:w-96">
+              <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Input
+                className="h-10 w-full rounded-lg border border-gray-300 pl-10 pr-4 focus:border-red-300 focus:ring-2 focus:ring-red-200"
+                type="text"
+                placeholder="Search..."
+              />
+            </div>
           </div>
-          {/* User profile */}
-          <div>
-            <Avatar className="h-12 w-12">
-              <AvatarImage src="https://github.com/shadcn.png" alt="Profile" />
-              <AvatarFallback>P</AvatarFallback>
-            </Avatar>
-          </div>
-        </div>
-        <div className="mx-10 my-5"> {children} </div>
+          <Avatar className="h-10 w-10 cursor-pointer transition-shadow duration-200 hover:shadow-md">
+            <AvatarImage src="https://github.com/shadcn.png" alt="Profile" />
+            <AvatarFallback>P</AvatarFallback>
+          </Avatar>
+        </header>
+
+        {/* Content Section */}
+        <section className="m-2 flex-1 overflow-auto rounded-lg bg-white p-4 shadow-sm">
+          {children}
+        </section>
       </div>
+
+      {/* Overlay for Mobile Sidebar */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden"
+          onClick={toggleSidebar}
+        ></div>
+      )}
     </main>
   );
 };
 
-export default DashboardLayout;
+export default Dashboard;

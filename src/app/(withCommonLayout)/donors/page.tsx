@@ -4,7 +4,7 @@ import SearchBloodDonors from "../components/SearchBloodDonors";
 
 const Donors = () => (
   <Suspense fallback={<div>Loading...</div>}>
-    <div className="container mt-10">
+    <div className="container my-10">
       <SearchBloodDonors />
       <DonorsContent />
     </div>

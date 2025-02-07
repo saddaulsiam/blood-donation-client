@@ -1,15 +1,32 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { TUser } from "@/types";
-import { FiDroplet } from "react-icons/fi";
+import Link from "next/link";
+import { FiDroplet, FiEdit2 } from "react-icons/fi";
 
 const DonarProfileDetails = ({
   donarInfo,
+  edit,
 }: {
   donarInfo: TUser | undefined;
+  edit?: boolean;
 }) => {
   return (
-    <div className="mb-8 rounded-md border bg-white p-6 shadow-sm md:p-8">
+    <div className="relative mb-8 rounded-md border bg-white p-6 shadow-sm md:p-8">
+      {/* Edit Button */}
+      {edit && (
+        <Link href={`/profile/update/${donarInfo?.id}`}>
+          <Button
+            variant="outline"
+            size="sm"
+            className="absolute right-4 top-4 flex items-center gap-2"
+          >
+            <FiEdit2 /> Edit
+          </Button>
+        </Link>
+      )}
+
       <div className="mb-8 flex flex-col items-center gap-6 text-center md:flex-row md:text-left">
         <Avatar className="h-20 w-20 border-[3px] border-primary">
           <AvatarImage
@@ -20,7 +37,7 @@ const DonarProfileDetails = ({
           </AvatarFallback>
         </Avatar>
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">
+          <h1 className="text-2xl font-bold capitalize text-gray-800">
             {donarInfo?.name}
           </h1>
           <p className="mt-2 text-gray-600">

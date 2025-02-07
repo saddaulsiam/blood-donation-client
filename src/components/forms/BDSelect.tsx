@@ -16,6 +16,7 @@ interface ITextField {
   placeholder: string;
   required?: boolean;
   className?: string;
+  defaultValue?: string;
   values: string[];
 }
 
@@ -25,6 +26,7 @@ const BDSelect = ({
   required,
   className,
   placeholder,
+  defaultValue,
   values,
 }: ITextField) => {
   const { control } = useFormContext();
@@ -33,6 +35,7 @@ const BDSelect = ({
     <Controller
       name={name}
       control={control}
+      defaultValue={defaultValue}
       render={({ field }) => (
         <div>
           {label && (

@@ -10,12 +10,14 @@ type TInputProps = {
   required?: boolean;
   className?: string;
   defaultValue?: string | number;
+  onChange?: any;
 };
 
-const BDInput = ({
+const BDFile = ({
   name,
-  type = "text",
+  type = "file",
   required,
+  onChange,
   label,
   placeholder,
   className,
@@ -39,6 +41,8 @@ const BDInput = ({
             id={name}
             {...field}
             type={type}
+            onChange={onChange}
+            accept="image/*"
             placeholder={placeholder}
             required={required}
             className={`h-12 ${className}`}
@@ -49,4 +53,4 @@ const BDInput = ({
   );
 };
 
-export default BDInput;
+export default BDFile;

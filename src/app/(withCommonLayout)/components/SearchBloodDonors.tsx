@@ -48,7 +48,10 @@ const SearchBloodDonors = () => {
               required
             />
 
-            <Button className="h-14 rounded-md px-[7.5rem] text-base font-medium">
+            <Button
+              type="submit"
+              className="h-14 rounded-md px-[7.5rem] text-base font-medium"
+            >
               Search
             </Button>
           </div>
