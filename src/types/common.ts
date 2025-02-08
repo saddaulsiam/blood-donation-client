@@ -30,6 +30,31 @@ export type IGenericErrorMessage = {
   message: string;
 };
 
+export const Gender = ["MALE", "FEMALE"];
+
+export type TError = {
+  data: {
+    message: string;
+    stack: string;
+    success: boolean;
+  };
+  status: number;
+};
+
+export type TResponse<T> = {
+  data?: T;
+  error?: TError;
+  meta?: TMeta;
+  success: boolean;
+  message: string;
+};
+
+export type TResponseRedux<T> = TResponse<T> & BaseQueryApi;
+
+export type TQueryParam = {
+  name: string;
+  value: boolean | React.Key;
+};
 export type TUserProfile = {
   id: string;
   age: number;
@@ -64,28 +89,13 @@ export type TUser = {
   profile: TUserProfile;
 };
 
-export const Gender = ["MALE", "FEMALE"];
-
-export type TError = {
-  data: {
-    message: string;
-    stack: string;
-    success: boolean;
-  };
-  status: number;
-};
-
-export type TResponse<T> = {
-  data?: T;
-  error?: TError;
-  meta?: TMeta;
-  success: boolean;
-  message: string;
-};
-
-export type TResponseRedux<T> = TResponse<T> & BaseQueryApi;
-
-export type TQueryParam = {
+export type TRequest = {
+  donorId: string;
   name: string;
-  value: boolean | React.Key;
+  phoneNumber: string;
+  dateOfDonation: string;
+  hospitalName: string;
+  reason: string;
+  donar?: TUser;
+  requester?: TUser;
 };
