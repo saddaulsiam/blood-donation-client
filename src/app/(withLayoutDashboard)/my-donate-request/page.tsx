@@ -48,21 +48,6 @@ const requests = [
   },
 ];
 
-const statusComponents: Record<string, React.ReactNode> = {
-  PENDING: (
-    <>
-      <Button className="flex items-center gap-1 bg-green-500 text-white hover:bg-green-600">
-        <Check size={16} /> Approve
-      </Button>
-      <Button className="flex items-center gap-1 bg-red-500 text-white hover:bg-red-600">
-        <X size={16} /> Reject
-      </Button>
-    </>
-  ),
-  APPROVED: <span className="font-medium text-green-600">✔ Approved</span>,
-  SUCCESSFUL: <span className="font-medium text-green-600">✔ SUCCESSFUL</span>,
-  REJECTED: <span className="font-medium text-red-600">✖ Rejected</span>,
-};
 const MyBloodRequest = () => {
   return (
     <div className="min-h-screen rounded-md bg-gray-50 p-6">
@@ -94,7 +79,7 @@ const MyBloodRequest = () => {
                 <TableCell>{request.hospitalAddress}</TableCell>
                 <TableCell>
                   <span
-                    className={`rounded-full px-3 py-1 text-sm font-semibold ${
+                    className={`rounded-full px-3 py-1 text-sm font-medium ${
                       request.status === "PENDING"
                         ? "bg-yellow-100 text-yellow-800"
                         : ["APPROVED", "SUCCESSFUL", "DONE"].includes(
@@ -108,31 +93,6 @@ const MyBloodRequest = () => {
                   </span>
                 </TableCell>
                 <TableCell className="flex flex-wrap justify-end gap-2">
-                  {/* {request.status === "PENDING" && (
-                    <>
-                      <Button className="flex items-center gap-1 bg-green-500 text-white hover:bg-green-600">
-                        <Check size={16} /> Approve
-                      </Button>
-                      <Button className="flex items-center gap-1 bg-red-500 text-white hover:bg-red-600">
-                        <X size={16} /> Reject
-                      </Button>
-                    </>
-                  )}
-                  {request.status === "APPROVED" && (
-                    <span className="font-medium text-green-600">
-                      ✔ Approved
-                    </span>
-                  )}
-                  {request.status === "SUCCESSFUL" && (
-                    <span className="font-medium text-green-600">
-                      ✔ SUCCESSFUL
-                    </span>
-                  )}
-                  {request.status === "REJECTED" && (
-                    <span className="font-medium text-red-600">
-                      ✖ Rejected
-                    </span>
-                  )} */}
                   <TableCell className="flex flex-wrap justify-end gap-2">
                     {request.status === "PENDING" ? (
                       <>

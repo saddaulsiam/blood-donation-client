@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -6,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Edit } from "lucide-react";
 
 const requests = [
   {
@@ -16,25 +16,34 @@ const requests = [
     dateOfDonation: "11-11-2020",
     hospitalName: "City Hospital",
     hospitalAddress: "Pabna Sodar",
-    status: "Pending",
+    status: "PENDING",
   },
   {
-    id: "id-11111",
-    requesterName: "Saddaul Siam",
-    phoneNumber: "01311333277",
-    dateOfDonation: "11-11-2020",
-    hospitalName: "City Hospital",
-    hospitalAddress: "Pabna Sodar",
-    status: "Pending",
+    id: "id-11112",
+    requesterName: "John Doe",
+    phoneNumber: "01234567890",
+    dateOfDonation: "12-12-2021",
+    hospitalName: "Apollo Hospital",
+    hospitalAddress: "Dhaka",
+    status: "APPROVED",
   },
   {
-    id: "id-11111",
-    requesterName: "Saddaul Siam",
-    phoneNumber: "01311333277",
-    dateOfDonation: "11-11-2020",
-    hospitalName: "City Hospital",
-    hospitalAddress: "Pabna Sodar",
-    status: "Pending",
+    id: "id-11112",
+    requesterName: "John Doe",
+    phoneNumber: "01234567890",
+    dateOfDonation: "12-12-2021",
+    hospitalName: "Apollo Hospital",
+    hospitalAddress: "Dhaka",
+    status: "REJECTED",
+  },
+  {
+    id: "id-11112",
+    requesterName: "John Doe",
+    phoneNumber: "01234567890",
+    dateOfDonation: "12-12-2021",
+    hospitalName: "Apollo Hospital",
+    hospitalAddress: "Dhaka",
+    status: "SUCCESSFUL",
   },
 ];
 
@@ -69,19 +78,38 @@ const RequestToDonate = () => {
                 <TableCell>{request.hospitalAddress}</TableCell>
                 <TableCell>
                   <span
-                    className={`rounded-full px-3 py-1 text-sm font-semibold ${
-                      request.status === "Pending"
+                    className={`rounded-full px-3 py-1 text-sm font-medium ${
+                      request.status === "PENDING"
                         ? "bg-yellow-100 text-yellow-800"
-                        : "bg-green-100 text-green-800"
+                        : ["APPROVED", "SUCCESSFUL", "DONE"].includes(
+                              request.status,
+                            )
+                          ? "bg-green-100 text-green-800"
+                          : "bg-red-100 text-red-800"
                     }`}
                   >
                     {request.status}
                   </span>
                 </TableCell>
                 <TableCell>
-                  <button className="text-gray-500 hover:text-gray-700">
-                    <Edit className="h-5 w-5" />
-                  </button>
+                  {request.status === "PENDING" ? (
+                    <Button variant="link">Cancel</Button>
+                  ) : request.status === "SUCCESSFUL" ? (
+                    <span className="text-green-500">✔ Donation Complete</span>
+                  ) : request.status === "REJECTED" ? (
+                    <span className="text-red-500">
+                      ✖ Donar Cancel Required
+                    </span>
+                  ) : request.status === "APPROVED" ? (
+                    <>
+                      <span className="text-green-500">
+                        Donar approved request
+                      </span>
+                      {/* <Button variant="link">Cancel</Button> */}
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </TableCell>
               </TableRow>
             ))}
