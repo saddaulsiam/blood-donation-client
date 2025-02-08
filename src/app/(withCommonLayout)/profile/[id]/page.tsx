@@ -9,11 +9,12 @@ import { toast } from "sonner";
 import BloodDonationRequestForm from "../../components/BloodDonationRequestForm";
 import DonarProfileDetails from "../../components/DonarProfileDetails";
 
-const Profile = () => {
+const BloodRequest = () => {
   const router = useRouter();
   const { id } = useParams();
 
   const { data: donarInfo } = useSingleDonorQuery(id);
+  console.log({donarInfo})
   const [bloodRequest] = useBloodRequestMutation();
 
   const handleSubmit = (values: FieldValues) => {
@@ -29,7 +30,7 @@ const Profile = () => {
       bloodRequest(data).then((response) => {
         if (response.data.success) {
           toast.success("Request Submitted Successfully!");
-          router.push("/dashboard");
+          router.push("/request-to-donate");
         }
       });
     } catch (error) {
@@ -50,4 +51,4 @@ const Profile = () => {
   );
 };
 
-export default withAuth(Profile);
+export default withAuth(BloodRequest);

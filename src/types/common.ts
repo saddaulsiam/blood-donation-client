@@ -90,12 +90,22 @@ export type TUser = {
 };
 
 export type TRequest = {
+  id: string;
   donorId: string;
   name: string;
   phoneNumber: string;
   dateOfDonation: string;
   hospitalName: string;
   reason: string;
+  status: string;
   donar?: TUser;
   requester?: TUser;
+};
+
+export const Status = {
+  PENDING: "PENDING",
+  APPROVED: "APPROVED",
+  REJECTED: "REJECTED",
+  CANCEL: "CANCEL",
+  SUCCESSFUL: "SUCCESSFUL",
 };

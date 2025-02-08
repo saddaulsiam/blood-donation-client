@@ -20,6 +20,7 @@ const requestApi = baseApi.injectEndpoints({
           data: TRequest[];
         }>,
       ) => response.data,
+      providesTags: ["REQUEST"],
     }),
     getRequestToDonate: builder.query({
       query: () => ({
@@ -31,6 +32,15 @@ const requestApi = baseApi.injectEndpoints({
           data: TRequest[];
         }>,
       ) => response.data,
+      providesTags: ["REQUEST"],
+    }),
+    updateRequest: builder.mutation({
+      query: (data) => ({
+        url: `/update-request/${data.id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["REQUEST"],
     }),
   }),
 });
@@ -39,4 +49,5 @@ export const {
   useBloodRequestMutation,
   useGetMyRequestQuery,
   useGetRequestToDonateQuery,
+  useUpdateRequestMutation,
 } = requestApi;
