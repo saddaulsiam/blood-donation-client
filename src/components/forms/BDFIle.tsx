@@ -4,24 +4,18 @@ import { Label } from "../ui/label";
 
 type TInputProps = {
   name: string;
-  type?: string;
   label?: string;
-  placeholder: string;
   required?: boolean;
   className?: string;
-  defaultValue?: string | number;
-  onChange?: any;
+  onChange?: (file: File | null) => void;
 };
 
 const BDFile = ({
   name,
-  type = "file",
   required,
   onChange,
   label,
-  placeholder,
   className,
-  defaultValue,
 }: TInputProps) => {
   const { control } = useFormContext();
 
@@ -29,7 +23,7 @@ const BDFile = ({
     <Controller
       control={control}
       name={name}
-      defaultValue={defaultValue}
+      defaultValue={null}
       render={({ field }) => (
         <div>
           {label && (
@@ -39,13 +33,15 @@ const BDFile = ({
           )}
           <Input
             id={name}
-            {...field}
-            type={type}
-            onChange={onChange}
+            type="file"
             accept="image/*"
-            placeholder={placeholder}
             required={required}
             className={`h-12 ${className}`}
+            onChange={(e) => {
+              const file = e.target.files?.[0] || null;
+              field.onChange(file);
+              if (onChange) onChange(file); // Pass file to parent
+            }}
           />
         </div>
       )}

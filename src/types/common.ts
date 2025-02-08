@@ -81,7 +81,7 @@ export type TUser = {
     | "AB_NEGATIVE"
     | "O_POSITIVE"
     | "O_NEGATIVE";
-  reason: string;
+  city: string;
   address: string;
   availability: boolean;
   createdAt: string;
@@ -96,7 +96,7 @@ export type TRequest = {
   phoneNumber: string;
   dateOfDonation: string;
   hospitalName: string;
-  reason: string;
+  city: string;
   status: string;
   donar?: TUser;
   requester?: TUser;

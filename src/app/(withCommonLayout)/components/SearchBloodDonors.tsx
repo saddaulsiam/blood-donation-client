@@ -13,7 +13,7 @@ const SearchBloodDonors = () => {
 
   const onSubmit = async (values: FieldValues) => {
     router.push(
-      `/donors?bloodGroup=${values.bloodGroups}&date=${values.date.split("T")[0]}&reason=${values.reason}`,
+      `/donors?bloodGroup=${values.bloodGroups}&date=${values.date.split("T")[0]}&city=${values.city}`,
     );
   };
   return (
@@ -37,7 +37,7 @@ const SearchBloodDonors = () => {
               values={cities}
               className="h-14 w-full"
               placeholder="Select Your City"
-              name="reason"
+              name="city"
               required
             />
 

@@ -12,7 +12,7 @@ const BloodDonorList = ({ donors }: BloodDonorListProps) => {
 
   const bloodGroup = searchParams.get("bloodGroup");
   const date = searchParams.get("date");
-  const reason = searchParams.get("reason");
+  const city = searchParams.get("city");
 
   return (
     <>
@@ -30,7 +30,7 @@ const BloodDonorList = ({ donors }: BloodDonorListProps) => {
         {donors?.map((donor) => (
           <Link
             key={donor.id}
-            href={`/profile/${donor.id}?bloodGroup=${bloodGroup}&date=${date}&reason=${reason}`}
+            href={`/profile/${donor.id}?bloodGroup=${bloodGroup}&date=${date}&city=${city}`}
           >
             <div className="rounded-lg bg-slate-100 p-7">
               <div className="flex justify-center pb-5">
@@ -51,7 +51,7 @@ const BloodDonorList = ({ donors }: BloodDonorListProps) => {
                   Last Donet: {donor.profile.lastDonationDate}
                 </p>
                 <p className="font-medium text-slate-600">
-                  Address: {donor.reason}
+                  Address: {donor.city}
                 </p>
               </div>
             </div>

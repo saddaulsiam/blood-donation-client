@@ -11,9 +11,9 @@ const DonorsContent = () => {
 
   const bloodGroup = searchParams.get("bloodGroup");
   const date = searchParams.get("date");
-  const reason = searchParams.get("reason");
+  const city = searchParams.get("city");
 
-  const { data: donors } = useDonorsQuery({ bloodGroup, date, reason });
+  const { data: donors } = useDonorsQuery({ bloodGroup, date, city });
   return (
     <section className="py-10">
       <h4 className="pb-10 text-center text-2xl font-semibold text-gray-800">
@@ -24,7 +24,7 @@ const DonorsContent = () => {
         {donors?.map((donor: TUser) => (
           <Link
             key={donor.id}
-            href={`/profile/${donor.id}?bloodGroup=${bloodGroup}&date=${date}&reason=${reason}`}
+            href={`/profile/${donor.id}?bloodGroup=${bloodGroup}&date=${date}&city=${city}`}
           >
             <div className="h-full rounded-lg bg-white p-5 shadow transition-shadow duration-300 ease-in-out hover:shadow-lg">
               <div className="flex justify-center pb-6">
@@ -59,7 +59,7 @@ const DonorsContent = () => {
                 <p className="text-base text-gray-600">
                   Address:{" "}
                   <span className="font-medium text-gray-800">
-                    {donor.reason}
+                    {donor.city}
                   </span>
                 </p>
               </div>

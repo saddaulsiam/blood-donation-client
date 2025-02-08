@@ -24,7 +24,7 @@ const BloodRequest = () => {
       phoneNumber: values.number,
       dateOfDonation: values.date.split("T")[0],
       hospitalName: values.hospitalName,
-      reason: values.message,
+      city: values.message,
     };
     try {
       bloodRequest(data).then((response) => {

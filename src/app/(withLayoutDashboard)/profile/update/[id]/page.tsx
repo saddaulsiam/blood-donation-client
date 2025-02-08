@@ -11,24 +11,32 @@ import { Button } from "@/components/ui/button";
 import { useSingleDonorQuery } from "@/redux/features/donors/donorsApi";
 import { Gender } from "@/types";
 import { bloodGroups } from "@/utils/data";
+import uploadToCloudinary from "@/utils/uploadToCloudinary";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+import { FieldValues } from "react-hook-form";
 import { FiDroplet, FiEdit2 } from "react-icons/fi";
 
 const UpdateProfileForm = () => {
   const { id } = useParams();
 
-  const { data: donarInfo } = useSingleDonorQuery(id);
-  const handleSubmit = () => {};
+  const { data: donorInfo } = useSingleDonorQuery(id);
 
-  const [photo, setPhoto] = useState<string | null>(null);
+  // Store selected image URL
+  const [photo, setPhoto] = useState<string | null>(
+    donorInfo?.profile?.photo || null,
+  );
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  // Handle file change and show real-time preview
+  const handleFileChange = (file: File | null) => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setPhoto(imageUrl);
     }
+  };
+  const handleSubmit = async (values: FieldValues) => {
+    values.photo = await uploadToCloudinary(values.photo);
+    console.log(values);
   };
 
   return (
@@ -38,11 +46,11 @@ const UpdateProfileForm = () => {
         <div className="relative">
           <Avatar className="h-24 w-24 border-[3px] border-primary shadow-md">
             <AvatarImage
-              src={photo || donarInfo?.profile?.photo || "/default-avatar.png"}
+              src={photo || donorInfo?.profile?.photo || "/default-avatar.png"}
               className="object-cover"
             />
             <AvatarFallback className="bg-primary/10 text-primary">
-              {donarInfo?.name?.charAt(0)}
+              {donorInfo?.name?.charAt(0)}
             </AvatarFallback>
           </Avatar>
           <label
@@ -54,17 +62,17 @@ const UpdateProfileForm = () => {
         </div>
         <div>
           <h1 className="text-2xl font-bold capitalize text-gray-800">
-            {donarInfo?.name}
+            {donorInfo?.name}
           </h1>
           <p className="mt-2 text-gray-600">
-            {donarInfo?.profile?.bio || "Bio not available"}
+            {donorInfo?.profile?.bio || "Bio not available"}
           </p>
           <Badge
-            variant={donarInfo?.availability ? "default" : "destructive"}
+            variant={donorInfo?.availability ? "default" : "destructive"}
             className="mt-4 gap-2"
           >
             <FiDroplet className="h-4 w-4" />
-            {donarInfo?.availability
+            {donorInfo?.availability
               ? "Available to donate"
               : "Currently unavailable"}
           </Badge>
@@ -76,29 +84,29 @@ const UpdateProfileForm = () => {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <BDInput
             name="name"
-            defaultValue={donarInfo?.name}
+            defaultValue={donorInfo?.name}
             label="Your Full Name"
             placeholder="John Doe"
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDInput
             name="bio"
-            defaultValue={donarInfo?.profile.bio}
+            defaultValue={donorInfo?.profile.bio}
             label="Bio"
             placeholder="Your cool bio"
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDSelect
-            name="BloodGroup"
-            defaultValue={donarInfo?.bloodGroup}
+            name="bloodGroup"
+            defaultValue={donorInfo?.bloodGroup}
             label="Blood Group"
             placeholder="Select your group"
             values={bloodGroups}
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDInput
-            name="Age"
-            defaultValue={donarInfo?.profile.age}
+            name="a ge"
+            defaultValue={donorInfo?.profile.age}
             label="Your Age"
             placeholder="23"
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
@@ -107,7 +115,7 @@ const UpdateProfileForm = () => {
             name="gender"
             label="Gender"
             values={Gender}
-            defaultValue={donarInfo?.gender}
+            defaultValue={donorInfo?.gender}
             placeholder="Select gender"
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
@@ -116,8 +124,8 @@ const UpdateProfileForm = () => {
             label="Last Donation"
             placeholder="Pick your last donation"
             defaultValue={
-              donarInfo?.profile?.lastDonationDate
-                ? new Date(donarInfo.profile.lastDonationDate)
+              donorInfo?.profile?.lastDonationDate
+                ? new Date(donorInfo.profile.lastDonationDate)
                     .toISOString()
                     .split("T")[0]
                 : ""
@@ -128,25 +136,23 @@ const UpdateProfileForm = () => {
             name="availability"
             label="Do you available for donate"
             placeholder={
-              donarInfo?.availability
+              donorInfo?.availability
                 ? "Available to donate"
                 : "Currently unavailable"
             }
             values={["Available to donate", "Currently unavailable"]}
             defaultValue={
-              donarInfo?.availability
+              donorInfo?.availability
                 ? "Available to donate"
                 : "Currently unavailable"
             }
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDFile
-            type="file"
             name="photo"
             label="Profile Photo"
-            placeholder="Select Photo"
             onChange={handleFileChange}
-            className="rounded-lg border border-gray-200 bg-white p-2 focus:border-primary focus:ring-2 focus:ring-primary/50"
+            className="rounded-lg border border-gray-200 bg-white p-2"
           />
         </div>
 

@@ -54,7 +54,7 @@ const MyBloodRequest = () => {
                   <TableCell>{request.name}</TableCell>
                   <TableCell>{request.phoneNumber}</TableCell>
                   <TableCell>{request.dateOfDonation}</TableCell>
-                  <TableCell>{request.reason}</TableCell>
+                  <TableCell>{request.city}</TableCell>
                   <TableCell>{request.hospitalName}</TableCell>
                   <TableCell>
                     <span

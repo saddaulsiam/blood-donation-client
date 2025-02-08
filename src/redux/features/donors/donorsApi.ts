@@ -4,8 +4,8 @@ import { baseApi } from "../../api/baseApi";
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     donors: builder.query({
-      query: ({ bloodGroup, date, reason }) => ({
-        url: `/donors?bloodGroup=${bloodGroup}&reason=${reason}&date=${date}`,
+      query: ({ bloodGroup, date, city }) => ({
+        url: `/donors?bloodGroup=${bloodGroup}&city=${city}&date=${date}`,
         method: "GET",
       }),
       transformResponse: (response: TResponseRedux<TUser[]>) => response.data,
