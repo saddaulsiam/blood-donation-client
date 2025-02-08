@@ -24,8 +24,19 @@ const authApi = baseApi.injectEndpoints({
       }),
       transformResponse: (response: TResponseRedux<TUser>) => response.data,
     }),
+    ChangePassword: builder.mutation({
+      query: (data) => ({
+        url: "/change-password",
+        method: "PUT",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useRegisterUserMutation, useLoginMutation, useGetMeQuery } =
-  authApi;
+export const {
+  useRegisterUserMutation,
+  useLoginMutation,
+  useGetMeQuery,
+  useChangePasswordMutation,
+} = authApi;
