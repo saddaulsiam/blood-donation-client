@@ -45,7 +45,7 @@ const SearchBloodDonors = () => {
               name="date"
               placeholder="Select date"
               className="h-14 w-full"
-              required
+              // required
             />
 
             <Button

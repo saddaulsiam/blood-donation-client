@@ -17,9 +17,11 @@ const SidebarItems = ({ isSidebarOpen }: any) => {
       }`}
     >
       <div>
-        <h2 className="mb-10 text-2xl font-bold text-red-600">
-          Blood Donation
-        </h2>
+        <Link href={"/"}>
+          <h2 className="mb-10 text-2xl font-bold text-red-600">
+            Blood Donation
+          </h2>
+        </Link>
         <nav className="flex-1">
           <ul className="space-y-2">
             {defaultMenus.map((menu, i) => (

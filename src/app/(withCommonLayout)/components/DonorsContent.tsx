@@ -14,14 +14,16 @@ const DonorsContent = () => {
   const city = searchParams.get("city");
 
   const { data: donors } = useDonorsQuery({ bloodGroup, date, city });
+
   return (
     <section className="py-10">
       <h4 className="pb-10 text-center text-2xl font-semibold text-gray-800">
-        Total donors found <span className="text-primary">82</span>
+        Total donors found{" "}
+        <span className="text-primary">{donors?.meta?.total}</span>
       </h4>
 
       <div className="grid grid-cols-4 gap-5">
-        {donors?.map((donor: TUser) => (
+        {donors?.data?.map((donor: TUser) => (
           <Link
             key={donor.id}
             href={`/profile/${donor.id}?bloodGroup=${bloodGroup}&date=${date}&city=${city}`}

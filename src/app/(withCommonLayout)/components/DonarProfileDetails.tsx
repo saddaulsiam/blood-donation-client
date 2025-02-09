@@ -57,7 +57,7 @@ const DonarProfileDetails = ({
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          label="Blood Type"
+          label="Blood Group"
           value={donarInfo?.bloodGroup
             ?.replace("_POSITIVE", "+")
             .replace("_NEGATIVE", "-")}
