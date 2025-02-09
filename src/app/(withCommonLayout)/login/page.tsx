@@ -48,7 +48,7 @@ const Login = () => {
         router.push(Url);
       }
     } catch (err: any) {
-      console.error(err);
+      toast.error(err.data.message);
     }
   };
 

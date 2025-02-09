@@ -50,7 +50,11 @@ const Register = () => {
         }
       }
     } catch (err: any) {
-      toast.error(err?.data?.message);
+      toast.error(
+        err?.data?.message === "Validation Error"
+          ? "Password must be at least 6 characters long."
+          : err?.data?.message,
+      );
     } finally {
       setIsLoading(false);
     }
