@@ -39,7 +39,12 @@ const Register = () => {
         const result = await loginUser(values).unwrap();
         if (result.success === true) {
           toast.success(result?.message);
-          dispatch(setUser({ user: result.data.user }));
+          // ✅ Update Redux state
+          dispatch(
+            setUser({
+              user: result.data.user, // Store logged-in user
+            }),
+          );
           setToLocalStorage({ key: authKey, token: result.data.accessToken });
           router.push("/profile");
         }

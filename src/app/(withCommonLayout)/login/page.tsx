@@ -34,16 +34,16 @@ const Login = () => {
       if (res.success === true) {
         toast.success(res?.message);
 
+        // ✅ Update Redux state
         dispatch(
           setUser({
-            user: res.data.user,
+            user: res.data.user, // Store logged-in user
           }),
         );
-        setToLocalStorage({ key: authKey, token: res.data.accessToken });
-        // Check if there is a stored redirect URL
-        const Url = getFromLocalStorage(redirectUrl) || "/";
 
-        // Clear the stored redirect URL
+        setToLocalStorage({ key: authKey, token: res.data.accessToken });
+
+        const Url = getFromLocalStorage(redirectUrl) || "/";
         removeFromLocalStorage(redirectUrl);
         router.push(Url);
       }
