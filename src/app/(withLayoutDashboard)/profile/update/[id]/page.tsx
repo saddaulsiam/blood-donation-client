@@ -8,23 +8,27 @@ import BDSelect from "@/components/forms/BDSelect";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useSingleDonorQuery } from "@/redux/features/donors/donorsApi";
+import {
+  useGetMeQuery,
+  useUpdateProfileMutation,
+} from "@/redux/features/auth/authApi";
 import { Gender } from "@/types";
-import { bloodGroups } from "@/utils/data";
+import { bloodGroups, cities } from "@/utils/data";
 import uploadToCloudinary from "@/utils/uploadToCloudinary";
-import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { FiDroplet, FiEdit2 } from "react-icons/fi";
+import { toast } from "sonner";
 
 const UpdateProfileForm = () => {
-  const { id } = useParams();
-
-  const { data: donorInfo } = useSingleDonorQuery(id);
+  const router = useRouter();
+  const { data: user } = useGetMeQuery("");
+  const [updateProfile] = useUpdateProfileMutation();
 
   // Store selected image URL
   const [photo, setPhoto] = useState<string | null>(
-    donorInfo?.profile?.photo || null,
+    user?.profile?.photo || null,
   );
 
   // Handle file change and show real-time preview
@@ -34,9 +38,33 @@ const UpdateProfileForm = () => {
       setPhoto(imageUrl);
     }
   };
+
   const handleSubmit = async (values: FieldValues) => {
-    values.photo = await uploadToCloudinary(values.photo);
-    console.log(values);
+    if (values.photo) {
+      values.photo = await uploadToCloudinary(values.photo);
+    }
+
+    const data = {
+      name: values.name || user?.name,
+      bloodGroup: values.bloodGroup || user?.bloodGroup,
+      gender: values.gender || user?.gender,
+      city: values.city || user?.city,
+      availability:
+        values.availability === "Available to donate" ? true : false,
+
+      bio: values.bio || user?.profile?.bio,
+      age: Number(values.age) || Number(user?.profile?.age),
+      photo: values.photo || user?.profile?.photo,
+      lastDonationDate:
+        values.lastDonationDate.split("T")[0] ||
+        user?.profile?.lastDonationDate.split("T")[0],
+    };
+
+    const res = await updateProfile(data).unwrap();
+    if (res.success === true) {
+      toast.success(res?.message);
+      router.push("/profile");
+    }
   };
 
   return (
@@ -46,11 +74,11 @@ const UpdateProfileForm = () => {
         <div className="relative">
           <Avatar className="h-24 w-24 border-[3px] border-primary shadow-md">
             <AvatarImage
-              src={photo || donorInfo?.profile?.photo || "/default-avatar.png"}
+              src={photo || user?.profile?.photo || "/default-avatar.png"}
               className="object-cover"
             />
             <AvatarFallback className="bg-primary/10 text-primary">
-              {donorInfo?.name?.charAt(0)}
+              {user?.name?.charAt(0)}
             </AvatarFallback>
           </Avatar>
           <label
@@ -62,17 +90,17 @@ const UpdateProfileForm = () => {
         </div>
         <div>
           <h1 className="text-2xl font-bold capitalize text-gray-800">
-            {donorInfo?.name}
+            {user?.name}
           </h1>
           <p className="mt-2 text-gray-600">
-            {donorInfo?.profile?.bio || "Bio not available"}
+            {user?.profile?.bio || "Bio not available"}
           </p>
           <Badge
-            variant={donorInfo?.availability ? "default" : "destructive"}
-            className="mt-4 gap-2"
+            variant={user?.availability ? "default" : "outline"}
+            className="mt-4"
           >
-            <FiDroplet className="h-4 w-4" />
-            {donorInfo?.availability
+            <FiDroplet className="mr-2" />
+            {user?.availability
               ? "Available to donate"
               : "Currently unavailable"}
           </Badge>
@@ -84,29 +112,37 @@ const UpdateProfileForm = () => {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <BDInput
             name="name"
-            defaultValue={donorInfo?.name}
+            defaultValue={user?.name}
             label="Your Full Name"
             placeholder="John Doe"
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDInput
             name="bio"
-            defaultValue={donorInfo?.profile.bio}
+            defaultValue={user?.profile?.bio}
             label="Bio"
-            placeholder="Your cool bio"
+            placeholder="Enter your bio"
+            className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
+          />
+          <BDSelect
+            name="city"
+            // defaultValue={donor?.city}
+            values={cities}
+            label="Your city"
+            placeholder="Select Your City"
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDSelect
             name="bloodGroup"
-            defaultValue={donorInfo?.bloodGroup}
+            // defaultValue={donor?.bloodGroup}
             label="Blood Group"
             placeholder="Select your group"
             values={bloodGroups}
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDInput
-            name="a ge"
-            defaultValue={donorInfo?.profile.age}
+            name="age"
+            defaultValue={user?.profile.age}
             label="Your Age"
             placeholder="23"
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
@@ -115,17 +151,17 @@ const UpdateProfileForm = () => {
             name="gender"
             label="Gender"
             values={Gender}
-            defaultValue={donorInfo?.gender}
+            // defaultValue={donor?.gender}
             placeholder="Select gender"
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDDatePicker
-            name="lastDonation"
+            name="lastDonationDate"
             label="Last Donation"
             placeholder="Pick your last donation"
             defaultValue={
-              donorInfo?.profile?.lastDonationDate
-                ? new Date(donorInfo.profile.lastDonationDate)
+              user?.profile?.lastDonationDate
+                ? new Date(user.profile.lastDonationDate)
                     .toISOString()
                     .split("T")[0]
                 : ""
@@ -136,23 +172,23 @@ const UpdateProfileForm = () => {
             name="availability"
             label="Do you available for donate"
             placeholder={
-              donorInfo?.availability
+              user?.availability
                 ? "Available to donate"
                 : "Currently unavailable"
             }
             values={["Available to donate", "Currently unavailable"]}
-            defaultValue={
-              donorInfo?.availability
-                ? "Available to donate"
-                : "Currently unavailable"
-            }
+            // defaultValue={
+            //   donor?.availability
+            //     ? "Available to donate"
+            //     : "Currently unavailable"
+            // }
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDFile
             name="photo"
-            label="Profile Photo"
+            // label="Profile Photo"
             onChange={handleFileChange}
-            className="rounded-lg border border-gray-200 bg-white p-2"
+            className="hidden rounded-lg border border-gray-200 bg-white p-2"
           />
         </div>
 

@@ -28,7 +28,7 @@ const Register = () => {
   const handleRegister = async (values: FieldValues) => {
     setIsLoading(true);
     values.age = parseInt(values.age);
-    values.lastDonationDate = values.lastDonationDate.split("T")[0];
+    values.lastDonationDate = values?.lastDonationDate?.split("T")[0];
 
     try {
       const res = await register(values).unwrap();

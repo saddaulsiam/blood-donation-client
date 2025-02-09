@@ -22,6 +22,7 @@ const authApi = baseApi.injectEndpoints({
         url: "/my-profile",
         method: "GET",
       }),
+      providesTags: ["USER"],
       transformResponse: (response: TResponseRedux<TUser>) => response.data,
     }),
     ChangePassword: builder.mutation({
@@ -31,6 +32,14 @@ const authApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: "/my-profile",
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["USER"],
+    }),
   }),
 });
 
@@ -39,4 +48,5 @@ export const {
   useLoginMutation,
   useGetMeQuery,
   useChangePasswordMutation,
+  useUpdateProfileMutation,
 } = authApi;

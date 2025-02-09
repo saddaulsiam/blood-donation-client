@@ -44,7 +44,7 @@ const DonarProfileDetails = ({
             {donarInfo?.profile?.bio || "Bio not available"}
           </p>
           <Badge
-            variant={donarInfo?.availability ? "default" : "destructive"}
+            variant={donarInfo?.availability ? "default" : "outline"}
             className="mt-4"
           >
             <FiDroplet className="mr-2" />
