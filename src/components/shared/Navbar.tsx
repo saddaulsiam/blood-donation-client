@@ -1,17 +1,27 @@
 "use client";
 
-import { useSelector } from "react-redux";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { authKey } from "@/contants/authkey";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { logoutUser } from "@/services/actions/logoutUser";
+import { removeFromLocalStorage } from "@/utils/local-storage";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAppDispatch } from "@/redux/hooks";
-import { Button } from "../ui/button";
-import { removeFromLocalStorage } from "@/utils/local-storage";
-import { authKey } from "@/contants/authkey";
-import { setUser } from "@/redux/features/auth/authSlice";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Button } from "../ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const Navbar = () => {
   const router = useRouter();
@@ -67,12 +77,44 @@ const Navbar = () => {
               </Button>
             </Link>
           ) : (
-            <Button
-              onClick={handleLogout}
-              className="rounded-lg bg-red-500 px-6 py-2 text-white transition duration-300 hover:bg-red-600"
-            >
-              Logout
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="@shadcn"
+                  />
+                  <AvatarFallback>P</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                  <Link href={"/profile"}>
+                    <DropdownMenuItem>Profile</DropdownMenuItem>
+                  </Link>
+                  <Link href={"/request-to-donate"}>
+                    <DropdownMenuItem>Request To Donate</DropdownMenuItem>
+                  </Link>
+                  <Link href={"/my-donate-request"}>
+                    <DropdownMenuItem>My Donation Requests</DropdownMenuItem>
+                  </Link>
+                  <Link href={"/change-password"}>
+                    <DropdownMenuItem>Change Password</DropdownMenuItem>
+                  </Link>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  className="rounded-lg bg-red-500 px-6 py-2 text-white transition duration-300 hover:bg-red-600"
+                >
+                  {/* <Button> */}
+                  Logout
+                  {/* </Button> */}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
         </li>
       </ul>
