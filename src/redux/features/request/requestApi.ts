@@ -9,6 +9,7 @@ const requestApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["REQUEST"],
     }),
     getMyRequest: builder.query({
       query: () => ({
