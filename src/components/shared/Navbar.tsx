@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { authKey } from "@/contants/authkey";
 import { setUser } from "@/redux/features/auth/authSlice";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logoutUser } from "@/services/actions/logoutUser";
 import { removeFromLocalStorage } from "@/utils/local-storage";
 import { motion } from "framer-motion";
@@ -19,16 +19,16 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
 
 const Navbar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
   // Get user from Redux state (Will update UI on login/logout)
-  const user = useSelector((state: any) => state.auth.user);
+  const user = useAppSelector((state) => state.auth.user);
   const isUserLoggedIn = !!user; // Convert user object to boolean
 
   const handleLogout = () => {
@@ -78,10 +78,12 @@ const Navbar = () => {
             </Link>
           ) : (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+              <DropdownMenuTrigger asChild className="cursor-pointer">
                 <Avatar>
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
+                    src={
+                      user?.profile?.photo || "https://github.com/shadcn.png"
+                    }
                     alt="@shadcn"
                   />
                   <AvatarFallback>P</AvatarFallback>
@@ -109,9 +111,7 @@ const Navbar = () => {
                   onClick={handleLogout}
                   className="rounded-lg bg-red-500 px-6 py-2 text-white transition duration-300 hover:bg-red-600"
                 >
-                  {/* <Button> */}
                   Logout
-                  {/* </Button> */}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

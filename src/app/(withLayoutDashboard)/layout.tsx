@@ -1,12 +1,11 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { FiMenu, FiSearch } from "react-icons/fi";
-import SidebarItems from "./dashboard/components/SidebarItems";
+import { FiMenu } from "react-icons/fi";
+import SidebarItems from "./components/SidebarItems";
 
-const Dashboard = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -53,4 +52,4 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Dashboard;
+export default Layout;

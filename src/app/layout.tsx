@@ -30,14 +30,10 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en">
-      <Providers>
-        <body
-          className={`${montserrat.variable} ${inter.variable} antialiased`}
-        >
-          {children}
-          <Toaster position="top-center" richColors />
-        </body>
-      </Providers>
+      <body className={`${montserrat.variable} ${inter.variable} antialiased`}>
+        <Providers>{children}</Providers>
+        <Toaster position="top-center" richColors />
+      </body>
     </html>
   );
 };
