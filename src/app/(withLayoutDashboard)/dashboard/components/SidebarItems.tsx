@@ -1,8 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { authKey } from "@/contants/authkey";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { logoutUser } from "@/services/actions/logoutUser";
 import { defaultMenus } from "@/utils/drawerItems";
+import { removeFromLocalStorage } from "@/utils/local-storage";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { LuLogOut } from "react-icons/lu";
@@ -10,6 +14,13 @@ import { LuLogOut } from "react-icons/lu";
 const SidebarItems = ({ isSidebarOpen }: any) => {
   const pathname = usePathname();
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    logoutUser(router);
+    dispatch(setUser({ user: null! }));
+    removeFromLocalStorage(authKey);
+  };
   return (
     <aside
       className={`fixed z-30 flex h-full w-64 flex-col justify-between bg-white p-6 shadow-lg transition-all duration-300 ease-in-out lg:relative lg:z-0 ${
@@ -44,7 +55,7 @@ const SidebarItems = ({ isSidebarOpen }: any) => {
       </div>
       {/* Profile Section at the Bottom */}
       <div className="border-t border-gray-200 pt-6">
-        <Button className="w-full" onClick={() => logoutUser(router)}>
+        <Button className="w-full" onClick={handleLogout}>
           Logout <LuLogOut />
         </Button>
       </div>
