@@ -14,7 +14,6 @@ const BloodRequest = () => {
   const { id } = useParams();
 
   const { data: donarInfo } = useSingleDonorQuery(id);
-  console.log({donarInfo})
   const [bloodRequest] = useBloodRequestMutation();
 
   const handleSubmit = (values: FieldValues) => {
