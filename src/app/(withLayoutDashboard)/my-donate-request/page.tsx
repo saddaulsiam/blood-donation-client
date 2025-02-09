@@ -110,7 +110,7 @@ const MyBloodRequest = () => {
                             : request.status === Status.CANCEL
                               ? "Canceled Request ❌"
                               : request.status === Status.APPROVED
-                                ? "Donor Approved Request"
+                                ? "Your Approved Request"
                                 : "Something went wrong"}
                         </span>
                       )}
