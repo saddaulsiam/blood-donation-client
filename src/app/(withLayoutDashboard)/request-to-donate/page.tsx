@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import withAuth from "@/hooks/withAuth";
 import {
   useGetRequestToDonateQuery,
   useUpdateRequestMutation,
@@ -108,4 +109,4 @@ const RequestToDonate = () => {
   );
 };
 
-export default RequestToDonate;
+export default withAuth(RequestToDonate);

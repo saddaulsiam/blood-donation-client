@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import withAuth from "@/hooks/withAuth";
 import {
   useGetMyRequestQuery,
   useUpdateRequestMutation,
@@ -118,4 +119,4 @@ const MyBloodRequest = () => {
   );
 };
 
-export default MyBloodRequest;
+export default withAuth(MyBloodRequest);

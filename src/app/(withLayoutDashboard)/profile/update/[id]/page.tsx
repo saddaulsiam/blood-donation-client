@@ -8,6 +8,7 @@ import BDSelect from "@/components/forms/BDSelect";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import withAuth from "@/hooks/withAuth";
 import {
   useGetMeQuery,
   useUpdateProfileMutation,
@@ -206,4 +207,4 @@ const UpdateProfileForm = () => {
   );
 };
 
-export default UpdateProfileForm;
+export default withAuth(UpdateProfileForm);

@@ -1,10 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useGetMeQuery } from "@/redux/features/auth/authApi";
 import Lottie from "lottie-react";
+import { useRouter } from "next/navigation";
 import animationData from "../../../../public/about.json";
 
 const AboutSection = () => {
+  const route = useRouter();
+  const { data: user } = useGetMeQuery("");
+
   return (
     <section className="container my-40">
       <h4 className="pb-8 text-center text-2xl font-semibold text-gray-800">
@@ -36,7 +41,10 @@ const AboutSection = () => {
             <p>🔹 Join a community of lifesavers and make an impact.</p>
           </div>
 
-          <Button className="mt-6 w-max rounded-md bg-primary px-8 py-3 text-base font-medium text-white shadow-lg transition-all duration-300 hover:bg-red-500 hover:shadow-xl">
+          <Button
+            onClick={() => route.push(`profile/update/${user?.id}`)}
+            className="mt-6 w-max rounded-md bg-primary px-8 py-3 text-base font-medium text-white shadow-lg transition-all duration-300 hover:bg-red-500 hover:shadow-xl"
+          >
             Become a Donor
           </Button>
         </div>

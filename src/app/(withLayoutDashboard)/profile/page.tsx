@@ -1,6 +1,7 @@
 "use client";
 
 import DonarProfileDetails from "@/app/(withCommonLayout)/components/DonarProfileDetails";
+import withAuth from "@/hooks/withAuth";
 import { useGetMeQuery } from "@/redux/features/auth/authApi";
 
 const Profile = () => {
@@ -12,4 +13,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);
