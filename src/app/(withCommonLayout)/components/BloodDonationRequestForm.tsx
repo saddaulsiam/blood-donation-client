@@ -5,8 +5,8 @@ import BDTextarea from "@/components/forms/BDTextarea";
 import { Button } from "@/components/ui/button";
 import { FiDroplet } from "react-icons/fi";
 
-const BloodDonationRequestForm = ({ handleSubmit }: any) => {
-      return (
+const BloodDonationRequestForm = ({ handleSubmit, isLoading }: any) => {
+  return (
     <BDForm onSubmit={handleSubmit}>
       <div className="space-y-6">
         <h2 className="pb-3 text-center text-2xl font-semibold text-gray-800">
@@ -52,9 +52,18 @@ const BloodDonationRequestForm = ({ handleSubmit }: any) => {
           type="submit"
           className="w-full gap-2 bg-primary text-lg hover:bg-primary-dark"
           size="lg"
+          disabled={isLoading}
         >
-          <FiDroplet />
-          Send Request
+          {isLoading ? (
+            <div className="flex items-center justify-center">
+              <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+            </div>
+          ) : (
+            <>
+              <FiDroplet />
+              Send Request
+            </>
+          )}
         </Button>
       </div>
     </BDForm>

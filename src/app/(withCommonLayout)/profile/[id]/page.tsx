@@ -14,7 +14,7 @@ const BloodRequest = () => {
   const { id } = useParams();
 
   const { data: donarInfo } = useSingleDonorQuery(id);
-  const [bloodRequest] = useBloodRequestMutation();
+  const [bloodRequest, { isLoading }] = useBloodRequestMutation();
 
   const handleSubmit = (values: FieldValues) => {
     const data = {
@@ -27,13 +27,14 @@ const BloodRequest = () => {
     };
     try {
       bloodRequest(data).then((response) => {
-        if (response.data.success) {
+        if (response?.data?.success) {
           toast.success("Request Submitted Successfully!");
           router.push("/request-to-donate");
         }
       });
     } catch (error) {
       console.log(error);
+      toast.error("something went wrong !");
     }
   };
 
@@ -44,7 +45,10 @@ const BloodRequest = () => {
 
       {/* Request Form */}
       <div className="rounded-md border bg-gradient-to-br from-white to-gray-50 p-6 shadow-sm md:p-8">
-        <BloodDonationRequestForm handleSubmit={handleSubmit} />
+        <BloodDonationRequestForm
+          handleSubmit={handleSubmit}
+          isLoading={isLoading}
+        />
       </div>
     </section>
   );

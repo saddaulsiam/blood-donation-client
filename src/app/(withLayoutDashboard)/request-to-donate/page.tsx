@@ -49,7 +49,9 @@ const RequestToDonate = () => {
             {requests?.data
               ?.map((request: any) => (
                 <TableRow key={request.id} className="hover:bg-gray-50">
-                  <TableCell className="font-medium">{request.id}</TableCell>
+                  <TableCell className="font-medium">
+                    {`${request.id.slice(0, 5)}...${request.id.slice(-5)}`}
+                  </TableCell>
                   <TableCell>{request.name}</TableCell>
                   <TableCell>{request.phoneNumber}</TableCell>
                   <TableCell>{request.dateOfDonation}</TableCell>
