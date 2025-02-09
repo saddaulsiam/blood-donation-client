@@ -22,7 +22,7 @@ const DonorsContent = () => {
         <span className="text-primary">{donors?.meta?.total}</span>
       </h4>
 
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
         {donors?.data?.map((donor: TUser) => (
           <Link
             key={donor.id}
