@@ -62,11 +62,11 @@ const MyBloodRequest = () => {
                       className={`rounded-full px-3 py-1 text-sm font-medium ${
                         request.status === Status.PENDING
                           ? "bg-yellow-100 text-yellow-800"
-                          : ["APPROVED", "SUCCESSFUL", "DONE"].includes(
-                                request.status,
-                              )
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
+                          : request.status === Status.APPROVED
+                            ? "bg-blue-100 text-blue-800"
+                            : request.status === Status.SUCCESSFUL
+                              ? "bg-green-100 text-green-800"
+                              : "bg-red-100 text-red-800"
                       }`}
                     >
                       {request.status}
@@ -95,11 +95,23 @@ const MyBloodRequest = () => {
                         </>
                       ) : (
                         <span
-                          className={`font-medium capitalize ${request.status === Status.CANCEL ? "text-red-600" : "text-green-600"}`}
+                          className={
+                            request.status === Status.SUCCESSFUL
+                              ? "text-green-500"
+                              : request.status === Status.CANCEL
+                                ? "text-red-500"
+                                : request.status === Status.APPROVED
+                                  ? "text-blue-800"
+                                  : "text-red-500"
+                          }
                         >
-                          {request.status === Status.CANCEL
-                            ? "✖ You Canceled Request"
-                            : `✔ You Approved Request`}
+                          {request.status === Status.SUCCESSFUL
+                            ? "✔ Donation Complete"
+                            : request.status === Status.CANCEL
+                              ? "Canceled Request ❌"
+                              : request.status === Status.APPROVED
+                                ? "Donor Approved Request"
+                                : "Something went wrong"}
                         </span>
                       )}
                     </TableCell>

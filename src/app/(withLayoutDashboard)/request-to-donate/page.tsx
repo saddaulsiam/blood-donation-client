@@ -80,18 +80,26 @@ const RequestToDonate = () => {
                       >
                         Cancel Now
                       </Button>
-                    ) : request.status === Status.SUCCESSFUL ? (
-                      <span className="text-green-500">
-                        ✔ Donation Complete
-                      </span>
-                    ) : request.status === Status.CANCEL ? (
-                      <span className="text-red-500">Request Canceled ❌</span>
-                    ) : request.status === Status.APPROVED ? (
-                      <span className="text-blue-800">
-                        Donor Approved Request
-                      </span>
                     ) : (
-                      <span className="text-red-500">Something went wrong</span>
+                      <span
+                        className={
+                          request.status === Status.SUCCESSFUL
+                            ? "text-green-500"
+                            : request.status === Status.CANCEL
+                              ? "text-red-500"
+                              : request.status === Status.APPROVED
+                                ? "text-blue-800"
+                                : "text-red-500"
+                        }
+                      >
+                        {request.status === Status.SUCCESSFUL
+                          ? "✔ Donation Complete"
+                          : request.status === Status.CANCEL
+                            ? "Canceled Request ❌"
+                            : request.status === Status.APPROVED
+                              ? "Donor Approved Request"
+                              : "Something went wrong"}
+                      </span>
                     )}
                   </TableCell>
                 </TableRow>

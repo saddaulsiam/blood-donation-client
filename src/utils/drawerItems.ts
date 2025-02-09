@@ -1,7 +1,5 @@
-import { FaUser } from "react-icons/fa";
+import { FaHandsHelping, FaUser } from "react-icons/fa";
 import { GiDroplets } from "react-icons/gi";
-import { LuDroplets } from "react-icons/lu";
-import { MdSpaceDashboard } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 
 export const defaultMenus = [
@@ -10,7 +8,7 @@ export const defaultMenus = [
   {
     title: "Request To Donate",
     path: "/request-to-donate",
-    icon: LuDroplets,
+    icon: FaHandsHelping,
   },
   {
     title: "My Donate Request",
