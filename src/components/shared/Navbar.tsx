@@ -196,25 +196,19 @@ const Navbar = () => {
       <ul className="hidden items-center space-x-8 text-lg font-medium text-gray-700 md:flex">
         <li>
           <Link
-            href="/dashboard"
+            href="/my-donate-request"
             className="transition duration-300 hover:text-primary"
           >
             Dashboard
           </Link>
         </li>
         <li>
-          <Link
-            href="/about"
-            className="transition duration-300 hover:text-primary"
-          >
+          <Link href="#" className="transition duration-300 hover:text-primary">
             About
           </Link>
         </li>
         <li>
-          <Link
-            href="/services"
-            className="transition duration-300 hover:text-primary"
-          >
+          <Link href="#" className="transition duration-300 hover:text-primary">
             Services
           </Link>
         </li>
