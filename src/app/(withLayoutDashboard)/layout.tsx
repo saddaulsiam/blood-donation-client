@@ -1,12 +1,13 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAppSelector } from "@/redux/hooks";
 import { useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import SidebarItems from "./components/SidebarItems";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const user = useAppSelector((state) => state.auth.user);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -20,19 +21,20 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {/* Main Content */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* App Bar */}
-        <header className="flex h-20 items-center justify-between bg-white px-4 shadow-sm lg:px-6">
+        <header className="flex h-20 items-center justify-between bg-white px-4 shadow-sm lg:px-12">
+          {/* <div> */}
+          <button
+            onClick={toggleSidebar}
+            className="p-2 text-gray-600 transition-colors duration-200 hover:text-red-600 lg:hidden"
+          >
+            <FiMenu className="h-6 w-6" />
+          </button>
+          {/* </div> */}
+
           <div>
-            <button
-              onClick={toggleSidebar}
-              className="p-2 text-gray-600 transition-colors duration-200 hover:text-red-600 lg:hidden"
-            >
-              <FiMenu className="h-6 w-6" />
-            </button>
+            <p className="text-sm text-gray-600">Welcome back</p>
+            <p className="text-xl capitalize text-gray-800">{user?.name}</p>
           </div>
-          <Avatar className="h-10 w-10 cursor-pointer transition-shadow duration-200 hover:shadow-md">
-            <AvatarImage src="https://github.com/shadcn.png" alt="Profile" />
-            <AvatarFallback>P</AvatarFallback>
-          </Avatar>
         </header>
 
         {/* Content Section */}
