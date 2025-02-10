@@ -40,7 +40,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </header>
 
         {/* Content Section */}
-        <section className="m-2 flex-1 overflow-auto rounded-lg bg-white p-4 shadow-sm">
+        <section className="smp-4 flex-1 overflow-auto rounded-lg bg-white p-2 shadow-sm sm:m-2">
           {children}
         </section>
       </div>
