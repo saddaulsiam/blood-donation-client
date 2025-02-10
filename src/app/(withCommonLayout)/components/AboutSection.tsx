@@ -13,7 +13,7 @@ const AboutSection = () => {
   const { data: user } = useGetMeQuery("");
 
   return (
-    <section className="container my-40">
+    <section id="about" className="container my-40 scroll-mt-20">
       <h4 className="pb-8 text-center text-2xl font-semibold text-gray-800">
         <span className="text-primary">#</span> About Us
       </h4>
