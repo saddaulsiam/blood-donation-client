@@ -24,12 +24,10 @@ const Register = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [loginUser] = useLoginMutation();
-  const [register] = useRegisterUserMutation();
-  const [isLoading, setIsLoading] = useState(false);
+  const [register, { isLoading }] = useRegisterUserMutation();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleRegister = async (values: FieldValues) => {
-    setIsLoading(true);
     values.age = parseInt(values.age);
     values.lastDonationDate = values?.lastDonationDate?.split("T")[0];
 
@@ -38,7 +36,7 @@ const Register = () => {
       if (res.success) {
         const result = await loginUser(values).unwrap();
         if (result.success === true) {
-          toast.success(result?.message);
+          toast.success("Account successfully registered");
           // ✅ Update Redux state
           dispatch(
             setUser({
@@ -49,14 +47,9 @@ const Register = () => {
           router.push("/profile");
         }
       }
-    } catch (err: any) {
-      toast.error(
-        err?.data?.message === "Validation Error"
-          ? "Password must be at least 6 characters long."
-          : err?.data?.message,
-      );
-    } finally {
-      setIsLoading(false);
+    } catch (error: any) {
+      console.log({ error });
+      error?.data?.errorSources?.map((err: any) => toast.error(err?.message));
     }
   };
 

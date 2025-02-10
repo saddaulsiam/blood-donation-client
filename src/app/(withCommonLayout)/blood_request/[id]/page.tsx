@@ -1,8 +1,8 @@
 "use client";
 
 import withAuth from "@/hooks/withAuth";
-import { useBloodRequestMutation } from "@/redux/features/request/requestApi";
 import { useSingleDonorQuery } from "@/redux/features/donors/donorsApi";
+import { useBloodRequestMutation } from "@/redux/features/request/requestApi";
 import { useParams, useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -14,27 +14,30 @@ const BloodRequest = () => {
   const { id } = useParams();
 
   const { data: donarInfo } = useSingleDonorQuery(id);
-  const [bloodRequest, { isLoading }] = useBloodRequestMutation();
+  const [bloodRequest, { isLoading, isError, error }] =
+    useBloodRequestMutation();
 
-  const handleSubmit = (values: FieldValues) => {
+  const handleSubmit = async (values: FieldValues) => {
     const data = {
       donorId: donarInfo?.id,
       name: values.name,
       phoneNumber: values.number,
       dateOfDonation: values.date.split("T")[0],
       hospitalName: values.hospitalName,
-      city: values.message,
+      city: donarInfo?.city,
+      message: values.message,
     };
+
     try {
-      bloodRequest(data).then((response) => {
-        if (response?.data?.success) {
-          toast.success("Request Submitted Successfully!");
-          router.push("/request-to-donate");
-        }
-      });
-    } catch (error) {
-      console.log(error);
-      toast.error("something went wrong !");
+      const result = await bloodRequest(data).unwrap();
+      if (result?.success === true) {
+        toast.success(result?.message);
+        router.push("/request-to-donate");
+      }
+      console.log({ result });
+    } catch (error: any) {
+      console.log({ error });
+      error?.data?.errorSources?.map((err: any) => toast.error(err?.message));
     }
   };
 

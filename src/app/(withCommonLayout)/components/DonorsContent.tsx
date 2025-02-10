@@ -44,7 +44,7 @@ const DonorsContent = () => {
 
       <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
         {isLoading
-          ? Array.from({ length: 8 }).map((_, index) => (
+          ? Array.from({ length: 4 }).map((_, index) => (
               <div
                 key={index}
                 className="h-full animate-pulse rounded-lg bg-gray-200 p-5 shadow"
