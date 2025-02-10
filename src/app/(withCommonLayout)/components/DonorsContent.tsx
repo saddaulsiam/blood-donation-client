@@ -13,11 +13,16 @@ const DonorsContent = () => {
   const date = searchParams.get("date");
   const city = searchParams.get("city");
 
-  const { data: donors, isLoading } = useDonorsQuery({
-    bloodGroup,
-    date,
-    city,
-  });
+  const { data: donors, isLoading } = useDonorsQuery(
+    {
+      bloodGroup,
+      date,
+      city,
+    },
+    {
+      pollingInterval: 5000,
+    },
+  );
 
   return (
     <section className="py-10">

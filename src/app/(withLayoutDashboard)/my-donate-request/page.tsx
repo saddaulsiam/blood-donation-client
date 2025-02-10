@@ -18,7 +18,9 @@ import { Status, TRequest } from "@/types";
 import { Check, X } from "lucide-react";
 
 const MyBloodRequest = () => {
-  const { data: requests } = useGetMyRequestQuery(undefined);
+  const { data: requests } = useGetMyRequestQuery(undefined, {
+    pollingInterval: 60000,
+  });
   const [updateRequest] = useUpdateRequestMutation();
 
   const handleStatusUpdate = (status: string, id: string) => {

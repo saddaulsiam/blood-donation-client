@@ -17,7 +17,9 @@ import {
 import { Status } from "@/types";
 
 const RequestToDonate = () => {
-  const { data: requests } = useGetRequestToDonateQuery(undefined);
+  const { data: requests } = useGetRequestToDonateQuery(undefined, {
+    pollingInterval: 60000,
+  });
   const [updateRequest] = useUpdateRequestMutation();
 
   const handleStatusUpdate = (status: string, id: string) => {
