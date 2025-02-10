@@ -58,7 +58,7 @@ const DonorsContent = () => {
           : donors?.data?.map((donor: TUser) => (
               <Link
                 key={donor.id}
-                href={`/profile/${donor.id}?bloodGroup=${bloodGroup}&date=${date}&city=${city}`}
+                href={`/blood_request/${donor.id}?bloodGroup=${bloodGroup}&date=${date}&city=${city}`}
               >
                 <div className="h-full rounded-lg bg-white p-5 shadow transition-shadow duration-300 ease-in-out hover:shadow-lg">
                   <div className="flex justify-center pb-6">
