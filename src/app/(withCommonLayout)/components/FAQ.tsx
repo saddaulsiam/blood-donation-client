@@ -1,5 +1,8 @@
 "use client";
+
 import { useState } from "react";
+import { motion } from "motion/react";
+import { fadeIn } from "@/lib/variants";
 
 const FAQSection = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -42,11 +45,24 @@ const FAQSection = () => {
 
   return (
     <section className="container mb-40 pt-20">
-      <h4 className="pb-14 text-center text-2xl font-semibold text-gray-800">
+      <motion.h4
+        variants={fadeIn("down", 0.2)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.2 }}
+        className="pb-14 text-center text-2xl font-semibold text-gray-800"
+      >
         <span className="text-primary"># </span>
         Frequently Asked Questions
-      </h4>
-      <div className="space-y-6">
+      </motion.h4>
+
+      <motion.div
+        variants={fadeIn("up", 0.2)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.2 }}
+        className="space-y-6"
+      >
         {faqData.map((faq, index) => (
           <div
             key={index}
@@ -85,7 +101,7 @@ const FAQSection = () => {
             )}
           </div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

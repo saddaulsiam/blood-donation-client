@@ -1,77 +1,7 @@
-/* import { FaQuoteLeft, FaStar } from "react-icons/fa";
+"use client";
 
-const Testimonials = () => {
-  return (
-    <section className="container py-20">
-      <h4 className="pb-20 text-center text-2xl font-semibold text-gray-800">
-        <span className="text-primary">#</span> Testimonials
-      </h4>
-
-      <div className="flex flex-wrap justify-center gap-10 sm:flex-nowrap">
-        <div className="relative max-w-sm transform rounded-lg bg-gradient-to-r from-gray-100 to-gray-200 p-8 shadow-xl transition-all hover:scale-105 hover:shadow-2xl">
-          <div className="absolute left-1/2 top-0 -mt-8 flex h-16 w-16 -translate-x-1/2 transform items-center justify-center rounded-full bg-primary">
-            <FaQuoteLeft className="text-3xl text-white" />
-          </div>
-          <p className="mb-4 text-xl text-gray-600">
-            I never realized how much one small act could change someone&apos;s
-            life. Donating blood is easy, quick, and has a huge impact.
-          </p>
-          <p className="text-xl font-semibold text-gray-700">John Doe</p>
-          <p className="text-sm text-gray-400">Donor</p>
-          <div className="mt-4 flex space-x-1">
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-gray-500" />
-          </div>
-        </div>
-
-        <div className="relative max-w-sm transform rounded-lg bg-gradient-to-r from-gray-100 to-gray-200 p-8 shadow-xl transition-all hover:scale-105 hover:shadow-2xl">
-          <div className="absolute left-1/2 top-0 -mt-8 flex h-16 w-16 -translate-x-1/2 transform items-center justify-center rounded-full bg-primary">
-            <FaQuoteLeft className="text-3xl text-white" />
-          </div>
-          <p className="mb-4 text-xl text-gray-600">
-            Thanks to a generous donor, I received the blood I needed and felt
-            like I had a second chance at life.
-          </p>
-          <p className="text-xl font-semibold text-gray-700">Jane Smith</p>
-          <p className="text-sm text-gray-400">Recipient</p>
-          <div className="mt-4 flex space-x-1">
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-          </div>
-        </div>
-
-        <div className="relative max-w-sm transform rounded-lg bg-gradient-to-r from-gray-100 to-gray-200 p-8 shadow-xl transition-all hover:scale-105 hover:shadow-2xl">
-          <div className="absolute left-1/2 top-0 -mt-8 flex h-16 w-16 -translate-x-1/2 transform items-center justify-center rounded-full bg-primary">
-            <FaQuoteLeft className="text-3xl text-white" />
-          </div>
-          <p className="mb-4 text-xl text-gray-600">
-            It’s an incredible feeling knowing that your donation could be the
-            reason someone else survives.
-          </p>
-          <p className="text-xl font-semibold text-gray-700">Mark Johnson</p>
-          <p className="text-sm text-gray-400">Donor</p>
-          <div className="mt-4 flex space-x-1">
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-gray-500" />
-            <FaStar className="text-gray-500" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default Testimonials;
- */
-
+import { fadeIn } from "@/lib/variants";
+import { motion } from "motion/react";
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
 
 const testimonials = [
@@ -102,12 +32,24 @@ const Testimonials = () => {
   return (
     <section className="bg-gray-50 py-20">
       <div className="container">
-        <h4 className="pb-20 text-center text-2xl font-bold text-gray-800">
+        <motion.h4
+          variants={fadeIn("down", 0.2)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className="pb-20 text-center text-2xl font-bold text-gray-800"
+        >
           <span className="text-primary">#</span> What Our Donors & Recipients
           Say
-        </h4>
+        </motion.h4>
 
-        <div className="flex flex-wrap justify-center gap-8 sm:flex-nowrap">
+        <motion.div
+          variants={fadeIn("up", 0.2)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className="flex flex-wrap justify-center gap-8 sm:flex-nowrap"
+        >
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
@@ -142,7 +84,7 @@ const Testimonials = () => {
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

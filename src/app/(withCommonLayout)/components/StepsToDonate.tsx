@@ -1,6 +1,8 @@
 "use client";
 
+import { fadeIn } from "@/lib/variants";
 import { useAppSelector } from "@/redux/hooks";
+import { motion } from "motion/react";
 import Link from "next/link";
 import { FaHandHoldingHeart, FaHeartbeat, FaUserPlus } from "react-icons/fa";
 
@@ -19,32 +21,12 @@ const StepsToDonate = () => {
 
         {/* Step 1 - Register */}
         <div className="relative z-10 flex w-96 flex-col items-center self-end">
-          {/* <div className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl">
-            <div className="absolute -top-5 rounded-full bg-primary p-4 shadow-lg">
-              <FaUserPlus className="text-4xl text-white" />
-            </div>
-            <h3 className="mb-4 mt-8 text-xl font-semibold text-gray-800">
-              Step 1: Register as a Donor
-            </h3>
-            <ul className="space-y-2 text-left text-gray-500">
-              <li className="list-inside list-disc">
-                Sign up by providing your basic details.
-              </li>
-              <li className="list-inside list-disc">
-                <Link
-                  href={`/profile/update/${user?.id}`}
-                  className="text-blue-500 hover:underline"
-                >
-                  Update your profile
-                </Link>{" "}
-                to ensure accurate donor information.
-              </li>
-              <li className="list-inside list-disc">
-                update your blood donation available status for donation
-              </li>
-            </ul>
-          </div> */}
-          <div className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl">
+          <motion.div
+            variants={fadeIn("up", 0.2)}
+            initial="hidden"
+            whileInView={"show"}
+            className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl"
+          >
             <div className="absolute -top-5 rounded-full bg-primary p-4 shadow-lg">
               <FaUserPlus className="text-4xl text-white" />
             </div>
@@ -69,7 +51,7 @@ const StepsToDonate = () => {
                 to donate.
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Line connecting Card 1 to central line */}
           <div className="absolute -left-[110px] top-1/2 hidden w-[13.8rem] -translate-x-1/2 transform rounded-md border border-primary sm:block" />
@@ -77,7 +59,12 @@ const StepsToDonate = () => {
 
         {/* Step 2 - Schedule Appointment */}
         <div className="relative z-10 flex w-96 flex-col items-center self-start">
-          <div className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl">
+          <motion.div
+            variants={fadeIn("up", 0.2)}
+            initial="hidden"
+            whileInView={"show"}
+            className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl"
+          >
             <div className="absolute -top-5 rounded-full bg-primary p-4 shadow-lg">
               <FaHeartbeat className="text-4xl text-white" />
             </div>
@@ -96,7 +83,7 @@ const StepsToDonate = () => {
                 complete your donation.
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Line connecting Card 2 to central line */}
           <div className="absolute -right-[220px] top-1/2 hidden w-[13.7rem] -translate-y-1/2 transform rounded-md border border-primary sm:block" />
@@ -104,7 +91,13 @@ const StepsToDonate = () => {
 
         {/* Step 3 - Donate Blood */}
         <div className="relative flex w-96 flex-col items-center self-end">
-          <div className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl">
+          <motion.div
+            variants={fadeIn("up", 0.2)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: false, amount: 0.7 }}
+            className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl"
+          >
             <div className="absolute -top-5 rounded-full bg-primary p-4 shadow-lg">
               <FaHandHoldingHeart className="text-4xl text-white" />
             </div>
@@ -122,7 +115,7 @@ const StepsToDonate = () => {
                 Rest briefly and enjoy post-donation refreshments.
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Line connecting Card 3 to central line */}
           <div className="absolute -left-[110px] top-1/2 hidden w-[13.9rem] -translate-x-1/2 transform rounded-md border border-primary sm:block" />

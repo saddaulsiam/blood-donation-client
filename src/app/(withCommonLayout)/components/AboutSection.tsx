@@ -1,8 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { fadeIn } from "@/lib/variants";
 import { useGetMeQuery } from "@/redux/features/auth/authApi";
 import Lottie from "lottie-react";
+import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import animationData from "../../../../public/about.json";
 
@@ -18,13 +20,25 @@ const AboutSection = () => {
 
       <div className="grid grid-cols-1 items-center gap-28 lg:grid-cols-5">
         {/* Image Section */}
-        <div className="relative col-span-1 flex justify-center lg:col-span-2 lg:justify-start">
+        <motion.div
+          variants={fadeIn("right", 0.2)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className="relative col-span-1 flex justify-center lg:col-span-2 lg:justify-start"
+        >
           <Lottie animationData={animationData} loop />
-        </div>
+        </motion.div>
 
         {/* Text Content */}
-        <div className="col-span-1 flex flex-col justify-center space-y-6 lg:col-span-3">
-          <h2 className="sm:text-3xl text-2xl font-bold leading-tight text-gray-800">
+        <motion.div
+          variants={fadeIn("left", 0.2)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className="col-span-1 flex flex-col justify-center space-y-6 lg:col-span-3"
+        >
+          <h2 className="text-2xl font-bold leading-tight text-gray-800 sm:text-3xl">
             Save a Life, Donate Blood Today
           </h2>
 
@@ -47,7 +61,7 @@ const AboutSection = () => {
           >
             Become a Donor
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

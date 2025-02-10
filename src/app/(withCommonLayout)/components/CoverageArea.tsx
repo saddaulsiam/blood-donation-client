@@ -1,5 +1,7 @@
 "use client";
 
+import { fadeIn } from "@/lib/variants";
+import { motion } from "motion/react";
 import CountUp from "react-countup";
 
 const CoverageArea = () => {
@@ -10,7 +12,13 @@ const CoverageArea = () => {
     { label: "Donation", value: 100, text: "Inprogress" },
   ];
   return (
-    <section className="container my-20 text-center">
+    <motion.section
+      variants={fadeIn("up", 0.2)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: false, amount: 0.7 }}
+      className="container my-20 text-center"
+    >
       <h4 className="pb-8 text-2xl font-semibold text-gray-800">
         <span className="text-primary">#</span> Coverage Area
       </h4>
@@ -26,7 +34,7 @@ const CoverageArea = () => {
           </div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -1,11 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { fadeIn } from "@/lib/variants";
+import { useGetMeQuery } from "@/redux/features/auth/authApi";
 import Lottie from "lottie-react";
+import { motion } from "motion/react";
+import { useRouter } from "next/navigation";
 import hero1 from "../../../../public/hero.json";
 import hero2 from "../../../../public/mobileHero.json";
-import { useRouter } from "next/navigation";
-import { useGetMeQuery } from "@/redux/features/auth/authApi";
 
 const HeroSection = () => {
   const route = useRouter();
@@ -14,7 +16,13 @@ const HeroSection = () => {
   return (
     <header className="container mt-16 grid items-center sm:mt-0 sm:grid-cols-2 lg:h-[39.5rem]">
       {/* details */}
-      <div className="flex flex-col space-y-5">
+      <motion.div
+        variants={fadeIn("right", 0.2)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.7 }}
+        className="flex flex-col space-y-5"
+      >
         <h1 className="text-3xl font-bold tracking-tight text-gray-800 lg:text-5xl">
           Donate <span className="text-primary">Blood,</span> Save Lives
         </h1>
@@ -40,13 +48,19 @@ const HeroSection = () => {
             Find a Donor
           </Button>
         </div>
-      </div>
+      </motion.div>
 
       {/* image */}
-      <div className="flex justify-center sm:justify-end">
+      <motion.div
+        variants={fadeIn("left", 0.2)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.7 }}
+        className="flex justify-center sm:justify-end"
+      >
         <Lottie animationData={hero2} loop className="md:hidden" />
         <Lottie animationData={hero1} loop className="hidden md:block" />
-      </div>
+      </motion.div>
     </header>
   );
 };
