@@ -24,7 +24,7 @@ const SearchBloodDonors = () => {
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: false, amount: 0.7 }}
-      className="container mt-10 rounded border bg-gray-50 pb-10 sm:mt-0"
+      className="container mt-10 rounded border bg-gradient-to-br from-gray-50 to-gray-100 pb-10 sm:mt-0"
     >
       <h4 className="pb-10 pt-5 text-center text-2xl font-semibold text-gray-800">
         Search <span className="text-primary">Blood Donors</span>

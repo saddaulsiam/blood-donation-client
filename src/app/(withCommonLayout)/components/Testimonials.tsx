@@ -30,7 +30,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="bg-gray-50 py-20">
+    <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
       <div className="container">
         <motion.h4
           variants={fadeIn("down", 0.2)}

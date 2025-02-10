@@ -69,7 +69,7 @@ const FAQSection = () => {
             className="overflow-hidden rounded-lg border-b bg-white shadow transition-shadow hover:shadow-md"
             onClick={() => toggleAnswer(index)}
           >
-            <div className="flex cursor-pointer items-center justify-between px-6 py-5 transition-all duration-300 hover:bg-gray-50">
+            <div className="flex cursor-pointer items-center justify-between from-gray-50 to-gray-100 px-6 py-5 transition-all duration-300 hover:bg-gradient-to-br">
               <h3 className="text font-semibold text-gray-700">
                 {faq.question}
               </h3>
@@ -95,7 +95,7 @@ const FAQSection = () => {
               </span>
             </div>
             {activeIndex === index && (
-              <div className="bg-gray-50 px-6 pb-6 text-lg text-gray-600">
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 px-6 pb-6 text-lg text-gray-600">
                 {faq.answer}
               </div>
             )}

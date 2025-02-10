@@ -25,7 +25,7 @@ const StepsToDonate = () => {
             variants={fadeIn("up", 0.2)}
             initial="hidden"
             whileInView={"show"}
-            className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl"
+            className="relative flex transform flex-col items-center rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 p-6 shadow-lg transition-all hover:shadow-xl"
           >
             <div className="absolute -top-5 rounded-full bg-primary p-4 shadow-lg">
               <FaUserPlus className="text-4xl text-white" />
@@ -63,7 +63,7 @@ const StepsToDonate = () => {
             variants={fadeIn("up", 0.2)}
             initial="hidden"
             whileInView={"show"}
-            className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl"
+            className="relative flex transform flex-col items-center rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 p-6 shadow-lg transition-all hover:shadow-xl"
           >
             <div className="absolute -top-5 rounded-full bg-primary p-4 shadow-lg">
               <FaHeartbeat className="text-4xl text-white" />
@@ -96,7 +96,7 @@ const StepsToDonate = () => {
             initial="hidden"
             whileInView={"show"}
             viewport={{ once: false, amount: 0.7 }}
-            className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl"
+            className="relative flex transform flex-col items-center rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 p-6 shadow-lg transition-all hover:shadow-xl"
           >
             <div className="absolute -top-5 rounded-full bg-primary p-4 shadow-lg">
               <FaHandHoldingHeart className="text-4xl text-white" />

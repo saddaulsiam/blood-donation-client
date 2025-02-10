@@ -25,7 +25,10 @@ const CoverageArea = () => {
 
       <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
         {stats.map((stat, index) => (
-          <div key={index} className="rounded-lg bg-gray-50 p-5 shadow">
+          <div
+            key={index}
+            className="rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 p-5 shadow"
+          >
             <p className="text-sm text-gray-600">{stat.text}</p>
             <h3 className="pt-1 text-2xl font-bold text-black">
               <CountUp start={0} end={stat.value} duration={3} />{" "}
