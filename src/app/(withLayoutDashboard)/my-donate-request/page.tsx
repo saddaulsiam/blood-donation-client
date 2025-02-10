@@ -1,6 +1,16 @@
 "use client";
 
+import Loading from "@/components/shared/Loading";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { SelectSeparator } from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -21,7 +31,7 @@ const MyBloodRequest = () => {
   const { data: requests } = useGetMyRequestQuery(undefined, {
     pollingInterval: 60000,
   });
-  const [updateRequest] = useUpdateRequestMutation();
+  const [updateRequest, { isLoading }] = useUpdateRequestMutation();
 
   const handleStatusUpdate = (status: string, id: string) => {
     const confirmed = confirm("Are you sure !!");
@@ -45,10 +55,12 @@ const MyBloodRequest = () => {
               <TableHead>Date of Donation</TableHead>
               <TableHead>City</TableHead>
               <TableHead>Hospital Name</TableHead>
+              <TableHead>Message</TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="text-center">Action</TableHead>
             </TableRow>
           </TableHeader>
+
           <TableBody>
             {requests?.data
               ?.map((request: TRequest) => (
@@ -61,6 +73,26 @@ const MyBloodRequest = () => {
                   <TableCell>{request.dateOfDonation}</TableCell>
                   <TableCell>{request.city}</TableCell>
                   <TableCell>{request.hospitalName}</TableCell>
+                  <TableCell>
+                    {request.message.slice(0, 30)}
+
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant={"link"}>View more</Button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[425px]">
+                        <DialogHeader>
+                          <DialogTitle className="mb-2">
+                            Requester Message
+                          </DialogTitle>
+                          <SelectSeparator />
+                          <DialogDescription className="text-base text-gray-600">
+                            {request.message}
+                          </DialogDescription>
+                        </DialogHeader>
+                      </DialogContent>
+                    </Dialog>
+                  </TableCell>
                   <TableCell>
                     <span
                       className={`rounded-full px-3 py-1 text-sm font-medium ${

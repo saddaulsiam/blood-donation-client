@@ -42,12 +42,12 @@ const BloodRequest = () => {
   };
 
   return (
-    <section className="mx-auto max-w-3xl p-4 md:p-8">
+    <section className="mx-auto max-w-5xl p-4 md:p-8">
       {/* Donor Profile Section */}
       <DonarProfileDetails donarInfo={donarInfo} />
 
       {/* Request Form */}
-      <div className="rounded-md border bg-gradient-to-br from-white to-gray-50 p-6 shadow-sm md:p-8">
+      <div className="mx-auto max-w-5xl rounded-md border bg-gradient-to-br from-white to-gray-50 p-6 shadow-sm md:p-8">
         <BloodDonationRequestForm
           handleSubmit={handleSubmit}
           isLoading={isLoading}

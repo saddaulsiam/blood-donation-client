@@ -2,6 +2,15 @@
 
 import { Button } from "@/components/ui/button";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { SelectSeparator } from "@/components/ui/select";
+import {
   Table,
   TableBody,
   TableCell,
@@ -43,6 +52,7 @@ const RequestToDonate = () => {
               <TableHead>Date of Donation</TableHead>
               <TableHead>City</TableHead>
               <TableHead>Hospital Name</TableHead>
+              <TableHead>Message</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Action</TableHead>
             </TableRow>
@@ -59,6 +69,24 @@ const RequestToDonate = () => {
                   <TableCell>{request.dateOfDonation}</TableCell>
                   <TableCell>{request.city}</TableCell>
                   <TableCell>{request.hospitalName}</TableCell>
+                  <TableCell>
+                    {request.message.slice(0, 30)}
+
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant={"link"}>View more</Button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[425px]">
+                        <DialogHeader>
+                          <DialogTitle className="mb-2">My Message</DialogTitle>
+                          <SelectSeparator />
+                          <DialogDescription className="text-base text-gray-600">
+                            {request.message}
+                          </DialogDescription>
+                        </DialogHeader>
+                      </DialogContent>
+                    </Dialog>
+                  </TableCell>
                   <TableCell>
                     <span
                       className={`rounded-full px-3 py-1 text-sm font-medium ${

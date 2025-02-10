@@ -98,6 +98,7 @@ export type TRequest = {
   hospitalName: string;
   city: string;
   status: string;
+  message: string;
   donar?: TUser;
   requester?: TUser;
 };

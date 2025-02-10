@@ -55,7 +55,7 @@ const DonarProfileDetails = ({
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         <StatCard
           label="Blood Group"
           value={donarInfo?.bloodGroup
@@ -63,6 +63,7 @@ const DonarProfileDetails = ({
             .replace("_NEGATIVE", "-")}
         />
         <StatCard label="Age" value={donarInfo?.profile?.age} />
+        <StatCard label="City" value={donarInfo?.city} />
         <StatCard
           label="Gender"
           value={donarInfo?.gender ? donarInfo?.gender : "N/A"}

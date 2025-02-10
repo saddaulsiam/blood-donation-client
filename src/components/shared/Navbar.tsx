@@ -139,7 +139,7 @@ const Navbar = () => {
         <ul className="flex flex-col items-center space-y-6 py-6 text-lg font-medium text-gray-700">
           <li>
             <Link
-              href="/dashboard"
+              href="/my-donate-request"
               className="transition duration-300 hover:text-primary"
               onClick={() => setIsMenuOpen(false)}
             >
