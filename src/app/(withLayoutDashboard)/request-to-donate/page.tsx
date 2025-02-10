@@ -30,7 +30,7 @@ const RequestToDonate = () => {
   };
   return (
     <div className="min-h-screen rounded-md bg-gray-50 p-2 sm:p-6">
-      <h2 className="pb-10 text-lg font-semibold text-gray-800 sm:text-3xl">
+      <h2 className="pb-10 pt-2 text-lg font-semibold text-gray-800 sm:text-3xl">
         I Request To Donate Blood
       </h2>
       <div className="overflow-x-auto rounded-lg bg-white shadow">
