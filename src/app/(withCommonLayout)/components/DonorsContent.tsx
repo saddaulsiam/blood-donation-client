@@ -84,7 +84,13 @@ const DonorsContent = () => {
                     <p className="text-base text-gray-600">
                       Last Donated:{" "}
                       <span className="font-medium text-gray-800">
-                        {donor.profile.lastDonationDate}
+                        {new Date(
+                          donor?.profile?.lastDonationDate,
+                        ).toLocaleDateString("en-US", {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        })}
                       </span>
                     </p>
                     <p className="text-base text-gray-600">

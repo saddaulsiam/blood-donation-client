@@ -74,6 +74,7 @@ const DonarProfileDetails = ({
               ? new Date(
                   donarInfo?.profile?.lastDonationDate,
                 ).toLocaleDateString("en-US", {
+                  day: "2-digit",
                   month: "short",
                   year: "numeric",
                 })
