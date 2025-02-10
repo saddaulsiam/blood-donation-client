@@ -12,7 +12,7 @@ const HeroSection = () => {
   const { data: user } = useGetMeQuery("");
 
   return (
-    <header className="container mt-10 grid items-center sm:mt-0 sm:grid-cols-2 lg:h-[39.5rem]">
+    <header className="container mt-16 grid items-center sm:mt-0 sm:grid-cols-2 lg:h-[39.5rem]">
       {/* details */}
       <div className="flex flex-col space-y-5">
         <h1 className="text-3xl font-bold tracking-tight text-gray-800 lg:text-5xl">

@@ -35,7 +35,7 @@ const StepsToDonate = () => {
           </div>
 
           {/* Line connecting Card 1 to central line */}
-          <div className="absolute -left-[112px] top-1/2 hidden w-[14.3rem] -translate-x-1/2 transform rounded-md border border-primary sm:block" />
+          <div className="absolute -left-[110px] top-1/2 hidden w-[13.8rem] -translate-x-1/2 transform rounded-md border border-primary sm:block" />
         </div>
 
         {/* Step 2 - Schedule Appointment */}
@@ -61,7 +61,7 @@ const StepsToDonate = () => {
           </div>
 
           {/* Line connecting Card 2 to central line */}
-          <div className="absolute -right-[227px] top-1/2 hidden w-[14.3rem] -translate-y-1/2 transform rounded-md border border-primary sm:block" />
+          <div className="absolute -right-[220px] top-1/2 hidden w-[13.7rem] -translate-y-1/2 transform rounded-md border border-primary sm:block" />
         </div>
 
         {/* Step 3 - Donate Blood */}
@@ -87,7 +87,7 @@ const StepsToDonate = () => {
           </div>
 
           {/* Line connecting Card 3 to central line */}
-          <div className="absolute -left-[112px] top-1/2 hidden w-[14.3rem] -translate-x-1/2 transform rounded-md border border-primary sm:block" />
+          <div className="absolute -left-[110px] top-1/2 hidden w-[13.9rem] -translate-x-1/2 transform rounded-md border border-primary sm:block" />
         </div>
       </div>
     </section>

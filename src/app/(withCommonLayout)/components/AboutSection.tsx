@@ -24,7 +24,7 @@ const AboutSection = () => {
 
         {/* Text Content */}
         <div className="col-span-1 flex flex-col justify-center space-y-6 lg:col-span-3">
-          <h2 className="text-3xl font-bold leading-tight text-gray-800">
+          <h2 className="sm:text-3xl text-2xl font-bold leading-tight text-gray-800">
             Save a Life, Donate Blood Today
           </h2>
 
