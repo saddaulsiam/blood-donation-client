@@ -4,10 +4,10 @@ import CountUp from "react-countup";
 
 const CoverageArea = () => {
   const stats = [
-    { label: "Cities", value: 50, text: "We are Coverage in" },
+    { label: "Cities", value: 64, text: "We are Coverage in" },
     { label: "Donors", value: 500, text: "Our Total" },
     { label: "Donation", value: 5000, text: "Complete Total" },
-    { label: "Donation", value: 50, text: "Inprogress" },
+    { label: "Donation", value: 100, text: "Inprogress" },
   ];
   return (
     <section className="container my-20 text-center">

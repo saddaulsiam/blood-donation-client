@@ -1,6 +1,11 @@
+"use client";
+
+import { useAppSelector } from "@/redux/hooks";
+import Link from "next/link";
 import { FaHandHoldingHeart, FaHeartbeat, FaUserPlus } from "react-icons/fa";
 
 const StepsToDonate = () => {
+  const user = useAppSelector((state) => state.auth.user);
   return (
     <section className="container py-20">
       <h4 className="pb-14 text-center text-2xl font-semibold text-gray-800">
@@ -14,6 +19,31 @@ const StepsToDonate = () => {
 
         {/* Step 1 - Register */}
         <div className="relative z-10 flex w-96 flex-col items-center self-end">
+          {/* <div className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl">
+            <div className="absolute -top-5 rounded-full bg-primary p-4 shadow-lg">
+              <FaUserPlus className="text-4xl text-white" />
+            </div>
+            <h3 className="mb-4 mt-8 text-xl font-semibold text-gray-800">
+              Step 1: Register as a Donor
+            </h3>
+            <ul className="space-y-2 text-left text-gray-500">
+              <li className="list-inside list-disc">
+                Sign up by providing your basic details.
+              </li>
+              <li className="list-inside list-disc">
+                <Link
+                  href={`/profile/update/${user?.id}`}
+                  className="text-blue-500 hover:underline"
+                >
+                  Update your profile
+                </Link>{" "}
+                to ensure accurate donor information.
+              </li>
+              <li className="list-inside list-disc">
+                update your blood donation available status for donation
+              </li>
+            </ul>
+          </div> */}
           <div className="relative flex transform flex-col items-center rounded-xl bg-gray-50 p-6 shadow-lg transition-all hover:shadow-xl">
             <div className="absolute -top-5 rounded-full bg-primary p-4 shadow-lg">
               <FaUserPlus className="text-4xl text-white" />
@@ -26,10 +56,17 @@ const StepsToDonate = () => {
                 Sign up by providing your basic details.
               </li>
               <li className="list-inside list-disc">
-                Share your medical history for eligibility screening.
+                <Link
+                  href={`/profile/update/${user?.id}`}
+                  className="text-blue-500 hover:underline"
+                >
+                  Update your profile
+                </Link>{" "}
+                to keep your donor information accurate.
               </li>
               <li className="list-inside list-disc">
-                Get approval and become a registered donor.
+                Update your availability status to let others know you’re ready
+                to donate.
               </li>
             </ul>
           </div>
@@ -49,13 +86,14 @@ const StepsToDonate = () => {
             </h3>
             <ul className="space-y-2 text-left text-gray-500">
               <li className="list-inside list-disc">
-                Pick a date and time that works for you.
+                Recipients will send you a blood donation request.
               </li>
               <li className="list-inside list-disc">
-                Locate the nearest donation center or mobile unit.
+                Review the request details and decide approve or decline.
               </li>
               <li className="list-inside list-disc">
-                Receive a confirmation and reminder for your appointment.
+                Once approved, visit the donation center as scheduled and
+                complete your donation.
               </li>
             </ul>
           </div>
@@ -75,13 +113,13 @@ const StepsToDonate = () => {
             </h3>
             <ul className="space-y-2 text-left text-gray-500">
               <li className="list-inside list-disc">
-                Complete a quick health check upon arrival.
+                Complete a quick health check on arrival.
               </li>
               <li className="list-inside list-disc">
-                Follow guidance from medical staff during donation.
+                Follow medical staff instructions during donation.
               </li>
               <li className="list-inside list-disc">
-                Rest briefly after donation and enjoy refreshments.
+                Rest briefly and enjoy post-donation refreshments.
               </li>
             </ul>
           </div>
