@@ -16,13 +16,13 @@ import { logoutUser } from "@/services/actions/logoutUser";
 import { removeFromLocalStorage } from "@/utils/local-storage";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import logo from "../../../public/logo.jpg";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
-import Image from "next/image";
-import logo from "../../../public/logo.jpg";
 
 const Navbar = () => {
   const router = useRouter();
