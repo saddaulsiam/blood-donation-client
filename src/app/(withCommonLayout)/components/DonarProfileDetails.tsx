@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { TUser } from "@/types";
+import { TUser } from "@/types/user";
 import Link from "next/link";
 import { FiDroplet, FiEdit2 } from "react-icons/fi";
 

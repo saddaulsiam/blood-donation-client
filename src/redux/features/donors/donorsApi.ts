@@ -1,5 +1,6 @@
-import { ResponseSuccessType, TResponseRedux, TUser } from "@/types";
+import { ResponseSuccessType, TResponseRedux } from "@/types";
 import { baseApi } from "../../api/baseApi";
+import { TUser } from "@/types/user";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

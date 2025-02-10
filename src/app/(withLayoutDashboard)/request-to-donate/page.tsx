@@ -18,12 +18,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Status } from "@/contants/common";
 import withAuth from "@/hooks/withAuth";
 import {
   useGetRequestToDonateQuery,
   useUpdateRequestMutation,
 } from "@/redux/features/request/requestApi";
-import { Status } from "@/types";
 
 const RequestToDonate = () => {
   const { data: requests } = useGetRequestToDonateQuery(undefined, {

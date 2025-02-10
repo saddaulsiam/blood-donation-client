@@ -1,5 +1,6 @@
-import { TMeta, TRequest, TResponseRedux } from "@/types";
+import { TMeta, TResponseRedux } from "@/types";
 import { baseApi } from "../../api/baseApi";
+import { TRequest } from "@/types/request";
 
 const requestApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

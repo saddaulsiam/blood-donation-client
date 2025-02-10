@@ -1,5 +1,5 @@
 import { RootState } from "@/redux/store";
-import { TUser } from "@/types";
+import { TUser } from "@/types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type TAuthState = {

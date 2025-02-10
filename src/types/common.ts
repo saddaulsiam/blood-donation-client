@@ -1,11 +1,5 @@
 import { BaseQueryApi } from "@reduxjs/toolkit/query";
 
-export type TMeta = {
-  page: number;
-  limit: number;
-  total: number;
-};
-
 export interface DrawerItem {
   title: string;
   path: string;
@@ -13,6 +7,12 @@ export interface DrawerItem {
   icon?: unknown;
   child?: DrawerItem[];
 }
+
+export type TMeta = {
+  page: number;
+  limit: number;
+  total: number;
+};
 
 export type ResponseSuccessType = {
   data: any;
@@ -29,8 +29,6 @@ export type IGenericErrorMessage = {
   path: string | number;
   message: string;
 };
-
-export const Gender = ["MALE", "FEMALE"];
 
 export type TError = {
   data: {
@@ -54,59 +52,4 @@ export type TResponseRedux<T> = TResponse<T> & BaseQueryApi;
 export type TQueryParam = {
   name: string;
   value: boolean | React.Key;
-};
-export type TUserProfile = {
-  id: string;
-  age: number;
-  bio: string;
-  photo: string;
-  lastDonationDate: string;
-  createdAt: string;
-  updatedAt: string;
-  userId: string;
-};
-
-export type TUser = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  gender: "Male" | "Female";
-  bloodGroup:
-    | "A_POSITIVE"
-    | "A_NEGATIVE"
-    | "B_POSITIVE"
-    | "B_NEGATIVE"
-    | "AB_POSITIVE"
-    | "AB_NEGATIVE"
-    | "O_POSITIVE"
-    | "O_NEGATIVE";
-  city: string;
-  address: string;
-  availability: boolean;
-  createdAt: string;
-  updatedAt: string;
-  profile: TUserProfile;
-};
-
-export type TRequest = {
-  id: string;
-  donorId: string;
-  name: string;
-  phoneNumber: string;
-  dateOfDonation: string;
-  hospitalName: string;
-  city: string;
-  status: string;
-  message: string;
-  donar?: TUser;
-  requester?: TUser;
-};
-
-export const Status = {
-  PENDING: "PENDING",
-  APPROVED: "APPROVED",
-  REJECTED: "REJECTED",
-  CANCEL: "CANCEL",
-  SUCCESSFUL: "SUCCESSFUL",
 };

@@ -2,7 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useDonorsQuery } from "@/redux/features/donors/donorsApi";
-import { TUser } from "@/types";
+import { TUser } from "@/types/user";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 

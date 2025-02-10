@@ -1,6 +1,5 @@
 "use client";
 
-import Loading from "@/components/shared/Loading";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -19,12 +18,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Status } from "@/contants/common";
 import withAuth from "@/hooks/withAuth";
 import {
   useGetMyRequestQuery,
   useUpdateRequestMutation,
 } from "@/redux/features/request/requestApi";
-import { Status, TRequest } from "@/types";
+import { TRequest } from "@/types/request";
 import { Check, X } from "lucide-react";
 
 const MyBloodRequest = () => {

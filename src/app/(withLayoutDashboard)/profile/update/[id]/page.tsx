@@ -8,6 +8,7 @@ import BDSelect from "@/components/forms/BDSelect";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Gender } from "@/contants/common";
 import withAuth from "@/hooks/withAuth";
 import {
   useGetMeQuery,
@@ -15,7 +16,6 @@ import {
 } from "@/redux/features/auth/authApi";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { Gender } from "@/types";
 import { bloodGroups, cities } from "@/utils/data";
 import uploadToCloudinary from "@/utils/uploadToCloudinary";
 import { Camera } from "lucide-react";
