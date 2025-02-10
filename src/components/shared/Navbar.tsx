@@ -21,12 +21,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
+import Image from "next/image";
+import logo from "../../../public/logo.jpg";
 
 const Navbar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   // Get user from Redux state (Will update UI on login/logout)
   const user = useAppSelector((state) => state.auth.user);
   const isUserLoggedIn = !!user; // Convert user object to boolean
@@ -40,14 +42,12 @@ const Navbar = () => {
   return (
     <div className="container flex h-20 items-center justify-between">
       {/* Logo */}
-      <div className="flex items-center space-x-4">
-        <Link
-          href="/"
-          className="text-3xl font-extrabold text-primary hover:text-gray-700"
-        >
-          Logo
-        </Link>
-      </div>
+      <Link href="/">
+        <div className="flex items-center space-x-1 text-3xl font-extrabold text-gray-800 hover:text-primary">
+          <Image src={logo} width={35} height={35} alt="logo" />
+          <p>Logo</p>
+        </div>
+      </Link>
 
       {/* Desktop Navbar */}
       <ul className="hidden items-center space-x-8 text-lg font-medium text-gray-700 md:flex">
