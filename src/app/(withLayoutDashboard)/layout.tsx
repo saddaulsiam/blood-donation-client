@@ -33,7 +33,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
           <div>
             <p className="text-sm text-gray-600">Welcome back</p>
-            <p className="text-xl capitalize text-gray-800">{user?.name}</p>
+            <p className="text-xl font-semibold capitalize text-gray-800">
+              {user?.name}
+            </p>
           </div>
         </header>
 
