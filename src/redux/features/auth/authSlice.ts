@@ -3,7 +3,7 @@ import { TUser } from "@/types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type TAuthState = {
-  user: null | TUser;
+  user: TUser | null;
 };
 
 const initialState: TAuthState = {

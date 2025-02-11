@@ -27,7 +27,10 @@ export type TUser = {
   city: string;
   address: string;
   availability: boolean;
+  profile: TUserProfile;
+  role: string;
+  status: string;
+  isEmailVerified: boolean;
   createdAt: string;
   updatedAt: string;
-  profile: TUserProfile;
 };

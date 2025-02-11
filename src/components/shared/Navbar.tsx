@@ -76,13 +76,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          {!isUserLoggedIn ? (
-            <Link href="/login">
-              <Button className="rounded-lg bg-red-500 px-6 py-2 text-white transition duration-300 hover:bg-red-600">
-                Login
-              </Button>
-            </Link>
-          ) : (
+          {isUserLoggedIn && user?.isEmailVerified ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild className="cursor-pointer">
                 <Avatar>
@@ -121,6 +115,12 @@ const Navbar = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+          ) : (
+            <Link href="/login">
+              <Button className="rounded-lg bg-red-500 px-6 py-2 text-white transition duration-300 hover:bg-red-600">
+                Login
+              </Button>
+            </Link>
           )}
         </li>
       </ul>
@@ -171,19 +171,19 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            {!isUserLoggedIn ? (
-              <Link href="/login" onClick={() => setIsMenuOpen(false)}>
-                <Button className="rounded-lg bg-red-500 px-6 py-2 text-white transition duration-300 hover:bg-red-600">
-                  Login
-                </Button>
-              </Link>
-            ) : (
+            {isUserLoggedIn && user?.isEmailVerified ? (
               <Button
                 onClick={handleLogout}
                 className="rounded-lg bg-red-500 px-6 py-2 text-white transition duration-300 hover:bg-red-600"
               >
                 Logout
               </Button>
+            ) : (
+              <Link href="/login" onClick={() => setIsMenuOpen(false)}>
+                <Button className="rounded-lg bg-red-500 px-6 py-2 text-white transition duration-300 hover:bg-red-600">
+                  Login
+                </Button>
+              </Link>
             )}
           </li>
         </ul>
