@@ -4,6 +4,7 @@ import { authKey } from "@/contants/authkey";
 import {
   useLoginMutation,
   useRegisterUserMutation,
+  useResendCodeMutation,
   useVerifyEmailMutation,
 } from "@/redux/features/auth/authApi";
 import { setUser } from "@/redux/features/auth/authSlice";
@@ -24,6 +25,7 @@ const RegisterAndVerify = () => {
 
   const [register, { isLoading }] = useRegisterUserMutation();
   const [verifyEmail, { isLoading: isVerifying }] = useVerifyEmailMutation();
+  const [resendCode, { isLoading: isResending }] = useResendCodeMutation();
   const [loginUser] = useLoginMutation();
 
   const dispatch = useAppDispatch();
@@ -99,12 +101,27 @@ const RegisterAndVerify = () => {
       );
     }
   };
+
+  const handleResendCode = async () => {
+    try {
+      const res = await resendCode({ email: email || user?.email }).unwrap();
+      if (res?.success) {
+        toast.success(res.message);
+      }
+    } catch (error: any) {
+      error?.data?.errorSources?.forEach((err: any) =>
+        toast.error(err?.message),
+      );
+    }
+  };
   return (
     <>
       {isEmailVerified || user?.isEmailVerified === false ? (
         <EmailVerify
           handleVerification={handleVerification}
           isVerifying={isVerifying}
+          handleResendCode={handleResendCode}
+          isResending={isResending}
         />
       ) : (
         <Register handleRegister={handleRegister} isLoading={isLoading} />

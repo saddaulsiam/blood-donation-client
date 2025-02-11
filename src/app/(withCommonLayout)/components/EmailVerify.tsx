@@ -2,9 +2,13 @@ import BDForm from "@/components/forms/BDForm";
 import BDInput from "@/components/forms/BDInput";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
-import Link from "next/link";
 
-const EmailVerify = ({ handleVerification, isVerifying }: any) => {
+const EmailVerify = ({
+  handleVerification,
+  handleResendCode,
+  isVerifying,
+  isResending,
+}: any) => {
   return (
     <div className="flex min-h-screen items-center bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="mx-auto max-w-md rounded-xl bg-white p-10 shadow-lg">
@@ -52,13 +56,20 @@ const EmailVerify = ({ handleVerification, isVerifying }: any) => {
         </BDForm>
 
         <p className="mt-4 text-center text-sm text-gray-600">
-          Didn’t receive the code?{" "}
-          <Link
-            href="#"
-            className="font-medium text-red-600 hover:text-red-700"
+          Didn’t receive the code?
+          <Button
+            variant={"link"}
+            className="p-1 font-medium text-red-600 hover:text-red-700"
+            onClick={handleResendCode}
           >
-            Resend Code
-          </Link>
+            {isResending ? (
+              <div className="flex items-center justify-center">
+                <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-primary"></div>
+              </div>
+            ) : (
+              "Resend Code"
+            )}
+          </Button>
         </p>
       </div>
     </div>
