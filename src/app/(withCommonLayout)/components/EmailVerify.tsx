@@ -24,7 +24,7 @@ const EmailVerify = ({
         <BDForm onSubmit={handleVerification}>
           <div className="mt-6 space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block pb-1 text-sm font-medium text-gray-700">
                 Verification Code
               </label>
               <div className="relative">
