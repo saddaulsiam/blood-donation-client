@@ -164,7 +164,7 @@ const UpdateProfileForm = () => {
             name="age"
             defaultValue={user?.profile.age}
             label="Your Age"
-            placeholder={user?.profile.age.toString() ?? "23"}
+            placeholder={user?.profile.age?.toString() ?? "23"}
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDSelect
