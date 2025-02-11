@@ -52,9 +52,15 @@ const RegisterAndVerify = () => {
         );
       }
     } catch (error: any) {
-      error?.data?.errorSources?.forEach((err: any) =>
-        toast.error(err?.message),
-      );
+      if (error?.data?.message !== "Validation Error") {
+        toast.error(error?.data?.message);
+      }
+
+      if (error?.data?.message === "Validation Error") {
+        error?.data?.errorSources?.forEach((err: any) =>
+          toast.error(err?.message),
+        );
+      }
     }
   };
 
