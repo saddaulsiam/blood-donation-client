@@ -11,7 +11,7 @@ import { FiDroplet } from "react-icons/fi";
 const Register = ({ handleRegister, isLoading }: any) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <div className="flex min-h-[calc(100vh-80px)] items-center bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="flex items-center bg-gradient-to-br from-gray-50 to-gray-100 p-2 sm:min-h-[calc(100vh-80px)]">
       <div className="mx-auto flex max-w-5xl flex-col overflow-hidden rounded-xl bg-white shadow-lg lg:flex-row">
         {/* Form Section */}
         <div className="p-12 lg:w-1/2">

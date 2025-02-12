@@ -59,7 +59,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-80px)] items-center bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="flex items-center bg-gradient-to-br from-gray-50 to-gray-100 p-2 sm:min-h-[calc(100vh-80px)]">
       <div className="mx-auto flex w-[64rem] flex-col overflow-hidden rounded-xl shadow-lg lg:flex-row">
         {/* Illustration Section */}
         <div className="flex items-center justify-center bg-gradient-to-br from-red-600 to-red-700 p-12 lg:w-1/2">

@@ -36,13 +36,15 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="flex items-center bg-gradient-to-br from-gray-50 to-gray-100 p-2 sm:min-h-[calc(100vh-80px)]">
       <div className="mx-auto flex w-[64rem] flex-col overflow-hidden rounded-xl shadow-lg lg:flex-row">
         {/* Illustration Section */}
         <div className="flex items-center justify-center bg-gradient-to-br from-red-600 to-red-700 p-12 lg:w-1/2">
           <div className="text-center text-white">
             <FiDroplet className="mx-auto mb-6 h-24 w-24 animate-pulse" />
-            <h2 className="mb-4 text-4xl font-bold">Forgot Password?</h2>
+            <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
+              Forgot Password?
+            </h2>
             <p className="text-xl opacity-90">
               Enter your email to receive a reset link.
             </p>
@@ -50,7 +52,7 @@ const ForgotPassword = () => {
         </div>
 
         {/* Form Section */}
-        <div className="bg-gradient-to-br from-white to-gray-50 p-12 lg:w-1/2">
+        <div className="bg-gradient-to-br from-white to-gray-50 p-10 sm:p-12 lg:w-1/2">
           <div className="mx-auto">
             <div className="mb-8 text-center">
               <h1 className="mb-2 text-3xl font-bold text-gray-900">
