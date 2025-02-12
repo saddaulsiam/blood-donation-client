@@ -9,7 +9,7 @@ import { FaHandHoldingHeart, FaHeartbeat, FaUserPlus } from "react-icons/fa";
 const StepsToDonate = () => {
   const user = useAppSelector((state) => state.auth.user);
   return (
-    <section id="services" className="container py-20">
+    <section id="services" className="container relative overflow-hidden py-20">
       <h4 className="pb-14 text-center text-2xl font-semibold text-gray-800">
         <span className="text-primary">#</span> Steps to{" "}
         <span className="text-primary">Donate Blood</span>
@@ -17,7 +17,7 @@ const StepsToDonate = () => {
 
       <div className="relative flex flex-col items-center space-y-16 sm:space-y-0">
         {/* Central Line */}
-        <div className="absolute top-0 h-full w-0.5 -translate-x-1/2 transform bg-primary sm:left-1/2" />
+        <div className="absolute inset-y-0 w-0.5 -translate-x-1/2 transform bg-primary sm:left-1/2" />
 
         {/* Step 1 - Register */}
         <div className="relative z-10 flex w-96 flex-col items-center self-end">
