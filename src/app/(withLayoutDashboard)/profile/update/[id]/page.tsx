@@ -65,10 +65,9 @@ const UpdateProfileForm = () => {
       bio: values.bio || user?.profile?.bio || "",
       age: Number(values.age) || Number(user?.profile?.age) || undefined,
       photo: values.photo || user?.profile?.photo || "",
-      lastDonationDate:
-        values.lastDonationDate && values.lastDonationDate.includes("T")
-          ? values.lastDonationDate.split("T")[0]
-          : user?.profile?.lastDonationDate?.split("T")[0] || undefined,
+      lastDonationDate: values.lastDonationDate
+        ? values.lastDonationDate.split("T")[0]
+        : user?.profile?.lastDonationDate?.split("T")[0] || undefined,
     };
 
     try {
@@ -86,7 +85,7 @@ const UpdateProfileForm = () => {
       error?.data?.errorSources?.map((err: any) => toast.error(err?.message));
     }
   };
-  console.log(user);
+  console.log({ user });
   return (
     <div className="container relative mb-8 rounded-lg border bg-gradient-to-br from-white to-gray-50 p-6 shadow-lg md:p-8">
       {/* Avatar and Profile Info Section */}
@@ -164,7 +163,7 @@ const UpdateProfileForm = () => {
             name="age"
             defaultValue={user?.profile.age}
             label="Your Age"
-            placeholder={user?.profile.age?.toString() ?? "23"}
+            placeholder={user?.profile.age?.toString() ?? "e.g.,20"}
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDSelect
@@ -179,26 +178,19 @@ const UpdateProfileForm = () => {
             name="lastDonationDate"
             label="Last Donation"
             placeholder={
-              user?.profile?.lastDonationDate ?? "Pick your last donation"
-            }
-            defaultValue={
               user?.profile?.lastDonationDate
-                ? new Date(user.profile.lastDonationDate)
-                    .toISOString()
-                    .split("T")[0]
-                : ""
+                ? user.profile.lastDonationDate
+                : "Pick your last donation"
             }
+            defaultValue={user?.profile?.lastDonationDate} // Corrected
             before={new Date()}
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
+
           <BDSelect
             name="availability"
-            label="Do you available for donate"
-            placeholder={
-              user?.availability
-                ? "Available to donate"
-                : "Currently unavailable"
-            }
+            label="Are you available to donate?"
+            placeholder="Select your availability"
             defaultValue={
               user?.availability
                 ? "Available to donate"
