@@ -40,11 +40,10 @@ const Login = () => {
       const res = await loginUser(values).unwrap();
       if (res.success === true) {
         toast.success(res?.message);
-
         // ✅ Update Redux state
         dispatch(
           setUser({
-            user: res.data.user, // Store logged-in user
+            user: res?.data?.user, // Store logged-in user
           }),
         );
 

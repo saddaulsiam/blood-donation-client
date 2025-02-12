@@ -188,6 +188,7 @@ const UpdateProfileForm = () => {
                     .split("T")[0]
                 : ""
             }
+            before={new Date()}
             className="rounded-lg border-gray-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/50"
           />
           <BDSelect

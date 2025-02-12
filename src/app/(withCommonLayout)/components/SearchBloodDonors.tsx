@@ -53,6 +53,7 @@ const SearchBloodDonors = () => {
             placeholder="Select date"
             className="h-14 w-full"
             required
+            after={new Date()} // This will disable past dates but allow today
           />
 
           <Button
