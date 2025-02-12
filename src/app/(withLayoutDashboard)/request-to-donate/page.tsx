@@ -29,7 +29,7 @@ const RequestToDonate = () => {
   const { data: requests } = useGetRequestToDonateQuery(undefined, {
     pollingInterval: 60000,
   });
-  const [updateRequest] = useUpdateRequestMutation();
+  const [updateRequest, { isLoading }] = useUpdateRequestMutation();
 
   const handleStatusUpdate = (status: string, id: string) => {
     const confirmed = confirm("Are you sure !!");
@@ -104,14 +104,21 @@ const RequestToDonate = () => {
                   </TableCell>
                   <TableCell>
                     {request.status === Status.PENDING ? (
-                      <Button
-                        variant="link"
-                        onClick={() =>
-                          handleStatusUpdate(Status.CANCEL, request.id)
-                        }
-                      >
-                        Cancel Now
-                      </Button>
+                      isLoading ? (
+                        <div className="flex items-center gap-2">
+                          <span className="h-5 w-5 animate-spin rounded-full border-4 border-red-500 border-t-transparent"></span>
+                          <span className="text-red-500">Canceling...</span>
+                        </div>
+                      ) : (
+                        <Button
+                          variant="link"
+                          onClick={() =>
+                            handleStatusUpdate(Status.CANCEL, request.id)
+                          }
+                        >
+                          Cancel Now
+                        </Button>
+                      )
                     ) : (
                       <span
                         className={

@@ -78,38 +78,71 @@ const Navbar = () => {
         <li>
           {isUserLoggedIn && user?.isEmailVerified ? (
             <DropdownMenu>
-              <DropdownMenuTrigger asChild className="cursor-pointer">
-                <Avatar>
+              <DropdownMenuTrigger asChild>
+                {/* <button className="relative flex items-center rounded-full focus:outline-none focus:ring-2 focus:ring-primary"> */}
+                <Avatar className="h-10 w-10 transition-all hover:scale-105">
                   <AvatarImage
-                    src={
-                      user?.profile?.photo || "https://github.com/shadcn.png"
-                    }
-                    alt="@shadcn"
+                    src={user?.profile?.photo || "/default-avatar.png"}
+                    alt="User Profile"
                   />
-                  <AvatarFallback>P</AvatarFallback>
+                  <AvatarFallback>{user?.name || "U"}</AvatarFallback>
                 </Avatar>
+                {/* </button> */}
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+
+              {/* Dropdown Content */}
+              <DropdownMenuContent
+                className="w-56 rounded-lg bg-white shadow-md"
+                side="bottom"
+                align="end"
+                sideOffset={10}
+              >
+                <DropdownMenuLabel className="px-4 py-2 text-sm font-semibold capitalize text-gray-700">
+                  {user?.name || "User"}
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
+
                 <DropdownMenuGroup>
-                  <Link href={"/profile"}>
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
-                  </Link>
-                  <Link href={"/request-to-donate"}>
-                    <DropdownMenuItem>Request To Donate</DropdownMenuItem>
-                  </Link>
-                  <Link href={"/my-donate-request"}>
-                    <DropdownMenuItem>My Donation Requests</DropdownMenuItem>
-                  </Link>
-                  <Link href={"/change-password"}>
-                    <DropdownMenuItem>Change Password</DropdownMenuItem>
-                  </Link>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/profile"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/request-to-donate"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Request To Donate
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/my-donate-request"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      My Donation Requests
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/change-password"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Change Password
+                    </Link>
+                  </DropdownMenuItem>
                 </DropdownMenuGroup>
+
                 <DropdownMenuSeparator />
+
+                {/* Logout Button */}
                 <DropdownMenuItem
                   onClick={handleLogout}
-                  className="rounded-lg bg-red-500 px-6 py-2 text-white transition duration-300 hover:bg-red-600"
+                  className="w-full cursor-pointer rounded-b-lg bg-red-500 px-4 py-2 text-center text-white hover:bg-red-600"
                 >
                   Logout
                 </DropdownMenuItem>

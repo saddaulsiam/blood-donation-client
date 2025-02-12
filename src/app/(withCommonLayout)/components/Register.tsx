@@ -3,7 +3,7 @@
 import BDForm from "@/components/forms/BDForm";
 import BDInput from "@/components/forms/BDInput";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, Phone, User } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { FiDroplet } from "react-icons/fi";
@@ -44,6 +44,22 @@ const Register = ({ handleRegister, isLoading }: any) => {
                       name="name"
                       type="text"
                       placeholder="John Doe"
+                      className="h-12 w-full rounded-lg border border-gray-200 bg-gray-50 pl-10 pr-12 focus:border-gray-300 focus:ring-2 focus:ring-gray-200 focus:ring-offset-0"
+                    />
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <label className="mb-1 block text-sm font-medium text-gray-700">
+                    Phone Number
+                  </label>
+                  <div className="relative">
+                    <Phone className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform text-gray-400" />
+                    <BDInput
+                      required
+                      name="phoneNumber"
+                      type="text"
+                      placeholder="017********"
                       className="h-12 w-full rounded-lg border border-gray-200 bg-gray-50 pl-10 pr-12 focus:border-gray-300 focus:ring-2 focus:ring-gray-200 focus:ring-offset-0"
                     />
                   </div>

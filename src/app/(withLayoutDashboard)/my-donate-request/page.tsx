@@ -111,24 +111,31 @@ const MyBloodRequest = () => {
                   <TableCell className="flex flex-wrap justify-end gap-2">
                     <TableCell className="flex flex-wrap justify-end gap-2">
                       {request.status === Status.PENDING ? (
-                        <>
-                          <Button
-                            onClick={() =>
-                              handleStatusUpdate(Status.APPROVED, request.id)
-                            }
-                            className="flex items-center gap-1 bg-green-500 text-white hover:bg-green-600"
-                          >
-                            <Check size={16} /> Approve
-                          </Button>
-                          <Button
-                            onClick={() =>
-                              handleStatusUpdate(Status.CANCEL, request.id)
-                            }
-                            className="flex items-center gap-1 bg-red-500 text-white hover:bg-red-600"
-                          >
-                            <X size={16} /> Cancel
-                          </Button>
-                        </>
+                        isLoading ? (
+                          <div className="flex items-center gap-2">
+                            <span className="h-5 w-5 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></span>
+                            <span className="text-blue-500">Processing...</span>
+                          </div>
+                        ) : (
+                          <>
+                            <Button
+                              onClick={() =>
+                                handleStatusUpdate(Status.APPROVED, request.id)
+                              }
+                              className="flex items-center gap-1 bg-green-500 text-white hover:bg-green-600"
+                            >
+                              <Check size={16} /> Approve
+                            </Button>
+                            <Button
+                              onClick={() =>
+                                handleStatusUpdate(Status.CANCEL, request.id)
+                              }
+                              className="flex items-center gap-1 bg-red-500 text-white hover:bg-red-600"
+                            >
+                              <X size={16} /> Cancel
+                            </Button>
+                          </>
+                        )
                       ) : (
                         <span
                           className={

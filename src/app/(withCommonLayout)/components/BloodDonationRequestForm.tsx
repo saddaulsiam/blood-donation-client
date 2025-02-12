@@ -38,6 +38,7 @@ const BloodDonationRequestForm = ({ handleSubmit, isLoading }: any) => {
             label="Required Donation Date"
             placeholder="Select a date"
             required
+            after={new Date()}
           />
           <BDTextarea
             name="message"
