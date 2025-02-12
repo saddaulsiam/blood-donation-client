@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { authKey, redirectUrl } from "@/contants/authkey";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { setUser } from "@/redux/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import {
   getFromLocalStorage,
   removeFromLocalStorage,
@@ -15,7 +15,7 @@ import {
 import { Eye, EyeOff, Lock } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { FiDroplet } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
@@ -24,16 +24,9 @@ import { toast } from "sonner";
 const Login = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [loginUser, { isLoading }] = useLoginMutation();
 
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.auth.user);
-
-  useEffect(() => {
-    if (user?.isEmailVerified === false) {
-      router.push("/register");
-    }
-  }, [user?.isEmailVerified, router]);
+  const [loginUser, { isLoading }] = useLoginMutation();
 
   const handleLogin = async (values: FieldValues) => {
     try {
@@ -43,7 +36,7 @@ const Login = () => {
         // ✅ Update Redux state
         dispatch(
           setUser({
-            user: res?.data?.user, // Store logged-in user
+            user: res?.data?.user,
           }),
         );
 

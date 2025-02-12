@@ -2,17 +2,26 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  useResendCodeMutation,
+  useVerifyEmailMutation,
+} from "@/redux/features/auth/authApi";
 import { CheckCircle } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 
-const EmailVerify = ({
-  handleVerification,
-  handleResendCode,
-  isVerifying,
-  isResending,
-}: any) => {
+const EmailVerify = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
+
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const [verifyEmail, { isLoading: isVerifying }] = useVerifyEmailMutation();
+  const [resendCode, { isLoading: isResending }] = useResendCodeMutation();
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
@@ -42,6 +51,33 @@ const EmailVerify = ({
       inputRefs.current[index - 1]?.focus();
     } else if (e.key === "ArrowRight" && index < 5) {
       inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleVerification = async (values: FieldValues) => {
+    try {
+      const res = await verifyEmail({ email, code: values.code }).unwrap();
+      if (res.success) {
+        toast.success(res?.message);
+        router.push("/login");
+      }
+    } catch (error: any) {
+      error?.data?.errorSources?.forEach((err: any) =>
+        toast.error(err?.message),
+      );
+    }
+  };
+
+  const handleResendCode = async () => {
+    try {
+      const res = await resendCode({ email }).unwrap();
+      if (res?.success) {
+        toast.success(res.message);
+      }
+    } catch (error: any) {
+      error?.data?.errorSources?.forEach((err: any) =>
+        toast.error(err?.message),
+      );
     }
   };
 
