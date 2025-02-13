@@ -48,7 +48,7 @@ const Login = () => {
       }
     } catch (err: any) {
       toast.error(err.data.message);
-      if (err.status === 400) {
+      if (err.status === 403) {
         router.push(`email-verify?email=${values.email}`);
       }
     }
