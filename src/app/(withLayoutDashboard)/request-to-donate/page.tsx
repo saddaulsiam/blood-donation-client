@@ -64,13 +64,22 @@ const RequestToDonate = () => {
                   <TableCell className="font-medium">
                     {`${request.id.slice(0, 5)}...${request.id.slice(-5)}`}
                   </TableCell>
-                  <TableCell>{request.name}</TableCell>
-                  <TableCell>{request.phoneNumber}</TableCell>
-                  <TableCell>{request.dateOfDonation}</TableCell>
-                  <TableCell>{request.city}</TableCell>
-                  <TableCell>{request.hospitalName}</TableCell>
+                  <TableCell>{request?.donor?.name}</TableCell>
+                  <TableCell>{request?.donor?.phoneNumber}</TableCell>
                   <TableCell>
-                    {request.message.slice(0, 30)}
+                    {new Date(request.dateOfDonation).toLocaleDateString(
+                      "en-bn",
+                      {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      },
+                    )}
+                  </TableCell>
+                  <TableCell>{request?.city}</TableCell>
+                  <TableCell>{request?.hospitalName}</TableCell>
+                  <TableCell>
+                    {request?.message.slice(0, 30)}
 
                     <Dialog>
                       <DialogTrigger asChild>

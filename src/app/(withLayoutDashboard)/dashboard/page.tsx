@@ -4,8 +4,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { HeartHandshake, Users, History, PlusCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import withAuth from "@/hooks/withAuth";
 
-export default function Dashboard() {
+const Dashboard = () => {
   return (
     <div className="space-y-6 p-6">
       <motion.h1
@@ -59,4 +60,6 @@ export default function Dashboard() {
       </div>
     </div>
   );
-}
+};
+
+export default withAuth(Dashboard);

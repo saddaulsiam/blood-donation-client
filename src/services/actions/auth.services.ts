@@ -5,6 +5,8 @@ import {
   getFromLocalStorage,
   removeFromLocalStorage,
 } from "@/utils/local-storage";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { deleteCookies } from "./deleteCookies";
 
 export const getUserInfo = () => {
   const authToken = getFromLocalStorage(authKey);
@@ -30,8 +32,11 @@ export const isLoggedIn = (): boolean => {
   return false;
 };
 
-export const removeUser = () => {
-  return removeFromLocalStorage(authKey);
+export const logoutUser = (router: AppRouterInstance) => {
+  removeFromLocalStorage(authKey);
+  deleteCookies([authKey, "refreshToken"]);
+  router.push("/");
+  router.refresh();
 };
 
 // export const getNewAccessToken = async () => {

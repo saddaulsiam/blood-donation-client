@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { authKey } from "@/contants/authkey";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { logoutUser } from "@/services/actions/logoutUser";
+import { logoutUser } from "@/services/actions/auth.services";
 import { defaultMenus } from "@/utils/drawerItems";
 import { removeFromLocalStorage } from "@/utils/local-storage";
 import Link from "next/link";
@@ -19,7 +19,7 @@ const SidebarItems = ({ isSidebarOpen }: any) => {
   const handleLogout = () => {
     logoutUser(router);
     dispatch(setUser({ user: null! }));
-    removeFromLocalStorage(authKey);
+    // removeFromLocalStorage(authKey);
   };
   return (
     <aside

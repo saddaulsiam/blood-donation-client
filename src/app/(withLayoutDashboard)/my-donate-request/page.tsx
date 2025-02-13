@@ -70,7 +70,16 @@ const MyBloodRequest = () => {
                   </TableCell>
                   <TableCell>{request.name}</TableCell>
                   <TableCell>{request.phoneNumber}</TableCell>
-                  <TableCell>{request.dateOfDonation}</TableCell>
+                  <TableCell>
+                    {new Date(request.dateOfDonation).toLocaleDateString(
+                      "en-bn",
+                      {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      },
+                    )}
+                  </TableCell>
                   <TableCell>{request.city}</TableCell>
                   <TableCell>{request.hospitalName}</TableCell>
                   <TableCell>

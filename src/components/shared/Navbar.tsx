@@ -12,7 +12,7 @@ import {
 import { authKey } from "@/contants/authkey";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { logoutUser } from "@/services/actions/logoutUser";
+import { logoutUser } from "@/services/actions/auth.services";
 import { removeFromLocalStorage } from "@/utils/local-storage";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";

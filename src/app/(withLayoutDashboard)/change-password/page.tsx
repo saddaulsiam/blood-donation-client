@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import withAuth from "@/hooks/withAuth";
 import { useChangePasswordMutation } from "@/redux/features/auth/authApi";
 import { AlertCircle, CheckCircle, Eye, EyeOff, Lock } from "lucide-react";
 import { useState } from "react";
@@ -17,7 +18,7 @@ const ChangePassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const [changePassword] = useChangePasswordMutation();
+  const [changePassword, { isLoading }] = useChangePasswordMutation();
 
   // Real-time validation
   const handleConfirmPasswordChange = (
@@ -154,12 +155,19 @@ const ChangePassword = () => {
         <Button
           type="submit"
           className="h-12 w-full rounded-lg bg-primary text-base font-medium text-white transition duration-300 ease-in-out hover:bg-primary-dark"
+          disabled={isLoading}
         >
-          Change Password
+          {isLoading ? (
+            <div className="flex items-center justify-center">
+              <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+            </div>
+          ) : (
+            "Change Password"
+          )}
         </Button>
       </form>
     </div>
   );
 };
 
-export default ChangePassword;
+export default withAuth(ChangePassword);
