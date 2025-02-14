@@ -12,6 +12,24 @@ const requestApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["REQUEST"],
     }),
+    getRequests: builder.query({
+      query: ({ status }) => {
+        // Initialize an empty array to store query parameters
+        const params = [];
+        // Add query parameters conditionally if they exist
+        if (status) {
+          params.push(`status=${status}`);
+        }
+        // Construct the URL with query parameters
+        const queryString = params.length ? `?${params.join("&")}` : "";
+
+        return {
+          url: `/requests${queryString}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["REQUEST"],
+    }),
     getMyRequest: builder.query({
       query: () => ({
         url: "/get-my-requests",
@@ -44,12 +62,21 @@ const requestApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["REQUEST"],
     }),
+    compleatRemainder: builder.mutation({
+      query: (data) => ({
+        url: `/request-complete-remainder/${data.id}`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["REQUEST"],
+    }),
   }),
 });
 
 export const {
   useBloodRequestMutation,
+  useGetRequestsQuery,
   useGetMyRequestQuery,
   useGetRequestToDonateQuery,
   useUpdateRequestMutation,
+  useCompleatRemainderMutation,
 } = requestApi;

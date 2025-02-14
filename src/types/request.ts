@@ -9,7 +9,8 @@ export type TRequest = {
   hospitalName: string;
   city: string;
   status: string;
+  isComplete: boolean;
   message: string;
-  donar?: TUser;
+  donor?: TUser;
   requester?: TUser;
 };
