@@ -1,9 +1,13 @@
 import { FaHandsHelping, FaUser } from "react-icons/fa";
 import { GiDroplets } from "react-icons/gi";
-import { RiLockPasswordLine } from "react-icons/ri";
+import {
+  RiAdminLine,
+  RiLockPasswordLine,
+  RiTodoLine,
+  RiUserSettingsLine,
+} from "react-icons/ri";
 
-export const defaultMenus = [
-  // { title: "Dashboard", path: "/dashboard", icon: MdSpaceDashboard },
+export const userMenus = [
   { title: "Profile", path: "/profile", icon: FaUser },
   {
     title: "Request To Donate",
@@ -20,4 +24,33 @@ export const defaultMenus = [
     path: "/change-password",
     icon: RiLockPasswordLine,
   },
+];
+
+export const adminMenus = [
+  // {
+  //   title: "Profile",
+  //   path: "/profile",
+  //   icon: FaUser,
+  // },
+  {
+    title: "Make Admin",
+    path: "/make-admin",
+    icon: RiAdminLine, // Changed icon
+  },
+  {
+    title: "Manage Donors",
+    path: "/manage-donors",
+    icon: RiUserSettingsLine, // Changed icon
+  },
+  {
+    title: "Manage Requests",
+    path: "/manage-requests",
+    icon: RiTodoLine, // Changed icon
+  },
+
+  // {
+  //   title: "Change Password",
+  //   path: "/change-password",
+  //   icon: RiLockPasswordLine,
+  // },
 ];

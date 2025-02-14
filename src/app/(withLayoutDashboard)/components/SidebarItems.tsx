@@ -1,25 +1,25 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { authKey } from "@/contants/authkey";
 import { setUser } from "@/redux/features/auth/authSlice";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logoutUser } from "@/services/actions/auth.services";
-import { defaultMenus } from "@/utils/drawerItems";
-import { removeFromLocalStorage } from "@/utils/local-storage";
+import { adminMenus, userMenus } from "@/utils/drawerItems";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { LuLogOut } from "react-icons/lu";
 
 const SidebarItems = ({ isSidebarOpen }: any) => {
-  const pathname = usePathname();
   const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useAppDispatch();
+
+  const user = useAppSelector((state) => state.auth.user);
+  const sidebarMenu = user?.role === "ADMIN" ? userMenus : adminMenus;
 
   const handleLogout = () => {
     logoutUser(router);
     dispatch(setUser({ user: null! }));
-    // removeFromLocalStorage(authKey);
   };
   return (
     <aside
@@ -35,7 +35,7 @@ const SidebarItems = ({ isSidebarOpen }: any) => {
         </Link>
         <nav className="flex-1">
           <ul className="space-y-2">
-            {defaultMenus.map((menu, i) => (
+            {sidebarMenu.map((menu, i) => (
               <li key={i}>
                 <Link
                   href={menu.path}
