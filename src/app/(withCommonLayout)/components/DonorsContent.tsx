@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useDonorsQuery } from "@/redux/features/donors/donorsApi";
+import { useGetDonorsQuery } from "@/redux/features/donors/donorsApi";
 import { TUser } from "@/types/user";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -13,7 +13,7 @@ const DonorsContent = () => {
   const date = searchParams.get("date");
   const city = searchParams.get("city");
 
-  const { data: donors, isLoading } = useDonorsQuery(
+  const { data: donors, isLoading } = useGetDonorsQuery(
     {
       bloodGroup,
       date,
