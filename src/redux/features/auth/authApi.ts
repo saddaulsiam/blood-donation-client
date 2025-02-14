@@ -72,6 +72,14 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["USER"],
     }),
+    makeAdmin: builder.mutation({
+      query: (data) => ({
+        url: "/make-admin",
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["USER"],
+    }),
   }),
 });
 
@@ -85,4 +93,5 @@ export const {
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useUpdateProfileMutation,
+  useMakeAdminMutation,
 } = authApi;

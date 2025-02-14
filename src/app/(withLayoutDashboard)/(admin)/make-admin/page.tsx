@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useMakeAdminMutation } from "@/redux/features/auth/authApi";
 import { UserPlus, CheckCircle, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -10,6 +11,8 @@ const MakeAdmin = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+
+  const [makeAdmin] = useMakeAdminMutation();
 
   // Form submission to make user an admin
   const handleSubmit = async (e: React.FormEvent) => {
@@ -21,14 +24,15 @@ const MakeAdmin = () => {
     setError("");
 
     try {
-      // Simulating a successful admin role assignment
-      // Replace with actual API call to make user an admin
-      setSuccess(true);
-      toast.success("User is now an admin!");
-      setEmail("");
-    } catch (err) {
+      const res = await makeAdmin({ email }).unwrap();
+      if (res.success) {
+        setSuccess(true);
+        toast.success(res.message);
+        setEmail("");
+      }
+    } catch (err: any) {
       setSuccess(false);
-      toast.error("Something went wrong!");
+      toast.error(err.data.message);
     }
   };
 
