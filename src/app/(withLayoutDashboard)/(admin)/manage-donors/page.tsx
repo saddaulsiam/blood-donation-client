@@ -15,11 +15,14 @@ import {
   useGetDonorsQuery,
 } from "@/redux/features/donors/donorsApi";
 import { TUser } from "@/types/user";
+import { useEffect, useRef } from "react";
 import { CgUnblock } from "react-icons/cg";
 import { MdDeleteForever, MdOutlineBlock } from "react-icons/md";
+import { toast } from "sonner";
 
 const ManageDonors = () => {
   const { data: donors } = useGetDonorsQuery({});
+  const toastId = useRef<string | number | null>(null);
   const [changeStatus, { isLoading }] = useChangeDonorStatusMutation();
 
   const handleStatusUpdate = (status: string, email: string) => {
@@ -28,6 +31,19 @@ const ManageDonors = () => {
       changeStatus({ email, status });
     }
   };
+
+  useEffect(() => {
+    if (isLoading) {
+      if (!toastId.current) {
+        toastId.current = toast.loading("Processing...");
+      }
+    } else {
+      if (toastId.current) {
+        toast.dismiss(toastId.current);
+        toastId.current = null;
+      }
+    }
+  }, [isLoading]);
   return (
     <div className="min-h-screen rounded-md bg-gray-50 p-2 sm:p-6">
       <h2 className="pb-10 pt-2 text-lg font-semibold text-gray-800 sm:text-3xl">
@@ -99,19 +115,8 @@ const ManageDonors = () => {
                             handleStatusUpdate(Status.DELETED, donor.email)
                           }
                         >
-                          {isLoading ? (
-                            <div className="flex items-center gap-2">
-                              <span className="h-5 w-5 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></span>
-                              <span className="text-blue-500">
-                                Processing...
-                              </span>
-                            </div>
-                          ) : (
-                            <>
-                              <MdDeleteForever />
-                              Delete
-                            </>
-                          )}
+                          <MdDeleteForever />
+                          Delete
                         </Button>
                       ) : donor.status === Status.BLOCKED ? (
                         <Button
@@ -119,19 +124,8 @@ const ManageDonors = () => {
                             handleStatusUpdate(Status.ACTIVE, donor.email)
                           }
                         >
-                          {isLoading ? (
-                            <div className="flex items-center gap-2">
-                              <span className="h-5 w-5 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></span>
-                              <span className="text-blue-500">
-                                Processing...
-                              </span>
-                            </div>
-                          ) : (
-                            <>
-                              <CgUnblock />
-                              Unblock
-                            </>
-                          )}
+                          <CgUnblock />
+                          Unblock
                         </Button>
                       ) : (
                         <Button
@@ -139,19 +133,8 @@ const ManageDonors = () => {
                             handleStatusUpdate(Status.BLOCKED, donor.email)
                           }
                         >
-                          {isLoading ? (
-                            <div className="flex items-center gap-2">
-                              <span className="h-5 w-5 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></span>
-                              <span className="text-blue-500">
-                                Processing...
-                              </span>
-                            </div>
-                          ) : (
-                            <>
-                              <MdOutlineBlock />
-                              Block
-                            </>
-                          )}
+                          <MdOutlineBlock />
+                          Block
                         </Button>
                       )}
                     </TableCell>

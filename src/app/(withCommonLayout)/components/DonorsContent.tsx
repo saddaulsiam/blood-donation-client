@@ -69,7 +69,7 @@ const DonorsContent = () => {
                   <div className="flex justify-center pb-6">
                     <Avatar className="h-24 w-24 rounded-full border-[3px] border-primary shadow-lg">
                       <AvatarImage
-                        src={donor.profile.photo || "/default-avatar.png"}
+                        src={donor?.profile?.photo || "/default-avatar.png"}
                         alt="@shadcn"
                         className="rounded-full"
                       />

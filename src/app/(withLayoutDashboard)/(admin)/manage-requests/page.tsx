@@ -29,10 +29,11 @@ import {
 } from "@/redux/features/request/requestApi";
 import { TRequest } from "@/types/request";
 import { Bell, CheckCircle } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 const ManageRequests = () => {
+  const toastId = useRef<string | number | null>(null);
   const [selectedValue, setSelectedValue] = useState("");
 
   const { data: requests } = useGetRequestsQuery(
@@ -41,7 +42,6 @@ const ManageRequests = () => {
       pollingInterval: 60000,
     },
   );
-
   const [updateRequest, { isLoading }] = useUpdateRequestMutation();
   const [remainder, { isLoading: isRemain }] = useCompleatRemainderMutation();
 
@@ -58,6 +58,19 @@ const ManageRequests = () => {
       toast.success(res.message);
     }
   };
+
+  useEffect(() => {
+    if (isLoading || isRemain) {
+      if (!toastId.current) {
+        toastId.current = toast.loading("Processing...");
+      }
+    } else {
+      if (toastId.current) {
+        toast.dismiss(toastId.current);
+        toastId.current = null;
+      }
+    }
+  }, [isLoading, isRemain]);
 
   return (
     <div className="min-h-screen rounded-md bg-gray-50 p-2 sm:p-6">
@@ -161,28 +174,17 @@ const ManageRequests = () => {
                   </TableCell>
                   <TableCell>
                     {request.status === Status.PENDING ? (
-                      isLoading ? (
-                        <div className="flex items-center gap-2">
-                          <span className="h-5 w-5 animate-spin rounded-full border-4 border-red-500 border-t-transparent"></span>
-                          <span className="text-red-500">Rejecting...</span>
-                        </div>
-                      ) : (
-                        <Button
-                          variant="link"
-                          onClick={() =>
-                            handleStatusUpdate(Status.REJECTED, request.id)
-                          }
-                        >
-                          Reject Now
-                        </Button>
-                      )
+                      <Button
+                        variant="link"
+                        onClick={() =>
+                          handleStatusUpdate(Status.REJECTED, request.id)
+                        }
+                      >
+                        Reject Now
+                      </Button>
                     ) : request.status === Status.APPROVED ? (
                       new Date(request.dateOfDonation) < new Date() ? (
-                        isRemain ? (
-                          <div className="flex items-center gap-2">
-                            <span className="h-5 w-5 animate-spin rounded-full border-4 border-red-500 border-t-transparent" />
-                          </div>
-                        ) : request.isComplete ? (
+                        request.isComplete ? (
                           <>
                             <p className="flex items-center text-green-500">
                               <CheckCircle className="mr-1" /> Remainder send

@@ -22,7 +22,6 @@ const ForgotPassword = () => {
         toast.success("Check your email");
       }
     } catch (error: any) {
-      console.log(error);
       if (error?.data?.message !== "Validation Error") {
         toast.error(error?.data?.message);
       }

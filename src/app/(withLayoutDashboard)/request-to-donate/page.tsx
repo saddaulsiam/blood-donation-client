@@ -24,8 +24,11 @@ import {
   useGetRequestToDonateQuery,
   useUpdateRequestMutation,
 } from "@/redux/features/request/requestApi";
+import { useEffect, useRef } from "react";
+import { toast } from "sonner";
 
 const RequestToDonate = () => {
+  const toastId = useRef<string | number | null>(null);
   const { data: requests } = useGetRequestToDonateQuery(undefined, {
     pollingInterval: 60000,
   });
@@ -37,6 +40,19 @@ const RequestToDonate = () => {
       updateRequest({ id, status });
     }
   };
+
+  useEffect(() => {
+    if (isLoading) {
+      if (!toastId.current) {
+        toastId.current = toast.loading("Processing...");
+      }
+    } else {
+      if (toastId.current) {
+        toast.dismiss(toastId.current);
+        toastId.current = null;
+      }
+    }
+  }, [isLoading]);
   return (
     <div className="min-h-screen rounded-md bg-gray-50 p-2 sm:p-6">
       <h2 className="pb-10 pt-2 text-lg font-semibold text-gray-800 sm:text-3xl">
@@ -113,21 +129,14 @@ const RequestToDonate = () => {
                   </TableCell>
                   <TableCell>
                     {request.status === Status.PENDING ? (
-                      isLoading ? (
-                        <div className="flex items-center gap-2">
-                          <span className="h-5 w-5 animate-spin rounded-full border-4 border-red-500 border-t-transparent"></span>
-                          <span className="text-red-500">Canceling...</span>
-                        </div>
-                      ) : (
-                        <Button
-                          variant="link"
-                          onClick={() =>
-                            handleStatusUpdate(Status.CANCEL, request.id)
-                          }
-                        >
-                          Cancel Now
-                        </Button>
-                      )
+                      <Button
+                        variant="link"
+                        onClick={() =>
+                          handleStatusUpdate(Status.CANCEL, request.id)
+                        }
+                      >
+                        Cancel Now
+                      </Button>
                     ) : (
                       <span
                         className={

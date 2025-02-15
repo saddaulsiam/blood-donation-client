@@ -26,8 +26,12 @@ import {
 } from "@/redux/features/request/requestApi";
 import { TRequest } from "@/types/request";
 import { Check, X } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { toast } from "sonner";
 
 const MyBloodRequest = () => {
+  const toastId = useRef<string | number | null>(null);
+
   const { data: requests } = useGetMyRequestQuery(undefined, {
     pollingInterval: 60000,
   });
@@ -40,6 +44,18 @@ const MyBloodRequest = () => {
     }
   };
 
+  useEffect(() => {
+    if (isLoading) {
+      if (!toastId.current) {
+        toastId.current = toast.loading("Processing...");
+      }
+    } else {
+      if (toastId.current) {
+        toast.dismiss(toastId.current);
+        toastId.current = null;
+      }
+    }
+  }, [isLoading]);
   return (
     <div className="min-h-screen rounded-md bg-gray-50 p-2 sm:p-6">
       <h2 className="pb-10 pt-2 text-lg font-semibold text-gray-800 sm:text-3xl">
@@ -120,31 +136,24 @@ const MyBloodRequest = () => {
                   <TableCell className="flex flex-wrap justify-end gap-2">
                     <TableCell className="flex flex-wrap justify-end gap-2">
                       {request.status === Status.PENDING ? (
-                        isLoading ? (
-                          <div className="flex items-center gap-2">
-                            <span className="h-5 w-5 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></span>
-                            <span className="text-blue-500">Processing...</span>
-                          </div>
-                        ) : (
-                          <>
-                            <Button
-                              onClick={() =>
-                                handleStatusUpdate(Status.APPROVED, request.id)
-                              }
-                              className="flex items-center gap-1 bg-green-500 text-white hover:bg-green-600"
-                            >
-                              <Check size={16} /> Approve
-                            </Button>
-                            <Button
-                              onClick={() =>
-                                handleStatusUpdate(Status.CANCEL, request.id)
-                              }
-                              className="flex items-center gap-1 bg-red-500 text-white hover:bg-red-600"
-                            >
-                              <X size={16} /> Cancel
-                            </Button>
-                          </>
-                        )
+                        <>
+                          <Button
+                            onClick={() =>
+                              handleStatusUpdate(Status.APPROVED, request.id)
+                            }
+                            className="flex items-center gap-1 bg-green-500 text-white hover:bg-green-600"
+                          >
+                            <Check size={16} /> Approve
+                          </Button>
+                          <Button
+                            onClick={() =>
+                              handleStatusUpdate(Status.CANCEL, request.id)
+                            }
+                            className="flex items-center gap-1 bg-red-500 text-white hover:bg-red-600"
+                          >
+                            <X size={16} /> Cancel
+                          </Button>
+                        </>
                       ) : (
                         <span
                           className={
