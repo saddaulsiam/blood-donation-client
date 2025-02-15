@@ -1,7 +1,27 @@
 import { authKey } from "@/contants/authkey";
-import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { deleteCookies } from "@/services/actions/deleteCookies";
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+  setToLocalStorage,
+} from "@/utils/local-storage";
+import {
+  BaseQueryApi,
+  BaseQueryFn,
+  createApi,
+  FetchArgs,
+  fetchBaseQuery,
+  FetchBaseQueryError,
+} from "@reduxjs/toolkit/query/react";
 import { logout } from "../features/auth/authSlice";
+
+interface ExtraOptions {
+  headers?: Record<string, string>;
+}
+
+interface ErrorData {
+  message: string;
+}
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_BACKEND_API_URL,
@@ -17,10 +37,14 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
+const baseQueryWithRefreshToken: BaseQueryFn<
+  FetchArgs,
+  BaseQueryApi,
+  FetchBaseQueryError
+> = async (args, api, extraOptions: ExtraOptions): Promise<any> => {
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result?.error?.data?.message === "jwt expired") {
+  if ((result?.error?.data as ErrorData)?.message === "jwt expired") {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/refresh-token`,
       {
@@ -34,9 +58,18 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
     if (data?.data?.accessToken) {
       setToLocalStorage({ key: authKey, token: data.data.accessToken });
 
+      // Update the headers within extraOptions
+      extraOptions.headers = {
+        ...extraOptions.headers,
+        authorization: `${data.data.accessToken}`,
+      };
+
+      // Re-running the base query with updated headers
       result = await baseQuery(args, api, extraOptions);
     } else {
       api.dispatch(logout());
+      removeFromLocalStorage(authKey);
+      deleteCookies([authKey, "refreshToken"]);
     }
   }
 
