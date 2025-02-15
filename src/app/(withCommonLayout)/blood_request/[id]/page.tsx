@@ -15,7 +15,7 @@ const BloodRequest = () => {
 
   const { data: donarInfo } = useSingleDonorQuery(id);
   const [bloodRequest, { isLoading }] = useBloodRequestMutation();
-
+  console.log(donarInfo);
   const handleSubmit = async (values: FieldValues) => {
     const data = {
       donorId: donarInfo?.id,

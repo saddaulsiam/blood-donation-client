@@ -15,7 +15,7 @@ const SidebarItems = ({ isSidebarOpen }: any) => {
   const dispatch = useAppDispatch();
 
   const user = useAppSelector((state) => state.auth.user);
-  const sidebarMenu = user?.role === "ADMIN" ? userMenus : adminMenus;
+  const sidebarMenu = user?.role === "USER" ? userMenus : adminMenus;
 
   const handleLogout = () => {
     logoutUser(router);

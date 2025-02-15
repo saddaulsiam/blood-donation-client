@@ -59,13 +59,13 @@ const ManageDonors = () => {
                   <TableCell className="font-medium">
                     {`${donor.id.slice(0, 5)}...${donor.id.slice(-5)}`}
                   </TableCell>
-                  <TableCell>{donor.name}</TableCell>
-                  <TableCell>{donor.phoneNumber}</TableCell>
-                  <TableCell>{donor.email}</TableCell>
-                  <TableCell>{donor.profile.age}</TableCell>
-                  <TableCell>{donor.bloodGroup}</TableCell>
-                  <TableCell>{donor.gender}</TableCell>
-                  <TableCell>{donor.city}</TableCell>
+                  <TableCell>{donor?.name}</TableCell>
+                  <TableCell>{donor?.phoneNumber}</TableCell>
+                  <TableCell>{donor?.email}</TableCell>
+                  <TableCell>{donor?.profile?.age}</TableCell>
+                  <TableCell>{donor?.bloodGroup}</TableCell>
+                  <TableCell>{donor?.gender}</TableCell>
+                  <TableCell>{donor?.city}</TableCell>
                   <TableCell>
                     {donor?.profile?.lastDonationDate
                       ? new Date(
