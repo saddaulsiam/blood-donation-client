@@ -64,7 +64,7 @@ const Dashboard = () => {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        Welcome, Admin!
+        Hello, Admin!
       </motion.h1>
 
       {/* Metrics Cards */}
