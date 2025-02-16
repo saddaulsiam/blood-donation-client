@@ -63,6 +63,7 @@ const ManageDonors = () => {
               <TableHead>City</TableHead>
               <TableHead>Last Donation</TableHead>
               <TableHead>Availability</TableHead>
+              <TableHead>Role</TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="text-center">Action</TableHead>
             </TableRow>
@@ -78,10 +79,14 @@ const ManageDonors = () => {
                   <TableCell>{donor?.name}</TableCell>
                   <TableCell>{donor?.phoneNumber}</TableCell>
                   <TableCell>{donor?.email}</TableCell>
-                  <TableCell>{donor?.profile?.age}</TableCell>
-                  <TableCell>{donor?.bloodGroup}</TableCell>
-                  <TableCell>{donor?.gender}</TableCell>
-                  <TableCell>{donor?.city}</TableCell>
+                  <TableCell>
+                    {donor?.profile?.age ? donor?.profile?.age : "N/A"}
+                  </TableCell>
+                  <TableCell>
+                    {donor?.bloodGroup ? donor?.bloodGroup : "N/A"}
+                  </TableCell>
+                  <TableCell>{donor?.gender ? donor.gender : "N/A"}</TableCell>
+                  <TableCell>{donor?.city ? donor.city : "N/A"}</TableCell>
                   <TableCell>
                     {donor?.profile?.lastDonationDate
                       ? new Date(
@@ -94,6 +99,7 @@ const ManageDonors = () => {
                       : "N/A"}
                   </TableCell>
                   <TableCell>{donor.availability ? "Yes" : "No"}</TableCell>
+                  <TableCell>{donor.role}</TableCell>
                   <TableCell>
                     <span
                       className={`rounded-full px-3 py-1 text-sm font-medium ${
