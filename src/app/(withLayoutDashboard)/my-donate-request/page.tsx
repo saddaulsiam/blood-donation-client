@@ -37,10 +37,13 @@ const MyBloodRequest = () => {
   });
   const [updateRequest, { isLoading }] = useUpdateRequestMutation();
 
-  const handleStatusUpdate = (status: string, id: string) => {
+  const handleStatusUpdate = async (status: string, id: string) => {
     const confirmed = confirm("Are you sure !!");
     if (confirmed) {
-      updateRequest({ id, status });
+      const res = await updateRequest({ id, status }).unwrap();
+      if (res.success) {
+        toast.success("Update Successful");
+      }
     }
   };
 
@@ -154,25 +157,47 @@ const MyBloodRequest = () => {
                             <X size={16} /> Cancel
                           </Button>
                         </>
+                      ) : request.status === Status.APPROVED ? (
+                        request.isComplete ? (
+                          <>
+                            <Button
+                              onClick={() =>
+                                handleStatusUpdate(
+                                  Status.SUCCESSFUL,
+                                  request.id,
+                                )
+                              }
+                              className="flex items-center gap-1 bg-green-500 text-white hover:bg-green-600"
+                            >
+                              <Check size={16} /> Complete
+                            </Button>
+                            <Button
+                              onClick={() =>
+                                handleStatusUpdate(Status.CANCEL, request.id)
+                              }
+                              className="flex items-center gap-1 bg-red-500 text-white hover:bg-red-600"
+                            >
+                              <X size={16} /> Cancel
+                            </Button>
+                          </>
+                        ) : (
+                          <span className="text-blue-500">
+                            Your Approved Request
+                          </span>
+                        )
                       ) : (
                         <span
                           className={
                             request.status === Status.SUCCESSFUL
                               ? "text-green-500"
-                              : request.status === Status.CANCEL
-                                ? "text-red-500"
-                                : request.status === Status.APPROVED
-                                  ? "text-blue-800"
-                                  : "text-red-500"
+                              : "text-red-500"
                           }
                         >
                           {request.status === Status.SUCCESSFUL
                             ? "✔ Donation Complete"
                             : request.status === Status.CANCEL
                               ? "Canceled Request ❌"
-                              : request.status === Status.APPROVED
-                                ? "Your Approved Request"
-                                : "Something went wrong"}
+                              : "Something went wrong"}
                         </span>
                       )}
                     </TableCell>
