@@ -12,7 +12,7 @@ const MakeAdmin = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const [makeAdmin] = useMakeAdminMutation();
+  const [makeAdmin, { isLoading }] = useMakeAdminMutation();
 
   // Form submission to make user an admin
   const handleSubmit = async (e: React.FormEvent) => {
@@ -73,8 +73,18 @@ const MakeAdmin = () => {
         <Button
           type="submit"
           className="h-12 w-full rounded-lg bg-primary text-base font-medium text-white transition duration-300 ease-in-out hover:bg-primary-dark"
+          disabled={isLoading}
         >
-          Make Admin
+          {isLoading ? (
+            <div className="flex items-center justify-center">
+              <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+            </div>
+          ) : (
+            <>
+              <CheckCircle />
+              Make Admin
+            </>
+          )}
         </Button>
       </form>
     </div>

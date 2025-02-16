@@ -1,5 +1,6 @@
 import { FaHandsHelping, FaUser } from "react-icons/fa";
 import { GiDroplets } from "react-icons/gi";
+import { LuLayoutDashboard } from "react-icons/lu";
 import {
   RiAdminLine,
   RiLockPasswordLine,
@@ -27,11 +28,11 @@ export const userMenus = [
 ];
 
 export const adminMenus = [
-  // {
-  //   title: "Profile",
-  //   path: "/profile",
-  //   icon: FaUser,
-  // },
+  {
+    title: "Dashboard",
+    path: "/dashboard",
+    icon: LuLayoutDashboard,
+  },
   {
     title: "Make Admin",
     path: "/make-admin",

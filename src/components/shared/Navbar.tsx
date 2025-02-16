@@ -53,7 +53,7 @@ const Navbar = () => {
       <ul className="hidden items-center space-x-8 text-lg font-medium text-gray-700 md:flex">
         <li>
           <Link
-            href="/my-donate-request"
+            href={user?.role === "ADMIN" ? "/dashboard" : "/my-donate-request"}
             className="transition duration-300 hover:text-primary"
           >
             Dashboard
