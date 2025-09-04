@@ -61,7 +61,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link
-            href="#about"
+            href="/#about"
             className="transition duration-300 hover:text-primary"
           >
             About
@@ -69,7 +69,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link
-            href="#services"
+            href="/#services"
             className="transition duration-300 hover:text-primary"
           >
             Services
